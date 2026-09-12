@@ -1,0 +1,14 @@
+# Exact versions used to produce the results in the paper.
+# Python 3.12.7
+#
+#     python -m venv .venv && . .venv/bin/activate   # Windows: .venv\Scripts\activate
+#     pip install -r requirements.txt
+#
+# The analysis uses the standard library for I/O and arithmetic; pydantic
+# validates every record fetched from an archive. numpy, scipy and matplotlib
+# are needed only by the figure script.
+
+pydantic==2.13.4
+numpy==2.5.3
+scipy==1.18.1
+matplotlib==3.10.8

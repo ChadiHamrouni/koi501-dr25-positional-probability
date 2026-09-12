@@ -1,0 +1,35 @@
+# This file was produced by the NASA Exoplanet Archive  http://exoplanetarchive.ipac.caltech.edu
+# Wed Sep  9 10:35:00 2026
+#
+# User preference: *
+#
+# CONSTRAINT:  where (kepoi_name_display like '%K00696.01%')
+#
+# COLUMN kepid:          KepID
+# COLUMN kepoi_name:     KOI Name
+# COLUMN pp_koi_period:  KOI Transit Period [days]
+# COLUMN pp_koi_time0bk: KOI Transit Epoch [BKJD]
+# COLUMN pp_koi_depth:   KOI Transit Depth [ppm]
+# COLUMN pp_host_rel_prob: Host Star Relative Probability
+# COLUMN pp_host_prior_prob: Host Star a Priori Background Probability
+# COLUMN pp_host_prob_prov: Host Star Relative Probability Source Flag
+# COLUMN pp_host_prob_score: Host Star Probability Usability Score
+# COLUMN pp_1hi_starid:  Highest Prob. Star ID
+# COLUMN pp_1hi_ra:      Highest Prob. Star RA [decimal degrees]
+# COLUMN pp_1hi_dec:     Highest Prob. Star DEC [decimal degrees]
+# COLUMN pp_1hi_kepmag:  Highest Prob. Star Kepler-band Magnitude
+# COLUMN pp_1hi_rel_prob: Highest Prob. Star Relative Probability
+# COLUMN pp_1hi_mod_depth: Highest Prob. Star Modeled Transit Depth [ppm]
+# COLUMN pp_1hi_prob_prov: Highest Prob. Star Provenance Flag
+# COLUMN pp_2hi_starid:  2nd Highest Prob. Star ID
+# COLUMN pp_2hi_ra:      2nd Highest Prob. Star RA [decimal degrees]
+# COLUMN pp_2hi_dec:     2nd Highest Prob. Star DEC [decimal degrees]
+# COLUMN pp_2hi_kepmag:  2nd Highest Prob. Star Kepler-band Magnitude
+# COLUMN pp_2hi_rel_prob: 2nd Highest Prob. Star Relative Probability
+# COLUMN pp_2hi_mod_depth: 2nd Highest Prob. Star Modeled Transit Depth [ppm]
+# COLUMN pp_2hi_prob_prov: 2nd Highest Prob. Star Provenance Flag
+# COLUMN pp_unk_rel_prob: Relative Probability due to Unknown Background Source
+# COLUMN pp_bkgd_density: Local Background Source Density
+#
+kepid,kepoi_name,pp_koi_period,pp_koi_time0bk,pp_koi_depth,pp_host_rel_prob,pp_host_prior_prob,pp_host_prob_prov,pp_host_prob_score,pp_1hi_starid,pp_1hi_ra,pp_1hi_dec,pp_1hi_kepmag,pp_1hi_rel_prob,pp_1hi_mod_depth,pp_1hi_prob_prov,pp_2hi_starid,pp_2hi_ra,pp_2hi_dec,pp_2hi_kepmag,pp_2hi_rel_prob,pp_2hi_mod_depth,pp_2hi_prob_prov,pp_unk_rel_prob,pp_bkgd_density
+8869680,K00696.01,,,,0.00000e+00,0.92,FPWG,1.000,,,,,,,,,,,,,,,,

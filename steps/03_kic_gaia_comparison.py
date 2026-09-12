@@ -1,0 +1,78 @@
+"""Step 3 - Gaia settles which of the two KIC columns is at fault.
+
+The colour test says the catalogue contradicts itself. It does not say whether
+r is too bright or J too faint. For a normal star Gaia's G sits within a few
+tenths of r, so G - r near zero acquits the optical column and a large positive
+G - r convicts it.
+
+Reproduces the second half of Section 2.6.
+"""
+
+import statistics
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
+from koi501 import archives
+from koi501.models import GaiaMatch
+from koi501.report import Table, read, write
+
+GAIA_CAT = "vizier:I/355/gaiadr3"
+
+
+def _convict(stars: dict[int, dict]) -> dict:
+    """Match a set of KIC stars to Gaia and ask which column G agrees with."""
+    matches = archives.xmatch(
+        [{"kic": k, "ra": r["ra"], "dec": r["dec"]} for k, r in stars.items()],
+        GAIA_CAT, 2.0, selection="best")
+
+    records = []
+    for match in archives.validate(GaiaMatch, matches,
+                                   {"Gmag": "gmag", "angDist": "sep_as"}):
+        star = stars.get(match.kic)
+        if star is None or match.gmag is None:
+            continue
+        records.append({
+            "kic": match.kic, "kic_r": star["rmag"], "kic_J": star["jmag"],
+            "r_minus_J": star["r_minus_J"], "gaia_G": match.gmag,
+            "G_minus_r": match.gmag - star["rmag"],
+            "G_minus_J": match.gmag - star["jmag"],
+        })
+    convicted = [r for r in records if r["G_minus_r"] > 1.0]
+    return {
+        "n_stars": len(stars),
+        "n_with_gaia": len(records),
+        "n_optical_column_wrong": len(convicted),
+        "median_G_minus_r": statistics.median(r["G_minus_r"] for r in records),
+        "median_G_minus_J": statistics.median(r["G_minus_J"] for r in records),
+        "records": sorted(records, key=lambda r: -r["G_minus_r"]),
+    }
+
+
+def main() -> bool:
+    step2 = read("02_colour_pathology")
+    neighbours = step2["neighbours"]
+    print(f"  {len(neighbours)} offending neighbours")
+
+    # The paper quotes the neighbour population. The host population is
+    # reported alongside it because an earlier draft mixed the two.
+    by_neighbour = _convict({r["kic"]: r for r in neighbours})
+    print(f"  neighbours: {by_neighbour['n_with_gaia']} of "
+          f"{by_neighbour['n_stars']} unique stars have a Gaia counterpart")
+
+    payload = {"neighbours": by_neighbour}
+    write("03_kic_gaia_comparison", payload)
+
+    table = Table('KIC r against Gaia DR3 G for the impossible-colour neighbours',
+                  'Section 2.6')
+    table('distinct neighbouring stars', by_neighbour["n_stars"])
+    table('  with a Gaia match', by_neighbour["n_with_gaia"])
+    table('  Gaia more than 1 mag fainter than KIC r', by_neighbour["n_optical_column_wrong"])
+    table('median Gaia G minus KIC r (mag)', round(by_neighbour["median_G_minus_r"], 2))
+    table.show("03_kic_gaia_comparison")
+    return True
+
+
+if __name__ == "__main__":
+    raise SystemExit(0 if main() else 1)

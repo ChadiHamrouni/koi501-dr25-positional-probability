@@ -1,0 +1,154 @@
+{
+  "n_quarters": 16,
+  "mean_offset_as": [
+    0.281875,
+    -0.46558125
+  ],
+  "scatter_as": [
+    0.8976429115559631,
+    0.8618446505171335
+  ],
+  "error_on_mean_as": [
+    0.22441072788899077,
+    0.2154611626292834
+  ],
+  "error_formal_as": [
+    0.06893994443644091,
+    0.0686612783885959
+  ],
+  "neighbours": {
+    "4951867": {
+      "offset_ra_as": -6.3908885382644325,
+      "offset_dec_as": -2.1311999999909403,
+      "separation_as": 6.7368738854517,
+      "sigma_scatter_error": 30.72306753685201,
+      "sigma_formal_error": 99.78459059382031,
+      "sigma_four_independent": 15.361533768426005,
+      "sigma_single_systematic": 7.680766884213003
+    },
+    "4951861": {
+      "offset_ra_as": -8.264080006346724,
+      "offset_dec_as": -1.8683999999893786,
+      "separation_as": 8.472658196295892,
+      "sigma_scatter_error": 38.6343170057087,
+      "sigma_formal_error": 125.63471270460953,
+      "sigma_four_independent": 19.31715850285435,
+      "sigma_single_systematic": 9.658579251427176
+    }
+  },
+  "per_quarter": [
+    {
+      "quarter": 1,
+      "d_target_as": 1.7799627468011794,
+      "d_neighbour_as": 5.430708425137178,
+      "sigma_from_neighbour": 13.168591777274841,
+      "closer_to_target": true
+    },
+    {
+      "quarter": 2,
+      "d_target_as": 2.1295156867231575,
+      "d_neighbour_as": 6.99736349914644,
+      "sigma_from_neighbour": 39.53223103159342,
+      "closer_to_target": true
+    },
+    {
+      "quarter": 3,
+      "d_target_as": 0.2827428867363422,
+      "d_neighbour_as": 6.790506034700819,
+      "sigma_from_neighbour": 27.399118274717537,
+      "closer_to_target": true
+    },
+    {
+      "quarter": 4,
+      "d_target_as": 0.3214975272066645,
+      "d_neighbour_as": 7.040413924701561,
+      "sigma_from_neighbour": 20.921078764642807,
+      "closer_to_target": true
+    },
+    {
+      "quarter": 5,
+      "d_target_as": 1.8391910449977729,
+      "d_neighbour_as": 8.560469364347199,
+      "sigma_from_neighbour": 21.515001583908056,
+      "closer_to_target": true
+    },
+    {
+      "quarter": 6,
+      "d_target_as": 0.6345584921817689,
+      "d_neighbour_as": 6.618176763461281,
+      "sigma_from_neighbour": 31.342137022576832,
+      "closer_to_target": true
+    },
+    {
+      "quarter": 7,
+      "d_target_as": 0.29109063880516667,
+      "d_neighbour_as": 6.4586192273790415,
+      "sigma_from_neighbour": 19.943911470965165,
+      "closer_to_target": true
+    },
+    {
+      "quarter": 8,
+      "d_target_as": 0.3368164485294624,
+      "d_neighbour_as": 6.423866024398242,
+      "sigma_from_neighbour": 18.855634779536775,
+      "closer_to_target": true
+    },
+    {
+      "quarter": 9,
+      "d_target_as": 0.6907828747153478,
+      "d_neighbour_as": 6.0818311076289175,
+      "sigma_from_neighbour": 17.356349124897577,
+      "closer_to_target": true
+    },
+    {
+      "quarter": 10,
+      "d_target_as": 1.1404600124511162,
+      "d_neighbour_as": 7.32588807119748,
+      "sigma_from_neighbour": 40.0939537980442,
+      "closer_to_target": true
+    },
+    {
+      "quarter": 11,
+      "d_target_as": 1.4175902969476053,
+      "d_neighbour_as": 6.282169359696086,
+      "sigma_from_neighbour": 15.307081583327031,
+      "closer_to_target": true
+    },
+    {
+      "quarter": 12,
+      "d_target_as": 0.687041920118416,
+      "d_neighbour_as": 7.00243345857923,
+      "sigma_from_neighbour": 20.78155676862176,
+      "closer_to_target": true
+    },
+    {
+      "quarter": 13,
+      "d_target_as": 0.4047502439776905,
+      "d_neighbour_as": 6.5369573510086045,
+      "sigma_from_neighbour": 17.509580220310962,
+      "closer_to_target": true
+    },
+    {
+      "quarter": 14,
+      "d_target_as": 1.5065463882668864,
+      "d_neighbour_as": 7.242667825084308,
+      "sigma_from_neighbour": 40.485256334246166,
+      "closer_to_target": true
+    },
+    {
+      "quarter": 15,
+      "d_target_as": 3.040943649593001,
+      "d_neighbour_as": 9.008164766638096,
+      "sigma_from_neighbour": 22.351332960166452,
+      "closer_to_target": true
+    },
+    {
+      "quarter": 16,
+      "d_target_as": 0.3968095260953295,
+      "d_neighbour_as": 7.0951469424511,
+      "sigma_from_neighbour": 12.461466359577077,
+      "closer_to_target": true
+    }
+  ],
+  "n_closer_to_target": 16
+}

@@ -1,0 +1,77 @@
+{
+  "stars": [
+    {
+      "kic": 4951877,
+      "sep_from_host_as": 0.0,
+      "kic_kepmag": 14.612,
+      "kic_r": 14.566,
+      "kic_J": 13.393,
+      "r_minus_J": 1.173,
+      "gaia_G": 14.590293,
+      "gaia_match_as": 0.08966233114260247,
+      "twomass_J": 13.393,
+      "twomass_match_as": 0.014416392116521405,
+      "panstarrs_r": 14.5881,
+      "panstarrs_match_as": 0.07799884640968127,
+      "kepmag_minus_G": 0.021706999999999255
+    },
+    {
+      "kic": 4951867,
+      "sep_from_host_as": 6.73690036585981,
+      "kic_kepmag": 14.83,
+      "kic_r": 14.805,
+      "kic_J": 16.291,
+      "r_minus_J": -1.4860000000000007,
+      "gaia_G": 17.786575,
+      "gaia_match_as": 2.0422117135508495,
+      "twomass_J": 16.291,
+      "twomass_match_as": 1.908109768053922,
+      "panstarrs_r": 17.8162,
+      "panstarrs_match_as": 2.024820868995813,
+      "kepmag_minus_G": -2.956574999999999
+    },
+    {
+      "kic": 4951861,
+      "sep_from_host_as": 8.472689605154379,
+      "kic_kepmag": 15.485,
+      "kic_r": 15.455,
+      "kic_J": 15.511,
+      "r_minus_J": -0.05599999999999916,
+      "gaia_G": 17.513193,
+      "gaia_match_as": 1.0053066895797538,
+      "twomass_J": 15.511,
+      "twomass_match_as": 0.9505878816739787,
+      "panstarrs_r": 17.531,
+      "panstarrs_match_as": 1.009886719566373,
+      "kepmag_minus_G": -2.0281930000000017
+    }
+  ],
+  "flux_shares": {
+    "kic": [
+      0.441385129567661,
+      0.3610918593156267,
+      0.19752301111671228
+    ],
+    "gaia": [
+      0.8925384114020625,
+      0.04700175945542158,
+      0.06045982914251595
+    ]
+  },
+  "host_gaia": {
+    "source_id": 2073562489151839872,
+    "ra": 298.473178196931,
+    "dec": 40.07586578535615,
+    "phot_g_mean_mag": 14.590293,
+    "parallax": 0.6521979165937739,
+    "parallax_error": 0.016722895,
+    "ruwe": 0.96993756,
+    "astrometric_excess_noise": 0.0,
+    "ipd_frac_multi_peak": 0,
+    "non_single_star": 0
+  },
+  "brightest_other_gaia_within_25as": {
+    "G": 16.229666,
+    "sep_as": 19.191583183300057
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "n_visits": 19,
+  "first_visit": "2018-09-25",
+  "last_visit": "2020-11-01",
+  "baseline_d": 767.9050000002608,
+  "baseline_periods": 30.96853159545016,
+  "largest_phase_gap": 0.20627271005312764,
+  "systemic_kms": -69.95761328374174,
+  "systemic_err_kms": 0.02382066167163931,
+  "scatter_ms": 189.06702298731673,
+  "error_range_ms": [
+    77.57,
+    164.53
+  ],
+  "semi_amplitude_ms": 11.671712561173932,
+  "semi_amplitude_err_ms": 62.513284247264444,
+  "chi2_reduced": 3.05321796097859,
+  "limit_3sigma_ms": 199.21156530296727,
+  "companion_mass_limit_mjup": 3.340912139188427,
+  "single_component_every_visit": true
+}

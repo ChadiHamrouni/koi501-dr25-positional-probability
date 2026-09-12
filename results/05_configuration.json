@@ -1,0 +1,1256 @@
+{
+  "table": [
+    {
+      "koi": "K04010.01",
+      "kic": 5288570,
+      "sep_as": 3.181537,
+      "share": 0.6362367874972658,
+      "disposition": "FALSE POSITIVE",
+      "score": 0.0,
+      "flags": "co ec",
+      "offset_as": 8.09,
+      "offset_err_as": 0.71,
+      "offset_sigma": 11.3943661971831,
+      "mes": 18.389515
+    },
+    {
+      "koi": "K03431.01",
+      "kic": 9267997,
+      "sep_as": 3.934785,
+      "share": 0.7947697669965004,
+      "disposition": "FALSE POSITIVE",
+      "score": 0.0,
+      "flags": "nt",
+      "offset_as": 2.32,
+      "offset_err_as": 0.67,
+      "offset_sigma": 3.4626865671641784,
+      "mes": 18.733833
+    },
+    {
+      "koi": "K03866.01",
+      "kic": 5215985,
+      "sep_as": 4.290759,
+      "share": 0.741830609579974,
+      "disposition": "FALSE POSITIVE",
+      "score": 0.0,
+      "flags": "ss co ec",
+      "offset_as": 8.662,
+      "offset_err_as": 0.07,
+      "offset_sigma": 123.74285714285715,
+      "mes": 19.587814
+    },
+    {
+      "koi": "K06805.01",
+      "kic": 7031726,
+      "sep_as": 4.823484,
+      "share": 0.8816192554691565,
+      "disposition": "FALSE POSITIVE",
+      "score": 0.0,
+      "flags": "ss co ec",
+      "offset_as": 4.25,
+      "offset_err_as": 0.7,
+      "offset_sigma": 6.071428571428572,
+      "mes": 10.803962
+    },
+    {
+      "koi": "K05298.01",
+      "kic": 6543682,
+      "sep_as": 5.501041,
+      "share": 0.4149484430775893,
+      "disposition": "FALSE POSITIVE",
+      "score": 0.0,
+      "flags": "ss ec",
+      "offset_as": 0.096,
+      "offset_err_as": 0.067,
+      "offset_sigma": 1.4328358208955223,
+      "mes": 25239.281
+    },
+    {
+      "koi": "K00051.01",
+      "kic": 6056990,
+      "sep_as": 6.17994,
+      "share": 0.29863663202834184,
+      "disposition": "FALSE POSITIVE",
+      "score": 0.0,
+      "flags": "ss",
+      "offset_as": 1.893,
+      "offset_err_as": 0.074,
+      "offset_sigma": 25.581081081081084,
+      "mes": 502.43918
+    },
+    {
+      "koi": "K05020.01",
+      "kic": 3859892,
+      "sep_as": 6.522109,
+      "share": 0.44359749020289335,
+      "disposition": "FALSE POSITIVE",
+      "score": 0.001,
+      "flags": "co",
+      "offset_as": 15.614,
+      "offset_err_as": 0.074,
+      "offset_sigma": 211.00000000000003,
+      "mes": 7.7701044
+    },
+    {
+      "koi": "K00501.01",
+      "kic": 4951867,
+      "sep_as": 6.736785,
+      "share": 0.4499716058127916,
+      "disposition": "CANDIDATE",
+      "score": 0.998,
+      "flags": "none",
+      "offset_as": 0.67,
+      "offset_err_as": 0.25,
+      "offset_sigma": 2.68,
+      "mes": 33.061207
+    },
+    {
+      "koi": "K00043.01",
+      "kic": 9025929,
+      "sep_as": 6.866188,
+      "share": 0.7318299924954319,
+      "disposition": "FALSE POSITIVE",
+      "score": 0.0,
+      "flags": "ss co ec",
+      "offset_as": 8.406,
+      "offset_err_as": 0.068,
+      "offset_sigma": 123.61764705882354,
+      "mes": 172.9772
+    }
+  ],
+  "grid": [
+    {
+      "sep_max": 6.0,
+      "share_min": 0.15,
+      "n": 7,
+      "counts": {
+        "FALSE POSITIVE": 6,
+        "CONFIRMED": 1
+      },
+      "candidates": []
+    },
+    {
+      "sep_max": 6.0,
+      "share_min": 0.25,
+      "n": 5,
+      "counts": {
+        "FALSE POSITIVE": 5
+      },
+      "candidates": []
+    },
+    {
+      "sep_max": 6.0,
+      "share_min": 0.35,
+      "n": 5,
+      "counts": {
+        "FALSE POSITIVE": 5
+      },
+      "candidates": []
+    },
+    {
+      "sep_max": 8.0,
+      "share_min": 0.15,
+      "n": 11,
+      "counts": {
+        "FALSE POSITIVE": 9,
+        "CANDIDATE": 1,
+        "CONFIRMED": 1
+      },
+      "candidates": [
+        "K00501.01"
+      ]
+    },
+    {
+      "sep_max": 8.0,
+      "share_min": 0.25,
+      "n": 9,
+      "counts": {
+        "FALSE POSITIVE": 8,
+        "CANDIDATE": 1
+      },
+      "candidates": [
+        "K00501.01"
+      ]
+    },
+    {
+      "sep_max": 8.0,
+      "share_min": 0.35,
+      "n": 8,
+      "counts": {
+        "FALSE POSITIVE": 7,
+        "CANDIDATE": 1
+      },
+      "candidates": [
+        "K00501.01"
+      ]
+    },
+    {
+      "sep_max": 10.0,
+      "share_min": 0.15,
+      "n": 18,
+      "counts": {
+        "FALSE POSITIVE": 13,
+        "CONFIRMED": 4,
+        "CANDIDATE": 1
+      },
+      "candidates": [
+        "K00501.01"
+      ]
+    },
+    {
+      "sep_max": 10.0,
+      "share_min": 0.25,
+      "n": 15,
+      "counts": {
+        "FALSE POSITIVE": 11,
+        "CONFIRMED": 3,
+        "CANDIDATE": 1
+      },
+      "candidates": [
+        "K00501.01"
+      ]
+    },
+    {
+      "sep_max": 10.0,
+      "share_min": 0.35,
+      "n": 12,
+      "counts": {
+        "FALSE POSITIVE": 10,
+        "CONFIRMED": 1,
+        "CANDIDATE": 1
+      },
+      "candidates": [
+        "K00501.01"
+      ]
+    },
+    {
+      "sep_max": 12.0,
+      "share_min": 0.15,
+      "n": 26,
+      "counts": {
+        "FALSE POSITIVE": 16,
+        "CONFIRMED": 9,
+        "CANDIDATE": 1
+      },
+      "candidates": [
+        "K00501.01"
+      ]
+    },
+    {
+      "sep_max": 12.0,
+      "share_min": 0.25,
+      "n": 23,
+      "counts": {
+        "FALSE POSITIVE": 14,
+        "CONFIRMED": 8,
+        "CANDIDATE": 1
+      },
+      "candidates": [
+        "K00501.01"
+      ]
+    },
+    {
+      "sep_max": 12.0,
+      "share_min": 0.35,
+      "n": 14,
+      "counts": {
+        "FALSE POSITIVE": 12,
+        "CONFIRMED": 1,
+        "CANDIDATE": 1
+      },
+      "candidates": [
+        "K00501.01"
+      ]
+    },
+    {
+      "sep_max": 15.0,
+      "share_min": 0.15,
+      "n": 34,
+      "counts": {
+        "FALSE POSITIVE": 23,
+        "CONFIRMED": 10,
+        "CANDIDATE": 1
+      },
+      "candidates": [
+        "K00501.01"
+      ]
+    },
+    {
+      "sep_max": 15.0,
+      "share_min": 0.25,
+      "n": 30,
+      "counts": {
+        "FALSE POSITIVE": 20,
+        "CONFIRMED": 9,
+        "CANDIDATE": 1
+      },
+      "candidates": [
+        "K00501.01"
+      ]
+    },
+    {
+      "sep_max": 15.0,
+      "share_min": 0.35,
+      "n": 20,
+      "counts": {
+        "FALSE POSITIVE": 17,
+        "CONFIRMED": 2,
+        "CANDIDATE": 1
+      },
+      "candidates": [
+        "K00501.01"
+      ]
+    }
+  ],
+  "all_pairs": [
+    {
+      "koi": "K03919.01",
+      "kic": 4649406,
+      "sep_as": 21.688004,
+      "share": 0.8858769425858496,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K00975.01",
+      "kic": 3632399,
+      "sep_as": 21.360565,
+      "share": 0.04583764312205324,
+      "disposition": "CONFIRMED"
+    },
+    {
+      "koi": "K05617.01",
+      "kic": 9116066,
+      "sep_as": 24.256508,
+      "share": 0.7052072643552737,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K02212.01",
+      "kic": 10203328,
+      "sep_as": 15.330246,
+      "share": 0.9200173113117378,
+      "disposition": "CONFIRMED"
+    },
+    {
+      "koi": "K03675.01",
+      "kic": 9596126,
+      "sep_as": 20.749645,
+      "share": 0.976383240011816,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K07828.01",
+      "kic": 7210776,
+      "sep_as": 24.842646,
+      "share": 0.7529580182879438,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K02782.01",
+      "kic": 10275784,
+      "sep_as": 21.559143,
+      "share": 0.892234662988112,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K03834.01",
+      "kic": 3836413,
+      "sep_as": 12.974787,
+      "share": 0.6535300560992989,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K00043.01",
+      "kic": 9025929,
+      "sep_as": 6.866188,
+      "share": 0.7318299924954319,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K03596.01",
+      "kic": 9025929,
+      "sep_as": 15.218721,
+      "share": 0.9851710082731274,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K03769.01",
+      "kic": 6543682,
+      "sep_as": 13.571084,
+      "share": 0.5207114077393363,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K05298.01",
+      "kic": 6543682,
+      "sep_as": 5.501041,
+      "share": 0.4149484430775893,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K03866.01",
+      "kic": 5215985,
+      "sep_as": 4.290759,
+      "share": 0.741830609579974,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K03920.01",
+      "kic": 2437446,
+      "sep_as": 22.462516,
+      "share": 0.9082501278659647,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K02533.01",
+      "kic": 11074831,
+      "sep_as": 19.512508,
+      "share": 0.6819214657036123,
+      "disposition": "CONFIRMED"
+    },
+    {
+      "koi": "K06805.01",
+      "kic": 7031726,
+      "sep_as": 4.823484,
+      "share": 0.8816192554691565,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K02647.01",
+      "kic": 11962274,
+      "sep_as": 22.04783,
+      "share": 0.7688713926719952,
+      "disposition": "CONFIRMED"
+    },
+    {
+      "koi": "K06557.01",
+      "kic": 5295215,
+      "sep_as": 16.053494,
+      "share": 0.4465547221765603,
+      "disposition": "CANDIDATE"
+    },
+    {
+      "koi": "K03922.01",
+      "kic": 7024511,
+      "sep_as": 12.716693,
+      "share": 0.9333149870669453,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K04010.01",
+      "kic": 5288570,
+      "sep_as": 3.181537,
+      "share": 0.6362367874972658,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K06555.01",
+      "kic": 5288570,
+      "sep_as": 23.948874,
+      "share": 0.6336749918637284,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K02711.01",
+      "kic": 5272214,
+      "sep_as": 22.589846,
+      "share": 0.5527622943892355,
+      "disposition": "CONFIRMED"
+    },
+    {
+      "koi": "K02711.02",
+      "kic": 5272214,
+      "sep_as": 22.589846,
+      "share": 0.5527622943892355,
+      "disposition": "CONFIRMED"
+    },
+    {
+      "koi": "K03579.01",
+      "kic": 5024252,
+      "sep_as": 18.978086,
+      "share": 0.7599150041816847,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K04055.01",
+      "kic": 3228848,
+      "sep_as": 14.01497,
+      "share": 0.11983024346957041,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K01704.01",
+      "kic": 7386815,
+      "sep_as": 9.84503,
+      "share": 0.553672894272721,
+      "disposition": "CONFIRMED"
+    },
+    {
+      "koi": "K03513.01",
+      "kic": 9851178,
+      "sep_as": 24.898716,
+      "share": 0.0015407435118878212,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K04676.02",
+      "kic": 4953160,
+      "sep_as": 9.026077,
+      "share": 0.7034810742284314,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K04055.01",
+      "kic": 3228847,
+      "sep_as": 14.490246,
+      "share": 0.0727754534691171,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K01762.01",
+      "kic": 5387830,
+      "sep_as": 11.117577,
+      "share": 0.8215778656328989,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K06311.01",
+      "kic": 3337351,
+      "sep_as": 17.849847,
+      "share": 0.017726878191509542,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K05020.01",
+      "kic": 3859892,
+      "sep_as": 6.522109,
+      "share": 0.44359749020289335,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K01003.01",
+      "kic": 2438541,
+      "sep_as": 15.19101,
+      "share": 0.7700151330014712,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K01944.01",
+      "kic": 2438541,
+      "sep_as": 10.999783,
+      "share": 0.3009567297344628,
+      "disposition": "CONFIRMED"
+    },
+    {
+      "koi": "K01944.02",
+      "kic": 2438541,
+      "sep_as": 10.999783,
+      "share": 0.3009567297344628,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K00970.01",
+      "kic": 11502259,
+      "sep_as": 22.533877,
+      "share": 0.0008410747055178573,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K08266.01",
+      "kic": 6946986,
+      "sep_as": 22.016505,
+      "share": 0.0038153977974471737,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K01552.01",
+      "kic": 7984036,
+      "sep_as": 15.170665,
+      "share": 0.8525282658959842,
+      "disposition": "CANDIDATE"
+    },
+    {
+      "koi": "K01544.01",
+      "kic": 5024482,
+      "sep_as": 11.687057,
+      "share": 0.9330277973467044,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K07555.01",
+      "kic": 5024482,
+      "sep_as": 24.036877,
+      "share": 0.6135736676457326,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K07714.01",
+      "kic": 5024482,
+      "sep_as": 23.315662,
+      "share": 0.925782081387431,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K03513.01",
+      "kic": 9851126,
+      "sep_as": 21.392573,
+      "share": 0.005978548500838403,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K00501.01",
+      "kic": 4951867,
+      "sep_as": 6.736785,
+      "share": 0.4499716058127916,
+      "disposition": "CANDIDATE"
+    },
+    {
+      "koi": "K00696.01",
+      "kic": 8869664,
+      "sep_as": 16.723848,
+      "share": 0.1744076930118158,
+      "disposition": "CANDIDATE"
+    },
+    {
+      "koi": "K03156.01",
+      "kic": 4150654,
+      "sep_as": 23.308542,
+      "share": 0.0012960947400253112,
+      "disposition": "CANDIDATE"
+    },
+    {
+      "koi": "K03156.02",
+      "kic": 4150654,
+      "sep_as": 23.308542,
+      "share": 0.0012960947400253112,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K03156.03",
+      "kic": 4150654,
+      "sep_as": 23.308542,
+      "share": 0.0012960947400253112,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K03156.04",
+      "kic": 4150654,
+      "sep_as": 23.308542,
+      "share": 0.0012960947400253112,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K02835.01",
+      "kic": 5436356,
+      "sep_as": 19.941742,
+      "share": 0.7659121144371001,
+      "disposition": "CONFIRMED"
+    },
+    {
+      "koi": "K00051.01",
+      "kic": 6056990,
+      "sep_as": 6.17994,
+      "share": 0.29863663202834184,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K01724.01",
+      "kic": 10214168,
+      "sep_as": 12.363311,
+      "share": 0.5204815399503305,
+      "disposition": "CONFIRMED"
+    },
+    {
+      "koi": "K03715.01",
+      "kic": 4937161,
+      "sep_as": 17.491353,
+      "share": 0.8050862744441983,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K06969.01",
+      "kic": 8111998,
+      "sep_as": 10.336411,
+      "share": 0.09726574598034234,
+      "disposition": "CANDIDATE"
+    },
+    {
+      "koi": "K00988.01",
+      "kic": 2302546,
+      "sep_as": 9.085543,
+      "share": 0.295942879478668,
+      "disposition": "CONFIRMED"
+    },
+    {
+      "koi": "K00988.02",
+      "kic": 2302546,
+      "sep_as": 9.085543,
+      "share": 0.295942879478668,
+      "disposition": "CONFIRMED"
+    },
+    {
+      "koi": "K02116.01",
+      "kic": 8163998,
+      "sep_as": 23.93378,
+      "share": 0.6109498634535054,
+      "disposition": "CONFIRMED"
+    },
+    {
+      "koi": "K06269.01",
+      "kic": 2437866,
+      "sep_as": 18.134903,
+      "share": 0.27601356620224043,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K06873.01",
+      "kic": 7381720,
+      "sep_as": 15.151598,
+      "share": 0.5892934584461469,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K00340.01",
+      "kic": 10551530,
+      "sep_as": 13.770687,
+      "share": 0.16929587197272725,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K03596.01",
+      "kic": 9025922,
+      "sep_as": 8.383622,
+      "share": 0.9605436327274126,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K02016.01",
+      "kic": 8492019,
+      "sep_as": 19.1689,
+      "share": 0.399166529328502,
+      "disposition": "CONFIRMED"
+    },
+    {
+      "koi": "K03712.01",
+      "kic": 2437059,
+      "sep_as": 24.444239,
+      "share": 0.937325560298056,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K07211.01",
+      "kic": 9641040,
+      "sep_as": 18.985575,
+      "share": 0.004767869812244137,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K03598.01",
+      "kic": 2437252,
+      "sep_as": 20.36171,
+      "share": 0.9740241524946641,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K02684.01",
+      "kic": 4035658,
+      "sep_as": 15.593037,
+      "share": 0.018783004474167135,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K06107.01",
+      "kic": 4035658,
+      "sep_as": 8.86351,
+      "share": 0.18250855152230555,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K05245.01",
+      "kic": 6184888,
+      "sep_as": 22.316558,
+      "share": 0.3005693343289775,
+      "disposition": "CONFIRMED"
+    },
+    {
+      "koi": "K01060.02",
+      "kic": 5880331,
+      "sep_as": 11.911546,
+      "share": 0.2750942645675065,
+      "disposition": "CONFIRMED"
+    },
+    {
+      "koi": "K01060.03",
+      "kic": 5880331,
+      "sep_as": 11.911546,
+      "share": 0.2750942645675065,
+      "disposition": "CONFIRMED"
+    },
+    {
+      "koi": "K01060.04",
+      "kic": 5880331,
+      "sep_as": 11.911546,
+      "share": 0.2750942645675065,
+      "disposition": "CONFIRMED"
+    },
+    {
+      "koi": "K01060.01",
+      "kic": 5880331,
+      "sep_as": 11.911546,
+      "share": 0.2750942645675065,
+      "disposition": "CONFIRMED"
+    },
+    {
+      "koi": "K03511.01",
+      "kic": 3644538,
+      "sep_as": 18.622633,
+      "share": 0.0018014281467462695,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K05998.01",
+      "kic": 5036926,
+      "sep_as": 14.87705,
+      "share": 0.404035979763209,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K04518.01",
+      "kic": 7032013,
+      "sep_as": 15.783509,
+      "share": 0.26421207255184864,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K02465.01",
+      "kic": 7542364,
+      "sep_as": 17.312505,
+      "share": 0.44041724853025915,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K05722.01",
+      "kic": 9847277,
+      "sep_as": 20.709755,
+      "share": 0.3176791152567425,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K00074.01",
+      "kic": 6889220,
+      "sep_as": 12.35713,
+      "share": 0.0346331798319644,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K05071.01",
+      "kic": 4566866,
+      "sep_as": 15.770305,
+      "share": 0.4577335442168386,
+      "disposition": "CANDIDATE"
+    },
+    {
+      "koi": "K01213.01",
+      "kic": 3455388,
+      "sep_as": 17.126687,
+      "share": 0.10113353296652672,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K03899.01",
+      "kic": 3455388,
+      "sep_as": 21.894692,
+      "share": 0.8525282658959846,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K06736.01",
+      "kic": 6593354,
+      "sep_as": 7.589695,
+      "share": 0.0638754034746973,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K05129.01",
+      "kic": 5131262,
+      "sep_as": 24.21701,
+      "share": 0.03216627362736461,
+      "disposition": "CANDIDATE"
+    },
+    {
+      "koi": "K06134.01",
+      "kic": 5738720,
+      "sep_as": 9.800224,
+      "share": 0.03838837298699336,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K06286.01",
+      "kic": 2708139,
+      "sep_as": 13.334205,
+      "share": 0.01821447363219049,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K08189.01",
+      "kic": 9874576,
+      "sep_as": 7.928871,
+      "share": 0.06813247669194158,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K07547.01",
+      "kic": 4074284,
+      "sep_as": 21.749888,
+      "share": 0.10307559303040939,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K07601.01",
+      "kic": 9246696,
+      "sep_as": 19.637017,
+      "share": 0.003058227530691335,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K03249.01",
+      "kic": 9083556,
+      "sep_as": 11.967412,
+      "share": 0.12588362892313412,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K00185.01",
+      "kic": 4178406,
+      "sep_as": 5.279026,
+      "share": 0.20643468823802272,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K06286.01",
+      "kic": 2708159,
+      "sep_as": 11.596444,
+      "share": 0.019597665323365498,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K01615.01",
+      "kic": 4278248,
+      "sep_as": 23.646372,
+      "share": 0.02387296392231566,
+      "disposition": "CONFIRMED"
+    },
+    {
+      "koi": "K01205.01",
+      "kic": 3869004,
+      "sep_as": 19.700157,
+      "share": 0.37535017497660234,
+      "disposition": "CONFIRMED"
+    },
+    {
+      "koi": "K05179.01",
+      "kic": 5563075,
+      "sep_as": 14.666701,
+      "share": 0.06354575755770081,
+      "disposition": "CANDIDATE"
+    },
+    {
+      "koi": "K03701.01",
+      "kic": 6470504,
+      "sep_as": 15.882525,
+      "share": 0.1897631890718116,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K03705.01",
+      "kic": 6470504,
+      "sep_as": 9.558354,
+      "share": 0.7178716156367783,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K02733.01",
+      "kic": 5953289,
+      "sep_as": 4.01792,
+      "share": 0.20061226473295507,
+      "disposition": "CONFIRMED"
+    },
+    {
+      "koi": "K07710.01",
+      "kic": 4851274,
+      "sep_as": 4.839809,
+      "share": 0.03199467809357884,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K01512.01",
+      "kic": 11955490,
+      "sep_as": 20.603306,
+      "share": 0.731106345647904,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K06815.01",
+      "kic": 7049525,
+      "sep_as": 19.547506,
+      "share": 0.29882958095199086,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K02731.01",
+      "kic": 4072354,
+      "sep_as": 23.636467,
+      "share": 0.5025328219372579,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K05157.01",
+      "kic": 5391891,
+      "sep_as": 9.246494,
+      "share": 0.018379912396479115,
+      "disposition": "CANDIDATE"
+    },
+    {
+      "koi": "K05440.01",
+      "kic": 7888875,
+      "sep_as": 17.476552,
+      "share": 0.49930922491159213,
+      "disposition": "CANDIDATE"
+    },
+    {
+      "koi": "K07555.01",
+      "kic": 5024369,
+      "sep_as": 15.100151,
+      "share": 0.4460995117811223,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K07714.01",
+      "kic": 5024369,
+      "sep_as": 19.04631,
+      "share": 0.863519080904981,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K00156.01",
+      "kic": 10925092,
+      "sep_as": 8.348705,
+      "share": 0.11090432834119501,
+      "disposition": "CONFIRMED"
+    },
+    {
+      "koi": "K00156.02",
+      "kic": 10925092,
+      "sep_as": 8.348705,
+      "share": 0.11090432834119501,
+      "disposition": "CONFIRMED"
+    },
+    {
+      "koi": "K00156.03",
+      "kic": 10925092,
+      "sep_as": 8.348705,
+      "share": 0.11090432834119501,
+      "disposition": "CONFIRMED"
+    },
+    {
+      "koi": "K02557.01",
+      "kic": 10925092,
+      "sep_as": 14.453085,
+      "share": 0.28606215406246094,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K01464.01",
+      "kic": 7838642,
+      "sep_as": 18.917484,
+      "share": 0.37082631748661854,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K08180.01",
+      "kic": 9268154,
+      "sep_as": 11.415983,
+      "share": 0.01859718869864362,
+      "disposition": "CANDIDATE"
+    },
+    {
+      "koi": "K02817.01",
+      "kic": 7605119,
+      "sep_as": 24.436227,
+      "share": 0.7171248617736565,
+      "disposition": "CONFIRMED"
+    },
+    {
+      "koi": "K03820.01",
+      "kic": 5217711,
+      "sep_as": 21.481804,
+      "share": 0.3174795062855837,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K03431.01",
+      "kic": 9267997,
+      "sep_as": 3.934785,
+      "share": 0.7947697669965004,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K01060.02",
+      "kic": 5880334,
+      "sep_as": 16.624272,
+      "share": 0.30270352080955687,
+      "disposition": "CONFIRMED"
+    },
+    {
+      "koi": "K01060.03",
+      "kic": 5880334,
+      "sep_as": 16.624272,
+      "share": 0.30270352080955687,
+      "disposition": "CONFIRMED"
+    },
+    {
+      "koi": "K01060.04",
+      "kic": 5880334,
+      "sep_as": 16.624272,
+      "share": 0.30270352080955687,
+      "disposition": "CONFIRMED"
+    },
+    {
+      "koi": "K01060.01",
+      "kic": 5880334,
+      "sep_as": 16.624272,
+      "share": 0.30270352080955687,
+      "disposition": "CONFIRMED"
+    },
+    {
+      "koi": "K03847.01",
+      "kic": 7289174,
+      "sep_as": 5.079234,
+      "share": 0.07542930786405262,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K00399.01",
+      "kic": 7289174,
+      "sep_as": 19.544807,
+      "share": 0.08127990988109389,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K01887.01",
+      "kic": 11019844,
+      "sep_as": 19.985484,
+      "share": 0.237406705854211,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K07748.01",
+      "kic": 5887381,
+      "sep_as": 8.814358,
+      "share": 0.020950984475698108,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K03469.01",
+      "kic": 4844475,
+      "sep_as": 5.559076,
+      "share": 0.13637240800077693,
+      "disposition": "CANDIDATE"
+    },
+    {
+      "koi": "K03846.01",
+      "kic": 7983728,
+      "sep_as": 17.321345,
+      "share": 0.30367643521358095,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K06047.01",
+      "kic": 7914915,
+      "sep_as": 8.008172,
+      "share": 0.017985312302663124,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K00042.01",
+      "kic": 8866110,
+      "sep_as": 23.037273,
+      "share": 0.0029371257821141144,
+      "disposition": "CONFIRMED"
+    },
+    {
+      "koi": "K04280.01",
+      "kic": 5026293,
+      "sep_as": 23.400665,
+      "share": 0.300375743302149,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K05700.01",
+      "kic": 9602607,
+      "sep_as": 11.341009,
+      "share": 0.03572727419291901,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K04676.02",
+      "kic": 4953134,
+      "sep_as": 20.269882,
+      "share": 0.2214542971988557,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K01930.01",
+      "kic": 5511084,
+      "sep_as": 20.317782,
+      "share": 0.1558841790576939,
+      "disposition": "CONFIRMED"
+    },
+    {
+      "koi": "K01930.02",
+      "kic": 5511084,
+      "sep_as": 20.317782,
+      "share": 0.1558841790576939,
+      "disposition": "CONFIRMED"
+    },
+    {
+      "koi": "K01930.03",
+      "kic": 5511084,
+      "sep_as": 20.317782,
+      "share": 0.1558841790576939,
+      "disposition": "CONFIRMED"
+    },
+    {
+      "koi": "K01930.04",
+      "kic": 5511084,
+      "sep_as": 20.317782,
+      "share": 0.1558841790576939,
+      "disposition": "CONFIRMED"
+    },
+    {
+      "koi": "K01966.01",
+      "kic": 9973851,
+      "sep_as": 7.092634,
+      "share": 0.06431741017677049,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K04221.01",
+      "kic": 6364078,
+      "sep_as": 14.772382,
+      "share": 0.6432416443809802,
+      "disposition": "FALSE POSITIVE"
+    },
+    {
+      "koi": "K03560.01",
+      "kic": 4848410,
+      "sep_as": 8.591065,
+      "share": 0.016399059266997005,
+      "disposition": "FALSE POSITIVE"
+    }
+  ],
+  "n_grid": 15,
+  "n_only_target": 12,
+  "n_empty": 3,
+  "n_other_candidate": 0
+}

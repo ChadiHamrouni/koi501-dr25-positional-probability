@@ -1,0 +1,5 @@
+results/.cache/
+*.pyc
+__pycache__/
+.venv/
+transit/
