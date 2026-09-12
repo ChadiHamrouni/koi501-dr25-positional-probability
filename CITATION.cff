@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the paper and this archived version."
+title: "koi501-dr25-positional-probability: Code for KOI-501.01"
+type: software
+authors:
+  - family-names: Hamrouny
+    given-names: Shady
+    orcid: "https://orcid.org/0009-0009-8885-6252"
+version: v1.0
+doi: 10.5281/zenodo.22729915
+date-released: 2026-09-12
+license: MIT
+repository-code: "https://github.com/ChadiHamrouni/koi501-dr25-positional-probability"
