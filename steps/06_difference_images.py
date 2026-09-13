@@ -1,7 +1,7 @@
 """Step 6 - where the light actually changed, from the sixteen difference images.
 
 The per-quarter centroid offsets are transcribed from the mission's Data
-Validation report (see data/README.md). This step averages them, places the two
+Validation report (see README, Committed data; the report is in docs/). This step averages them, places the two
 favoured neighbours against that mean, and gives the result under five error
 models so the headline figure is not resting on one choice.
 

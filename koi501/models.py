@@ -214,6 +214,30 @@ class GaiaMatch(Strict):
     sep_as: Optional[Arcsec] = None
 
 
+class FitsImageHeader(Strict):
+    """The header keywords a 2-D follow-up image must carry."""
+
+    model_config = ConfigDict(extra="ignore", frozen=True, populate_by_name=True)
+
+    simple: bool = Field(alias="SIMPLE")
+    bitpix: int = Field(alias="BITPIX")
+    naxis: int = Field(alias="NAXIS", ge=2, le=2)
+    naxis1: int = Field(alias="NAXIS1", gt=0)
+    naxis2: int = Field(alias="NAXIS2", gt=0)
+    bzero: float = Field(default=0.0, alias="BZERO")
+    bscale: float = Field(default=1.0, alias="BSCALE")
+    cd1_1: float = Field(alias="CD1_1")
+    cd1_2: float = Field(alias="CD1_2")
+    cd2_1: float = Field(alias="CD2_1")
+    cd2_2: float = Field(alias="CD2_2")
+
+    @property
+    def pixel_scale_as(self) -> float:
+        """Arcsec per pixel from the linear part of the CD matrix."""
+        det = self.cd1_1 * self.cd2_2 - self.cd1_2 * self.cd2_1
+        return abs(det) ** 0.5 * 3600.0
+
+
 class EclipsingBinary(Strict):
     """A Kepler eclipsing binary (Kirk et al. 2016, VizieR J/AJ/151/68)."""
 

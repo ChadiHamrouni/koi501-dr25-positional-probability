@@ -17,6 +17,10 @@ from koi501.report import Table, angsep, flux, write
 KIC_COLUMNS = "KIC,RAJ2000,DEJ2000,kepmag,rmag,Jmag"
 KIC_RENAME = {"KIC": "kic", "RAJ2000": "ra", "DEJ2000": "dec", "Jmag": "jmag"}
 SKY_RENAME = {"RAJ2000": "ra", "DEJ2000": "dec", "Jmag": "jmag"}
+GAIA_RENAME = {"Source": "source_id", "RA_ICRS": "ra", "DE_ICRS": "dec",
+               "Gmag": "phot_g_mean_mag", "Plx": "parallax", "e_Plx": "parallax_error",
+               "RUWE": "ruwe", "epsi": "astrometric_excess_noise",
+               "IPDfmp": "ipd_frac_multi_peak", "NSS": "non_single_star"}
 
 
 def main() -> bool:
@@ -26,12 +30,12 @@ def main() -> bool:
                              config.RA, config.DEC, 30.0),
         KIC_RENAME)}
 
-    gaia = list(archives.validate(GaiaSource, archives.gaia_tap(
-        "SELECT source_id, ra, dec, phot_g_mean_mag, parallax, "
-        "parallax_error, ruwe, astrometric_excess_noise, "
-        "ipd_frac_multi_peak, non_single_star FROM gaiadr3.gaia_source "
-        f"WHERE 1=CONTAINS(POINT('ICRS',ra,dec),"
-        f"CIRCLE('ICRS',{config.RA},{config.DEC},30./3600.))")))
+    gaia = list(archives.validate(
+        GaiaSource,
+        archives.vizier_cone("I/355/gaiadr3",
+                             "Source,RA_ICRS,DE_ICRS,Gmag,Plx,e_Plx,RUWE,epsi,IPDfmp,NSS",
+                             config.RA, config.DEC, 30.0),
+        GAIA_RENAME))
 
     twomass = list(archives.validate(
         TwoMassSource,

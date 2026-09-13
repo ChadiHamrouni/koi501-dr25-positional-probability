@@ -35,7 +35,7 @@ Requests to the archives are retried automatically if a connection drops.
 |---|---|
 | Language | Python 3.12.7; exact package versions in `requirements.txt` |
 | Tested on | Windows 11 Pro (10.0.26200) |
-| Network | HTTPS access to exoplanetarchive.ipac.caltech.edu, gea.esac.esa.int, vizier.cds.unistra.fr, cdsxmatch.u-strasbg.fr, archive.stsci.edu |
+| Network | HTTPS access to exoplanetarchive.ipac.caltech.edu, vizier.cds.unistra.fr, cdsxmatch.u-strasbg.fr, archive.stsci.edu, exofop.ipac.caltech.edu |
 | Disk | about 11 MB of cached queries, 0.5 MB of outputs |
 | Inputs | the archives above and the committed files in `data/` |
 | Outputs | `results/*.json`, `results/*.csv`, `figures/colour_pathology.{pdf,png}` |
@@ -67,6 +67,11 @@ only; it does not compare them with the manuscript.
 | §3 | Mean difference-image offset (+0.28, −0.47) arcsec, error on the mean 0.22 arcsec per axis | 06 | `data/dv/` |
 | §3 | KIC 4951867 lies 30.7σ and KIC 4951861 38.6σ from the source; 99.8σ, 15.4σ and 7.7σ under the alternative error models; all 16 quarters closer to the target | 06 | `data/dv/`, KIC |
 | §5.1 | 19 APOGEE visits; K = 12 ± 63 m s⁻¹; 3σ limit 199 m s⁻¹, i.e. M < 3.3 M_Jup | 07 | APOGEE DR17 |
+| §4, Table 3 | Host radius 1.746 ± 0.06 R☉ from 2MASS Ks and the Gaia distance at the APOGEE temperature; mass 1.26 ± 0.13 M☉; density 0.236 ± 0.021 ρ☉ | 09 | 2MASS, AllWISE, Gaia DR3 distances, APOGEE DR17 |
+| §4, Table 3 | Rp/R★ = 0.0218 ± 0.0005; planet 2.72, 4.06 and 4.16 ± 0.17 R⊕ on the DR25, Berger et al. 2020 and adopted stellar radii | 09 | `data/transit_fit/`, Mathur et al. 2017, Berger et al. 2020 |
+| §5.2 | UKIRT J contrast curve: FWHM 0.70 arcsec, inner working angle 0.80 arcsec, 5σ ΔJ = 5.1 mag at 1.5 arcsec and 7.21 mag at 2.9 arcsec; U, B, V reach 5.68, 5.88 and 6.70 mag | 12 | ExoFOP follow-up images |
+| §6 | 8053 objects of interest and 2876 eclipsing binaries compared; one statistical match (K01278.01), no physical path, no match under Coughlin et al. 2014 | 10 | DR25 KOI table, Kirk et al. 2016, MAST field of view |
+| §6, Table 4 | DR25 rows: MES 33.06, bootstrap false-alarm probability 1.4 × 10⁻²³⁸, rolling bands 0 of 52, weak secondary 44.9 ± 15.1 ppm, odd–even 0.111, ghost core/halo 17.96/6.23, score 0.998, no flags | 11 | DR25 TCE and KOI tables |
 
 Step 08 draws `figures/colour_pathology.pdf`, a supporting figure of the step 02
 and 05 results that does not appear in the paper. The left panel is the r − J
@@ -74,9 +79,8 @@ distribution of all tested neighbours with the −0.5 cut; the right panel place
 each impossible-colour neighbour by separation and light share, with the
 configuration of Table 2 shaded.
 
-Not reproduced here: the stellar radius and planet radius (§4), the contrast
-curves (§5.2), the vetting diagnostics (§6) and the false-positive probability
-(§7).
+Not reproduced here: the light-curve vetting rows of Table 4 marked "here" and
+the false-positive probabilities (§7).
 
 ## Sources
 
@@ -86,13 +90,19 @@ curves (§5.2), the vetting diagnostics (§6) and the false-positive probability
 | NASA Exoplanet Archive | `koiapp` (DR25 positional probabilities) | manual export, committed | 04 |
 | MAST | `kepler_koiapp.txt.gz` (earlier positional-probability release) | bulk file | 04 |
 | Kepler DV report | per-quarter difference-image centroids, KIC 4951877 | manual extraction, committed | 06 |
-| ESA Gaia archive | Gaia DR3 `gaia_source` | TAP | 01 |
+| CDS VizieR | Gaia DR3 `I/355/gaiadr3` (the CDS copy of `gaia_source`) | cone search | 01 |
 | CDS VizieR | KIC `V/133/kic`, 2MASS `II/246`, Pan-STARRS DR1 `II/349`, APOGEE DR17 `III/286/allvis` | cone search | 01, 06, 07 |
 | CDS X-Match | DR25 objects of interest × KIC; flagged neighbours × Gaia DR3 `I/355/gaiadr3` | bulk cross-match | 02, 03 |
+| CDS VizieR | 2MASS `II/246`, AllWISE `II/328`, Bailer-Jones distances `I/352`, APOGEE DR17 `III/286/catalog`, Mathur et al. 2017 `J/ApJS/229/30`, Berger et al. 2020 `J/AJ/159/280`, Kirk et al. 2016 `J/AJ/151/68` | cone or identifier query | 09, 10 |
+| NASA Exoplanet Archive | `q1_q17_dr25_tce` (DR25 threshold-crossing events) | TAP | 11 |
+| MAST | Kepler field-of-view service (CCD modules per season) | JSON query | 10 |
+| ExoFOP | Kepler follow-up images of KIC 4951877 (TIC 170740547): WIYN 0.9 m U, B, V (file ids 121811, 124500, 127189) and UKIRT WFCAM J (132444) | file download, SHA-256 checked | 12 |
+| MAST | Kepler long-cadence PDCSAP light curve of KIC 4951877, 17 quarters | lightkurve download | `fit/transit_fit.py` |
+| Transit fit | MCMC posterior of the radius ratio, written by `fit/transit_fit.py` | committed, `data/transit_fit/` | 09 |
 
 ### Committed data
 
-Two datasets are not served by any query interface and are committed in `data/`.
+Inputs not served by any query interface are committed in `data/`.
 
 **`data/koiapp/` — DR25 positional probabilities (13 CSV files).** The DR25
 `koiapp` table is not exposed by the archive's TAP service or its
@@ -142,6 +152,28 @@ The report's multi-quarter summary on the same pages (robust weighted mean
 | `koiapp/koiapp_*.csv` (13) | CSV, archive export; `#` lines are the archive's own header | `kepid`, `kepoi_name` [-]; `pp_koi_depth` [ppm]; `pp_host_rel_prob`, `pp_host_prob_score`, `pp_1hi_rel_prob`, `pp_2hi_rel_prob` [-]; `pp_1hi_kepmag`, `pp_2hi_kepmag` [mag]; `pp_1hi_mod_depth`, `pp_2hi_mod_depth` [ppm]; `pp_1hi_ra`, `pp_1hi_dec`, `pp_2hi_ra`, `pp_2hi_dec` [deg]; `*_prob_prov`, `*_starid` [-] | §2.3, §2.4, §2.6 |
 | `dv/dvr_quarterly_centroids.csv` | CSV | `quarter` [-]; `d_ra`, `d_dec` [arcsec], offset of the difference-image source from the KIC position as tabulated in the DV report; `e_ra`, `e_dec` [arcsec], the report's 1σ errors | §3 |
 
+### Transit fit (`data/transit_fit/transit_fit.json`)
+
+The MCMC posterior step 09 takes the radius ratio from, written by
+`fit/transit_fit.py`. That script is not part of `run_all.py` because it needs
+heavier packages and runs for about an hour:
+
+```bash
+pip install -r fit/requirements.txt
+python fit/transit_fit.py            # all three runs
+```
+
+It downloads the light curve from MAST itself. Model: batman 2.5.3
+quadratic limb darkening, 29.4-minute exposures supersampled 15 times, circular
+orbit, period fixed at the DR25 value; each transit window of ±4 durations
+divided by a straight line through its out-of-transit points. Free: Rp/R★,
+impact parameter, stellar density, epoch shift, both limb-darkening
+coefficients (Kipping q1, q2), and a flux-error scale. Sampled with emcee 3.1.6,
+40 walkers, 3000 burn-in and 6000 steps, seed 20260913, on the DR25 PDCSAP light
+curve (quality flag 0; 50 windows containing transit points). Three runs:
+`adopted` (density prior 0.236 ± 0.021 ρ☉, the one used), `free_rho` (density
+free) and `fixed_ld` (u1 = 0.36, u2 = 0.29 held fixed).
+
 ### Data behind Figure 1 (`data/figure_diffimage/`)
 
 | File | Format | Contents [unit] |
@@ -168,6 +200,11 @@ Column definitions for `koiapp` are in the archive's
 | `05_configuration.json` | JSON | Table 2 rows (see the CSV below); `grid`: `sep_max` [arcsec], `share_min` [fraction], counts [-]; `all_pairs` | §2.6, Table 2 |
 | `06_difference_images.json` | JSON | `mean_offset_as`, `scatter_as`, `error_on_mean_as`, `error_formal_as` [arcsec, RA and Dec]; per neighbour `sigma_*` [σ] under each error model; `per_quarter` distances [arcsec] and significance [σ] | §3 |
 | `07_radial_velocities.json` | JSON | `systemic_kms` [km s⁻¹]; `scatter_ms`, `error_range_ms`, `semi_amplitude_ms`, `semi_amplitude_err_ms`, `limit_3sigma_ms` [m s⁻¹]; `baseline_d` [d]; `largest_phase_gap` [orbital phase]; `companion_mass_limit_mjup` [M_Jup] | §5.1 |
+| `09_host_star.json` | JSON | catalogue inputs; `radius_rsun`, `mass_msun`, `density_solar`, `luminosity_lsun`, `teff_k` as [median, 1σ]; `planet_radius_earth` on three stellar radii [R⊕] | §4, Table 3 |
+| `10_ephemeris_match.json` | JSON | thresholds; counts [-]; statistical matches with `dP_prime`, `dT_prime` [-] and their physical-path test (`separation_as` [arcsec], shared CCD modules) | §6 |
+| `12_contrast_curves.json` | JSON | per band: `pixel_scale_as`, `fwhm_as`, `inner_working_angle_as`, `separation_as` [arcsec]; `delta_mag_5sigma` [mag]; ExoFOP file id | §5.2 |
+| `contrast_curves.csv` | CSV, `#` header gives units | the four curves: band, separation [arcsec], 5σ limit [mag] | §5.2 |
+| `11_dr25_vetting.json` | JSON | DR25 TCE statistics: depths [ppm], `boot_fap` [-], `tce_maxmesd` [d], rolling-band counts [-], ghost core/halo statistics [-]; KOI score and flags | §6, Table 4 |
 | `impossible_colour_neighbours.csv` | CSV, `#` header gives unit and meaning of every column | the 135 neighbours: KOI, disposition, KIC ID, position [deg], separation [arcsec], KIC and Gaia magnitudes [mag] | §2.6 |
 | `configuration.csv` | CSV, `#` header as above | the nine objects of Table 2: separation [arcsec], light share [fraction], DR25 centroid offset [arcsec] and significance [σ], score, flags, MES | Table 2 |
 
@@ -196,8 +233,9 @@ subsampling is used anywhere: step 02 covers all 8,054 objects of interest.
 run_all.py    runs the steps in order
 koi501/       config.py    thresholds and constants
               models.py    pydantic record models
-              archives.py  TAP, VizieR, X-Match and MAST clients with an on-disk cache
+              archives.py  TAP, VizieR, X-Match, MAST and ExoFOP clients with an on-disk cache
               report.py    shared functions and printed tables
+              fits_image.py  reader for the single-image FITS follow-up frames
 steps/        01_target_photometry.py
               02_colour_pathology.py
               03_kic_gaia_comparison.py
@@ -206,8 +244,13 @@ steps/        01_target_photometry.py
               06_difference_images.py
               07_radial_velocities.py
               08_figures.py
+              09_host_star.py
+              10_ephemeris_match.py
+              11_dr25_vetting.py
+              12_contrast_curves.py
 data/         committed datasets (see above)
 docs/         the NASA reports values are transcribed or quoted from, with checksums
+fit/          the transit fit of Section 4 and its own requirements
 results/      output of each step
 figures/      output of step 08
 ```

@@ -21,7 +21,6 @@ from typing import Iterable, Iterator
 from .config import RESULTS
 
 NASA_TAP = "https://exoplanetarchive.ipac.caltech.edu/TAP/sync"
-GAIA_TAP = "https://gea.esac.esa.int/tap-server/tap/sync"
 VIZIER = "https://vizier.cds.unistra.fr/viz-bin/asu-tsv"
 XMATCH = "https://cdsxmatch.u-strasbg.fr/xmatch/api/v1/sync"
 
@@ -72,14 +71,6 @@ def nasa_tap(query: str) -> list[dict]:
     """NASA Exoplanet Archive TAP. Serves the DR25 KOI and TCE tables."""
     url = f"{NASA_TAP}?query={urllib.parse.quote(query)}&format=csv"
     return _rows(_cached(f"nasa:{query}", lambda: _get(url)))
-
-
-def gaia_tap(query: str) -> list[dict]:
-    """Gaia archive TAP."""
-    body = urllib.parse.urlencode(
-        {"REQUEST": "doQuery", "LANG": "ADQL", "FORMAT": "csv", "QUERY": query}
-    ).encode()
-    return _rows(_cached(f"gaia:{query}", lambda: _post(GAIA_TAP, body, {})))
 
 
 def vizier_cone(source: str, columns: str, ra: float, dec: float,
@@ -168,6 +159,24 @@ def mast_table(url: str) -> list[dict]:
         urllib.request.Request(url, headers=HEADERS), 600)).decode("utf8", "replace")
     return list(csv.DictReader(io.StringIO(_cached(f"mast:{url}", fetch)),
                                delimiter="\t"))
+
+
+EXOFOP_FILE = "https://exofop.ipac.caltech.edu/tess/get_file.php?id={}"
+
+
+def exofop_file(file_id: int, sha256: str) -> bytes:
+    """A file from ExoFOP, cached, and checked against its expected checksum."""
+    CACHE.mkdir(parents=True, exist_ok=True)
+    path = CACHE / f"exofop_{file_id}.bin"
+    if not path.exists():
+        req = urllib.request.Request(EXOFOP_FILE.format(file_id), headers=HEADERS)
+        path.write_bytes(_open(req, 600))
+    data = path.read_bytes()
+    digest = hashlib.sha256(data).hexdigest()
+    if digest != sha256:
+        path.unlink()
+        raise ValueError(f"ExoFOP file {file_id}: checksum {digest} != expected {sha256}")
+    return data
 
 
 def kepler_fov(kic: int) -> list[dict]:
