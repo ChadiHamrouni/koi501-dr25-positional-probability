@@ -25,8 +25,20 @@ python run_all.py            # all steps
 python run_all.py 04 06      # selected steps
 ```
 
-Runtime is under a minute with a network connection; queries are cached in
-`results/.cache/`.
+Queries are cached in `results/.cache/`; with the cache present the full run
+takes under 30 seconds, and a first run spends a few minutes downloading.
+Requests to the archives are retried automatically if a connection drops.
+
+## Requirements
+
+| | |
+|---|---|
+| Language | Python 3.12.7; exact package versions in `requirements.txt` |
+| Tested on | Windows 11 Pro (10.0.26200) |
+| Network | HTTPS access to exoplanetarchive.ipac.caltech.edu, gea.esac.esa.int, vizier.cds.unistra.fr, cdsxmatch.u-strasbg.fr, archive.stsci.edu |
+| Disk | about 11 MB of cached queries, 0.5 MB of outputs |
+| Inputs | the archives above and the committed files in `data/` |
+| Outputs | `results/*.json`, `results/*.csv`, `figures/colour_pathology.{pdf,png}` |
 
 `run_all.py` executes the scripts in `steps/` in order. Each one queries its
 sources, validates every returned record, performs one part of the analysis,
@@ -107,7 +119,8 @@ the §2.6 statement that no other candidate is affected.
 
 **`data/dv/dvr_quarterly_centroids.csv` — difference-image centroids (16 rows).**
 The archive tabulates only the combined offset (`koi_dikco_msky` =
-0.675 ± 0.255 arcsec). The per-quarter values appear only in the DV report:
+0.675 ± 0.255 arcsec). The per-quarter values appear only in the DV report, a
+copy of which is in `docs/`:
 
 1. Download
    `https://exoplanetarchive.ipac.caltech.edu/data/KeplerData/004/004951/004951877/dv/kplr004951877-20160209194854_dvr.pdf`
@@ -119,6 +132,48 @@ The archive tabulates only the combined offset (`koi_dikco_msky` =
 
 The report's multi-quarter summary on the same pages (robust weighted mean
 +0.3309 ± 0.225 and −0.5879 ± 0.235 arcsec) is the cross-check quoted in §3.
+
+## Files
+
+### Inputs (`data/`)
+
+| File | Format | Columns used [unit] | Paper |
+|---|---|---|---|
+| `koiapp/koiapp_*.csv` (13) | CSV, archive export; `#` lines are the archive's own header | `kepid`, `kepoi_name` [-]; `pp_koi_depth` [ppm]; `pp_host_rel_prob`, `pp_host_prob_score`, `pp_1hi_rel_prob`, `pp_2hi_rel_prob` [-]; `pp_1hi_kepmag`, `pp_2hi_kepmag` [mag]; `pp_1hi_mod_depth`, `pp_2hi_mod_depth` [ppm]; `pp_1hi_ra`, `pp_1hi_dec`, `pp_2hi_ra`, `pp_2hi_dec` [deg]; `*_prob_prov`, `*_starid` [-] | §2.3, §2.4, §2.6 |
+| `dv/dvr_quarterly_centroids.csv` | CSV | `quarter` [-]; `d_ra`, `d_dec` [arcsec], offset of the difference-image source from the KIC position as tabulated in the DV report; `e_ra`, `e_dec` [arcsec], the report's 1σ errors | §3 |
+
+### Data behind Figure 1 (`data/figure_diffimage/`)
+
+| File | Format | Contents [unit] |
+|---|---|---|
+| `diffimage_stamps.fits` | FITS, one image pair per quarter | `DIRECT_Qnn`: out-of-transit mean; `DIFF_Qnn`: out-of-transit minus in-transit mean [e⁻ s⁻¹ per pixel]. Each header carries the stamp's WCS, `QUARTER`, `MODULE`, `OUTPUT`, `COLUMN0`, `ROW0` [pixel] and `NTRANSIT`. Built from the archived Kepler target pixel files |
+| `diffimage_stacks.fits` | FITS | `ALIGNED_DIRECT`, `ALIGNED_DIFF`: all 16 quarters shifted to put the target at pixel (`TARGETX`, `TARGETY`) and averaged (Figure 1a); `SEASON_M6_DIRECT`, `SEASON_M6_DIFF`: the four module-6 quarters averaged without resampling (Figure 1b) |
+| `gaia_neighbours.csv` | CSV, `#` header gives units | Gaia DR3 sources within 40 arcsec: `ra`, `dec` [deg]; `phot_g_mean_mag` [mag]; offsets from the target [arcsec]; pixel position on the Q0 stamp's WCS |
+
+The stamps share one sky orientation, but the target falls on a different pixel
+on each of the four CCD modules, up to one pixel apart, which is why Figure 1a
+aligns the quarters before averaging.
+
+Column definitions for `koiapp` are in the archive's
+[positional probabilities documentation](https://exoplanetarchive.ipac.caltech.edu/docs/API_koiapp_columns.html).
+
+### Outputs (`results/`)
+
+| File | Format | Contents [unit] | Paper |
+|---|---|---|---|
+| `01_target_photometry.json` | JSON | per star: KIC `kic_kepmag`, `kic_r`, `kic_J`, Gaia `gaia_G`, 2MASS `twomass_J`, Pan-STARRS `panstarrs_r` [mag]; `sep_from_host_as`, `*_match_as` [arcsec]; `flux_shares` [fraction]; host Gaia astrometry (`parallax` [mas], `ruwe` [-]) | §2.2, Table 1, §4 |
+| `02_colour_pathology.json` | JSON | counts [-]; `colour_histogram` edges [mag] and counts [-]; one record per impossible-colour neighbour (see the CSV below) | §2.6 |
+| `03_kic_gaia_comparison.json` | JSON | per neighbour star: `kic_r`, `kic_J`, `gaia_G`, `G_minus_r`, `G_minus_J` [mag]; counts [-] | §2.6 |
+| `04_positional_probability.json` | JSON | validated `koiapp` records (units as in the input table); `corrected_depths`: `magnitude_error` [mag], `flux_factor` [-], depths [ppm] and [%]; `earlier_release` (MAST) in the same form; `candidate_audit` [KOI names] | §2.3, §2.4, §2.6 |
+| `05_configuration.json` | JSON | Table 2 rows (see the CSV below); `grid`: `sep_max` [arcsec], `share_min` [fraction], counts [-]; `all_pairs` | §2.6, Table 2 |
+| `06_difference_images.json` | JSON | `mean_offset_as`, `scatter_as`, `error_on_mean_as`, `error_formal_as` [arcsec, RA and Dec]; per neighbour `sigma_*` [σ] under each error model; `per_quarter` distances [arcsec] and significance [σ] | §3 |
+| `07_radial_velocities.json` | JSON | `systemic_kms` [km s⁻¹]; `scatter_ms`, `error_range_ms`, `semi_amplitude_ms`, `semi_amplitude_err_ms`, `limit_3sigma_ms` [m s⁻¹]; `baseline_d` [d]; `largest_phase_gap` [orbital phase]; `companion_mass_limit_mjup` [M_Jup] | §5.1 |
+| `impossible_colour_neighbours.csv` | CSV, `#` header gives unit and meaning of every column | the 135 neighbours: KOI, disposition, KIC ID, position [deg], separation [arcsec], KIC and Gaia magnitudes [mag] | §2.6 |
+| `configuration.csv` | CSV, `#` header as above | the nine objects of Table 2: separation [arcsec], light share [fraction], DR25 centroid offset [arcsec] and significance [σ], score, flags, MES | Table 2 |
+
+`figures/colour_pathology.{pdf,png}` is drawn by step 08 from
+`02_colour_pathology.json` and `05_configuration.json`; it is a supporting
+figure and does not appear in the paper.
 
 ## Validation
 
@@ -152,6 +207,7 @@ steps/        01_target_photometry.py
               07_radial_velocities.py
               08_figures.py
 data/         committed datasets (see above)
+docs/         the NASA reports values are transcribed or quoted from, with checksums
 results/      output of each step
 figures/      output of step 08
 ```

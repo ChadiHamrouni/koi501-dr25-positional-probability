@@ -16,7 +16,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from koi501 import archives
 from koi501.models import GaiaMatch
-from koi501.report import Table, read, write
+from koi501.report import Table, read, write, write_table
 
 GAIA_CAT = "vizier:I/355/gaiadr3"
 
@@ -63,6 +63,28 @@ def main() -> bool:
 
     payload = {"neighbours": by_neighbour}
     write("03_kic_gaia_comparison", payload)
+
+    gaia = {r["kic"]: r for r in by_neighbour["records"]}
+    rows = [{**r, "gaia_G": gaia.get(r["kic"], {}).get("gaia_G"),
+             "G_minus_r": gaia.get(r["kic"], {}).get("G_minus_r")}
+            for r in neighbours]
+    write_table(
+        "impossible_colour_neighbours",
+        "KIC neighbours within 25 arcsec of a DR25 object of interest with "
+        "r - J < -0.5 (Section 2.6)",
+        [("koi", "-", "DR25 object of interest"),
+         ("disposition", "-", "DR25 disposition of that object"),
+         ("kic", "-", "KIC identifier of the neighbour"),
+         ("ra", "deg", "KIC right ascension, J2000"),
+         ("dec", "deg", "KIC declination, J2000"),
+         ("sep_as", "arcsec", "separation from the object of interest"),
+         ("kepmag", "mag", "KIC Kepler magnitude"),
+         ("rmag", "mag", "KIC r magnitude"),
+         ("jmag", "mag", "KIC J magnitude"),
+         ("r_minus_J", "mag", "KIC r minus KIC J"),
+         ("gaia_G", "mag", "Gaia DR3 G of the best match within 2 arcsec; blank if none"),
+         ("G_minus_r", "mag", "Gaia G minus KIC r; blank if no match")],
+        rows)
 
     table = Table('KIC r against Gaia DR3 G for the impossible-colour neighbours',
                   'Section 2.6')

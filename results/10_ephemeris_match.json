@@ -1,0 +1,139 @@
+{
+  "target": {
+    "koi": "K00501.01",
+    "period_d": 24.7962801,
+    "epoch_bkjd": 170.32595,
+    "modules": [
+      4,
+      6,
+      20,
+      22
+    ]
+  },
+  "thresholds": {
+    "sigma_P_min": 3.5,
+    "sigma_T_min": 2.0,
+    "dP_prime_max": 0.00046525815807105003,
+    "dT_prime_max": 0.04550026389635843
+  },
+  "n_kois": 8053,
+  "n_eclipsing_binaries": 2876,
+  "n_compared": 10929,
+  "n_period_only": 12,
+  "statistical_matches": [
+    {
+      "name": "K01278.01",
+      "kic": 8609450,
+      "period_d": 24.8056775,
+      "dP_prime": 0.0003788406908056028,
+      "dT_prime": 0.017939945401612922,
+      "physical_path": {
+        "separation_as": 40334.16774878981,
+        "prf_reach_as": 77.93510345211962,
+        "prf_wings": false,
+        "antipodal_offset_as": 15512.789814520685,
+        "antipodal_reflection": false,
+        "shared_modules": [],
+        "same_module": false,
+        "satisfied": false
+      }
+    }
+  ],
+  "n_full_matches": 0,
+  "period_coincident": [
+    {
+      "name": "K05940.01",
+      "kic": 11905398,
+      "period_d": 24.7967294,
+      "dP_prime": 1.8119325042908795e-05,
+      "dT_prime": 0.4507373749177801
+    },
+    {
+      "name": "K00760.01",
+      "kic": 11138155,
+      "period_d": 4.959319244,
+      "dP_prime": 6.374261959019023e-05,
+      "dT_prime": 0.07793827107155449
+    },
+    {
+      "name": "KIC 11138155",
+      "kic": 11138155,
+      "period_d": 4.9593282,
+      "dP_prime": 7.27719532651605e-05,
+      "dT_prime": 0.38942282545477447
+    },
+    {
+      "name": "K00570.01",
+      "kic": 8106610,
+      "period_d": 12.39894005,
+      "dP_prime": 0.00012904328866403247,
+      "dT_prime": 0.09904267858306627
+    },
+    {
+      "name": "KIC 9426970",
+      "kic": 9426970,
+      "period_d": 1.7711335,
+      "dP_prime": 0.00023211124401356642,
+      "dT_prime": 0.15744901994406685
+    },
+    {
+      "name": "KIC 5610698",
+      "kic": 5610698,
+      "period_d": 4.1325281,
+      "dP_prime": 0.0002689636883541624,
+      "dT_prime": 0.0585276359043867
+    },
+    {
+      "name": "K06603.01",
+      "kic": 5610698,
+      "period_d": 4.132521615,
+      "dP_prime": 0.0002783796691652185,
+      "dT_prime": 0.058267684342169446
+    },
+    {
+      "name": "K06417.01",
+      "kic": 4456622,
+      "period_d": 0.751408792,
+      "dP_prime": 0.000279522947074895,
+      "dT_prime": 0.07430789817004779
+    },
+    {
+      "name": "K02765.01",
+      "kic": 11188249,
+      "period_d": 2.75505467,
+      "dP_prime": 0.00028604514044161533,
+      "dT_prime": 0.3949937189449706
+    },
+    {
+      "name": "K02759.01",
+      "kic": 11076400,
+      "period_d": 1.07808492,
+      "dP_prime": 0.00030325996954161383,
+      "dT_prime": 0.4558522550323991
+    },
+    {
+      "name": "K01278.01",
+      "kic": 8609450,
+      "period_d": 24.8056775,
+      "dP_prime": 0.0003788406908056028,
+      "dT_prime": 0.017939945401612922,
+      "physical_path": {
+        "separation_as": 40334.16774878981,
+        "prf_reach_as": 77.93510345211962,
+        "prf_wings": false,
+        "antipodal_offset_as": 15512.789814520685,
+        "antipodal_reflection": false,
+        "shared_modules": [],
+        "same_module": false,
+        "satisfied": false
+      }
+    },
+    {
+      "name": "K08103.01",
+      "kic": 5647008,
+      "period_d": 0.799868354,
+      "dP_prime": 0.00045148179471610206,
+      "dT_prime": 0.08118835015191905
+    }
+  ]
+}

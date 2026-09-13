@@ -16,7 +16,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from koi501 import archives, config
 from koi501.models import KOIRow
-from koi501.report import Table, flux, read, write
+from koi501.report import Table, flux, read, write, write_table
 
 COLUMNS = ("kepoi_name,kepid,koi_disposition,koi_score,koi_kepmag,"
            "koi_dikco_msky,koi_dikco_msky_err,koi_max_mult_ev,"
@@ -72,6 +72,22 @@ def main() -> bool:
                "n_empty": len(empty),
                "n_other_candidate": len(grid) - len(only_target) - len(empty)}
     write("05_configuration", payload)
+    write_table(
+        "configuration",
+        "Objects with an impossible-colour neighbour within 8 arcsec carrying "
+        "at least 25% of the pair's KIC flux (Table 2)",
+        [("koi", "-", "DR25 object of interest"),
+         ("disposition", "-", "DR25 disposition"),
+         ("kic", "-", "KIC identifier of the neighbour"),
+         ("sep_as", "arcsec", "neighbour separation"),
+         ("share", "-", "neighbour flux / (host + neighbour flux), KIC Kepler magnitudes"),
+         ("offset_as", "arcsec", "DR25 koi_dikco_msky, difference-image offset from the KIC position"),
+         ("offset_err_as", "arcsec", "DR25 koi_dikco_msky_err"),
+         ("offset_sigma", "-", "offset_as / offset_err_as"),
+         ("score", "-", "DR25 Robovetter disposition score"),
+         ("flags", "-", "DR25 false-positive flags set: nt, ss, co, ec"),
+         ("mes", "-", "DR25 maximum multiple event statistic")],
+        rows)
 
     target = next(r for r in rows if r["koi"] == config.KOI)
     others = [r for r in rows if r["koi"] != config.KOI]

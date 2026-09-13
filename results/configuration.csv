@@ -1,0 +1,24 @@
+# Objects with an impossible-colour neighbour within 8 arcsec carrying at least 25% of the pair's KIC flux (Table 2)
+# 9 rows
+#
+# koi            [-]  DR25 object of interest
+# disposition    [-]  DR25 disposition
+# kic            [-]  KIC identifier of the neighbour
+# sep_as         [arcsec]  neighbour separation
+# share          [-]  neighbour flux / (host + neighbour flux), KIC Kepler magnitudes
+# offset_as      [arcsec]  DR25 koi_dikco_msky, difference-image offset from the KIC position
+# offset_err_as  [arcsec]  DR25 koi_dikco_msky_err
+# offset_sigma   [-]  offset_as / offset_err_as
+# score          [-]  DR25 Robovetter disposition score
+# flags          [-]  DR25 false-positive flags set: nt, ss, co, ec
+# mes            [-]  DR25 maximum multiple event statistic
+koi,disposition,kic,sep_as,share,offset_as,offset_err_as,offset_sigma,score,flags,mes
+K04010.01,FALSE POSITIVE,5288570,3.181537,0.6362367874972658,8.09,0.71,11.3943661971831,0.0,co ec,18.389515
+K03431.01,FALSE POSITIVE,9267997,3.934785,0.7947697669965004,2.32,0.67,3.4626865671641784,0.0,nt,18.733833
+K03866.01,FALSE POSITIVE,5215985,4.290759,0.741830609579974,8.662,0.07,123.74285714285715,0.0,ss co ec,19.587814
+K06805.01,FALSE POSITIVE,7031726,4.823484,0.8816192554691565,4.25,0.7,6.071428571428572,0.0,ss co ec,10.803962
+K05298.01,FALSE POSITIVE,6543682,5.501041,0.4149484430775893,0.096,0.067,1.4328358208955223,0.0,ss ec,25239.281
+K00051.01,FALSE POSITIVE,6056990,6.17994,0.29863663202834184,1.893,0.074,25.581081081081084,0.0,ss,502.43918
+K05020.01,FALSE POSITIVE,3859892,6.522109,0.44359749020289335,15.614,0.074,211.00000000000003,0.001,co,7.7701044
+K00501.01,CANDIDATE,4951867,6.736785,0.4499716058127916,0.67,0.25,2.68,0.998,none,33.061207
+K00043.01,FALSE POSITIVE,9025929,6.866188,0.7318299924954319,8.406,0.068,123.61764705882354,0.0,ss co ec,172.9772

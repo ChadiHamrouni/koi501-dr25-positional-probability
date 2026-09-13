@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import csv
 import json
 import math
 from pathlib import Path
@@ -32,6 +33,28 @@ def write(name: str, payload: dict[str, Any]) -> Path:
 
 def read(name: str) -> dict[str, Any]:
     return json.loads((RESULTS / f"{name}.json").read_text(encoding="utf8"))
+
+
+def write_table(name: str, title: str, columns: list[tuple[str, str, str]],
+                rows: list[dict[str, Any]]) -> Path:
+    """Write a CSV whose '#' header gives each column's unit and meaning.
+
+    ``columns`` is a list of (key, unit, description); units use "-" for
+    dimensionless values and text columns.
+    """
+    RESULTS.mkdir(parents=True, exist_ok=True)
+    path = RESULTS / f"{name}.csv"
+    with path.open("w", newline="", encoding="utf8") as handle:
+        handle.write(f"# {title}\n# {len(rows)} rows\n#\n")
+        width = max(len(key) for key, _, _ in columns)
+        for key, unit, description in columns:
+            handle.write(f"# {key:<{width}}  [{unit}]  {description}\n")
+        writer = csv.writer(handle)
+        writer.writerow(key for key, _, _ in columns)
+        for row in rows:
+            writer.writerow("" if row.get(key) is None else row[key]
+                            for key, _, _ in columns)
+    return path
 
 
 class Table:

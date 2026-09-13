@@ -126,7 +126,8 @@
       "kepmag": 10.731,
       "ra": 290.13202,
       "dec": 39.761051,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K00975.01",
@@ -138,7 +139,8 @@
       "kepmag": 11.52,
       "ra": 287.35422,
       "dec": 38.713818,
-      "is_host": false
+      "is_host": false,
+      "disposition": "CONFIRMED"
     },
     {
       "koi": "K05617.01",
@@ -150,7 +152,8 @@
       "kepmag": 12.564,
       "ra": 299.96768,
       "dec": 45.442356,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K02212.01",
@@ -162,7 +165,8 @@
       "kepmag": 12.289,
       "ra": 290.03741,
       "dec": 47.259502,
-      "is_host": false
+      "is_host": false,
+      "disposition": "CONFIRMED"
     },
     {
       "koi": "K03675.01",
@@ -174,7 +178,8 @@
       "kepmag": 12.542,
       "ra": 294.97058,
       "dec": 46.22551,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K07828.01",
@@ -186,7 +191,8 @@
       "kepmag": 12.49,
       "ra": 294.86145,
       "dec": 42.796104,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K02782.01",
@@ -198,7 +204,8 @@
       "kepmag": 13.406,
       "ra": 292.5524,
       "dec": 47.323647,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K03834.01",
@@ -210,7 +217,8 @@
       "kepmag": 13.76,
       "ra": 286.94046,
       "dec": 38.923927,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K00043.01",
@@ -222,7 +230,8 @@
       "kepmag": 12.2,
       "ra": 293.26849,
       "dec": 45.351532,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K03596.01",
@@ -234,7 +243,8 @@
       "kepmag": 12.2,
       "ra": 293.26849,
       "dec": 45.351532,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K03769.01",
@@ -246,7 +256,8 @@
       "kepmag": 13.908,
       "ra": 297.54327,
       "dec": 41.951748,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K05298.01",
@@ -258,7 +269,8 @@
       "kepmag": 13.908,
       "ra": 297.54327,
       "dec": 41.951748,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K03866.01",
@@ -270,7 +282,8 @@
       "kepmag": 14.063,
       "ra": 298.58072,
       "dec": 40.365723,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K03920.01",
@@ -282,7 +295,8 @@
       "kepmag": 12.473,
       "ra": 290.2258,
       "dec": 37.767056,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K02533.01",
@@ -294,7 +308,8 @@
       "kepmag": 12.446,
       "ra": 286.71472,
       "dec": 48.639893,
-      "is_host": false
+      "is_host": false,
+      "disposition": "CONFIRMED"
     },
     {
       "koi": "K06805.01",
@@ -306,7 +321,8 @@
       "kepmag": 11.476,
       "ra": 291.18686,
       "dec": 42.591022,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K02647.01",
@@ -318,7 +334,8 @@
       "kepmag": 13.797,
       "ra": 290.98129,
       "dec": 50.304626,
-      "is_host": false
+      "is_host": false,
+      "disposition": "CONFIRMED"
     },
     {
       "koi": "K06557.01",
@@ -330,7 +347,8 @@
       "kepmag": 14.038,
       "ra": 296.92941,
       "dec": 40.433933,
-      "is_host": false
+      "is_host": false,
+      "disposition": "CANDIDATE"
     },
     {
       "koi": "K03922.01",
@@ -342,7 +360,8 @@
       "kepmag": 12.655,
       "ra": 288.9256,
       "dec": 42.531509,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K04010.01",
@@ -354,7 +373,8 @@
       "kepmag": 12.99,
       "ra": 295.50107,
       "dec": 40.410225,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K06555.01",
@@ -366,7 +386,8 @@
       "kepmag": 12.99,
       "ra": 295.50107,
       "dec": 40.410225,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K02711.01",
@@ -378,7 +399,8 @@
       "kepmag": 13.412,
       "ra": 290.93643,
       "dec": 40.48138,
-      "is_host": false
+      "is_host": false,
+      "disposition": "CONFIRMED"
     },
     {
       "koi": "K02711.02",
@@ -390,7 +412,8 @@
       "kepmag": 13.412,
       "ra": 290.93643,
       "dec": 40.48138,
-      "is_host": false
+      "is_host": false,
+      "disposition": "CONFIRMED"
     },
     {
       "koi": "K03579.01",
@@ -402,7 +425,8 @@
       "kepmag": 13.322,
       "ra": 295.29333,
       "dec": 40.183308,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K04055.01",
@@ -414,7 +438,8 @@
       "kepmag": 14.193,
       "ra": 289.76956,
       "dec": 38.384838,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K01704.01",
@@ -426,7 +451,8 @@
       "kepmag": 14.626,
       "ra": 298.01111,
       "dec": 42.956203,
-      "is_host": false
+      "is_host": false,
+      "disposition": "CONFIRMED"
     },
     {
       "koi": "K03513.01",
@@ -438,7 +464,8 @@
       "kepmag": 14.66,
       "ra": 298.80954,
       "dec": 46.662941,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K04676.02",
@@ -450,7 +477,8 @@
       "kepmag": 12.993,
       "ra": 298.741,
       "dec": 40.070393,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K04055.01",
@@ -462,7 +490,8 @@
       "kepmag": 14.791,
       "ra": 289.76932,
       "dec": 38.385525,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K01762.01",
@@ -474,7 +503,8 @@
       "kepmag": 13.338,
       "ra": 298.13,
       "dec": 40.529449,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K06311.01",
@@ -486,7 +516,8 @@
       "kepmag": 13.361,
       "ra": 290.11569,
       "dec": 38.40419,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K05020.01",
@@ -498,7 +529,8 @@
       "kepmag": 14.11,
       "ra": 293.93439,
       "dec": 38.943073,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K01003.01",
@@ -510,7 +542,8 @@
       "kepmag": 14.897,
       "ra": 290.33224,
       "dec": 37.724277,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K01944.01",
@@ -522,7 +555,8 @@
       "kepmag": 14.897,
       "ra": 290.33224,
       "dec": 37.724277,
-      "is_host": false
+      "is_host": false,
+      "disposition": "CONFIRMED"
     },
     {
       "koi": "K01944.02",
@@ -534,7 +568,8 @@
       "kepmag": 14.897,
       "ra": 290.33224,
       "dec": 37.724277,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K00970.01",
@@ -546,7 +581,8 @@
       "kepmag": 14.661,
       "ra": 289.10284,
       "dec": 49.424156,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K08266.01",
@@ -558,7 +594,8 @@
       "kepmag": 15.439,
       "ra": 291.29633,
       "dec": 42.443855,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K01552.01",
@@ -570,7 +607,8 @@
       "kepmag": 14.01,
       "ra": 298.92358,
       "dec": 43.754227,
-      "is_host": false
+      "is_host": false,
+      "disposition": "CANDIDATE"
     },
     {
       "koi": "K01544.01",
@@ -582,7 +620,8 @@
       "kepmag": 12.203,
       "ra": 295.32501,
       "dec": 40.187576,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K07555.01",
@@ -594,7 +633,8 @@
       "kepmag": 12.203,
       "ra": 295.32501,
       "dec": 40.187576,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K07714.01",
@@ -606,7 +646,8 @@
       "kepmag": 12.203,
       "ra": 295.32501,
       "dec": 40.187576,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K03513.01",
@@ -618,7 +659,8 @@
       "kepmag": 13.183,
       "ra": 298.79532,
       "dec": 46.670448,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K00501.01",
@@ -630,7 +672,8 @@
       "kepmag": 14.83,
       "ra": 298.47089,
       "dec": 40.075279,
-      "is_host": false
+      "is_host": false,
+      "disposition": "CANDIDATE"
     },
     {
       "koi": "K00696.01",
@@ -642,7 +685,8 @@
       "kepmag": 15.045,
       "ra": 284.87463,
       "dec": 45.136898,
-      "is_host": false
+      "is_host": false,
+      "disposition": "CANDIDATE"
     },
     {
       "koi": "K03156.01",
@@ -654,7 +698,8 @@
       "kepmag": 15.116,
       "ra": 289.75085,
       "dec": 39.267231,
-      "is_host": false
+      "is_host": false,
+      "disposition": "CANDIDATE"
     },
     {
       "koi": "K03156.02",
@@ -666,7 +711,8 @@
       "kepmag": 15.116,
       "ra": 289.75085,
       "dec": 39.267231,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K03156.03",
@@ -678,7 +724,8 @@
       "kepmag": 15.116,
       "ra": 289.75085,
       "dec": 39.267231,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K03156.04",
@@ -690,7 +737,8 @@
       "kepmag": 15.116,
       "ra": 289.75085,
       "dec": 39.267231,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K02835.01",
@@ -702,7 +750,8 @@
       "kepmag": 14.619,
       "ra": 287.83368,
       "dec": 40.696972,
-      "is_host": false
+      "is_host": false,
+      "disposition": "CONFIRMED"
     },
     {
       "koi": "K00051.01",
@@ -714,7 +763,8 @@
       "kepmag": 14.688,
       "ra": 295.9187,
       "dec": 41.334145,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K01724.01",
@@ -726,7 +776,8 @@
       "kepmag": 15.512,
       "ra": 294.32715,
       "dec": 47.214218,
-      "is_host": false
+      "is_host": false,
+      "disposition": "CONFIRMED"
     },
     {
       "koi": "K03715.01",
@@ -738,7 +789,8 @@
       "kepmag": 14.81,
       "ra": 295.34232,
       "dec": 40.033226,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K06969.01",
@@ -750,7 +802,8 @@
       "kepmag": 14.869,
       "ra": 296.5524,
       "dec": 43.969082,
-      "is_host": false
+      "is_host": false,
+      "disposition": "CANDIDATE"
     },
     {
       "koi": "K00988.01",
@@ -762,7 +815,8 @@
       "kepmag": 14.503,
       "ra": 291.3645,
       "dec": 37.606655,
-      "is_host": false
+      "is_host": false,
+      "disposition": "CONFIRMED"
     },
     {
       "koi": "K00988.02",
@@ -774,7 +828,8 @@
       "kepmag": 14.503,
       "ra": 291.3645,
       "dec": 37.606655,
-      "is_host": false
+      "is_host": false,
+      "disposition": "CONFIRMED"
     },
     {
       "koi": "K02116.01",
@@ -786,7 +841,8 @@
       "kepmag": 14.2,
       "ra": 291.14099,
       "dec": 44.056618,
-      "is_host": false
+      "is_host": false,
+      "disposition": "CONFIRMED"
     },
     {
       "koi": "K06269.01",
@@ -798,7 +854,8 @@
       "kepmag": 15.205,
       "ra": 290.25864,
       "dec": 37.756367,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K06873.01",
@@ -810,7 +867,8 @@
       "kepmag": 15.408,
       "ra": 296.94165,
       "dec": 42.953732,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K00340.01",
@@ -822,7 +880,8 @@
       "kepmag": 14.784,
       "ra": 297.66748,
       "dec": 47.798065,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K03596.01",
@@ -834,7 +893,8 @@
       "kepmag": 13.29,
       "ra": 293.26605,
       "dec": 45.350697,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K02016.01",
@@ -846,7 +906,8 @@
       "kepmag": 14.58,
       "ra": 290.59839,
       "dec": 44.55143,
-      "is_host": false
+      "is_host": false,
+      "disposition": "CONFIRMED"
     },
     {
       "koi": "K03712.01",
@@ -858,7 +919,8 @@
       "kepmag": 14.051,
       "ra": 290.19949,
       "dec": 37.783779,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K07211.01",
@@ -870,7 +932,8 @@
       "kepmag": 14.976,
       "ra": 288.02365,
       "dec": 46.319393,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K03598.01",
@@ -882,7 +945,8 @@
       "kepmag": 13.693,
       "ra": 290.21271,
       "dec": 37.767826,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K02684.01",
@@ -894,7 +958,8 @@
       "kepmag": 14.33,
       "ra": 284.62152,
       "dec": 39.17828,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K06107.01",
@@ -906,7 +971,8 @@
       "kepmag": 14.33,
       "ra": 284.62152,
       "dec": 39.17828,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K05245.01",
@@ -918,7 +984,8 @@
       "kepmag": 13.945,
       "ra": 284.05484,
       "dec": 41.570683,
-      "is_host": false
+      "is_host": false,
+      "disposition": "CONFIRMED"
     },
     {
       "koi": "K01060.02",
@@ -930,7 +997,8 @@
       "kepmag": 15.4,
       "ra": 293.08902,
       "dec": 41.135567,
-      "is_host": false
+      "is_host": false,
+      "disposition": "CONFIRMED"
     },
     {
       "koi": "K01060.03",
@@ -942,7 +1010,8 @@
       "kepmag": 15.4,
       "ra": 293.08902,
       "dec": 41.135567,
-      "is_host": false
+      "is_host": false,
+      "disposition": "CONFIRMED"
     },
     {
       "koi": "K01060.04",
@@ -954,7 +1023,8 @@
       "kepmag": 15.4,
       "ra": 293.08902,
       "dec": 41.135567,
-      "is_host": false
+      "is_host": false,
+      "disposition": "CONFIRMED"
     },
     {
       "koi": "K01060.01",
@@ -966,7 +1036,8 @@
       "kepmag": 15.4,
       "ra": 293.08902,
       "dec": 41.135567,
-      "is_host": false
+      "is_host": false,
+      "disposition": "CONFIRMED"
     },
     {
       "koi": "K03511.01",
@@ -978,7 +1049,8 @@
       "kepmag": 15.21,
       "ra": 291.17007,
       "dec": 38.760052,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K05998.01",
@@ -990,7 +1062,8 @@
       "kepmag": 14.692,
       "ra": 297.94821,
       "dec": 40.152771,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K04518.01",
@@ -1002,7 +1075,8 @@
       "kepmag": 15.956,
       "ra": 291.28217,
       "dec": 42.540882,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K02465.01",
@@ -1014,7 +1088,8 @@
       "kepmag": 14.592,
       "ra": 295.78265,
       "dec": 43.177666,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K05722.01",
@@ -1026,7 +1101,8 @@
       "kepmag": 15.706,
       "ra": 297.74881,
       "dec": 46.662777,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K00074.01",
@@ -1038,7 +1114,8 @@
       "kepmag": 14.573,
       "ra": 298.31992,
       "dec": 42.389717,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K05071.01",
@@ -1050,7 +1127,8 @@
       "kepmag": 15.84,
       "ra": 293.17044,
       "dec": 39.631329,
-      "is_host": false
+      "is_host": false,
+      "disposition": "CANDIDATE"
     },
     {
       "koi": "K01213.01",
@@ -1062,7 +1140,8 @@
       "kepmag": 15.751,
       "ra": 294.35529,
       "dec": 38.599205,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K03899.01",
@@ -1074,7 +1153,8 @@
       "kepmag": 15.751,
       "ra": 294.35529,
       "dec": 38.599205,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K06736.01",
@@ -1086,7 +1166,8 @@
       "kepmag": 15.808,
       "ra": 287.67014,
       "dec": 42.059971,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K05129.01",
@@ -1098,7 +1179,8 @@
       "kepmag": 15.294,
       "ra": 299.31827,
       "dec": 40.27158,
-      "is_host": false
+      "is_host": false,
+      "disposition": "CANDIDATE"
     },
     {
       "koi": "K06134.01",
@@ -1110,7 +1192,8 @@
       "kepmag": 15.438,
       "ra": 299.72339,
       "dec": 40.903877,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K06286.01",
@@ -1122,7 +1205,8 @@
       "kepmag": 15.001,
       "ra": 290.28348,
       "dec": 37.938858,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K08189.01",
@@ -1134,7 +1218,8 @@
       "kepmag": 15.905,
       "ra": 283.1344,
       "dec": 46.790058,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K07547.01",
@@ -1146,7 +1231,8 @@
       "kepmag": 15.362,
       "ra": 295.72046,
       "dec": 39.189224,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K07601.01",
@@ -1158,7 +1244,8 @@
       "kepmag": 15.549,
       "ra": 300.94614,
       "dec": 45.60006,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K03249.01",
@@ -1170,7 +1257,8 @@
       "kepmag": 14.538,
       "ra": 289.75726,
       "dec": 45.453182,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K00185.01",
@@ -1182,7 +1270,8 @@
       "kepmag": 15.69,
       "ra": 296.18713,
       "dec": 39.262585,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K06286.01",
@@ -1194,7 +1283,8 @@
       "kepmag": 14.92,
       "ra": 290.28748,
       "dec": 37.939716,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K01615.01",
@@ -1206,7 +1296,8 @@
       "kepmag": 15.553,
       "ra": 295.32986,
       "dec": 39.373196,
-      "is_host": false
+      "is_host": false,
+      "disposition": "CONFIRMED"
     },
     {
       "koi": "K01205.01",
@@ -1218,7 +1309,8 @@
       "kepmag": 15.06,
       "ra": 295.97348,
       "dec": 38.941326,
-      "is_host": false
+      "is_host": false,
+      "disposition": "CONFIRMED"
     },
     {
       "koi": "K05179.01",
@@ -1230,7 +1322,8 @@
       "kepmag": 15.44,
       "ra": 298.92294,
       "dec": 40.71714,
-      "is_host": false
+      "is_host": false,
+      "disposition": "CANDIDATE"
     },
     {
       "koi": "K03701.01",
@@ -1242,7 +1335,8 @@
       "kepmag": 15.434,
       "ra": 299.02121,
       "dec": 41.819965,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K03705.01",
@@ -1254,7 +1348,8 @@
       "kepmag": 15.434,
       "ra": 299.02121,
       "dec": 41.819965,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K02733.01",
@@ -1266,7 +1361,8 @@
       "kepmag": 15.51,
       "ra": 289.55176,
       "dec": 41.297249,
-      "is_host": false
+      "is_host": false,
+      "disposition": "CONFIRMED"
     },
     {
       "koi": "K07710.01",
@@ -1278,7 +1374,8 @@
       "kepmag": 15.61,
       "ra": 295.84885,
       "dec": 39.947491,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K01512.01",
@@ -1290,7 +1387,8 @@
       "kepmag": 13.794,
       "ra": 286.88007,
       "dec": 50.373871,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K06815.01",
@@ -1302,7 +1400,8 @@
       "kepmag": 14.07,
       "ra": 296.13098,
       "dec": 42.518993,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K02731.01",
@@ -1314,7 +1413,8 @@
       "kepmag": 15.653,
       "ra": 295.33514,
       "dec": 39.167839,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K05157.01",
@@ -1326,7 +1426,8 @@
       "kepmag": 15.697,
       "ra": 298.89337,
       "dec": 40.578239,
-      "is_host": false
+      "is_host": false,
+      "disposition": "CANDIDATE"
     },
     {
       "koi": "K05440.01",
@@ -1338,7 +1439,8 @@
       "kepmag": 15.338,
       "ra": 291.08127,
       "dec": 43.608555,
-      "is_host": false
+      "is_host": false,
+      "disposition": "CANDIDATE"
     },
     {
       "koi": "K07555.01",
@@ -1350,7 +1452,8 @@
       "kepmag": 12.94,
       "ra": 295.31137,
       "dec": 40.188236,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K07714.01",
@@ -1362,7 +1465,8 @@
       "kepmag": 12.94,
       "ra": 295.31137,
       "dec": 40.188236,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K00156.01",
@@ -1374,7 +1478,8 @@
       "kepmag": 15.998,
       "ra": 294.11795,
       "dec": 48.349693,
-      "is_host": false
+      "is_host": false,
+      "disposition": "CONFIRMED"
     },
     {
       "koi": "K00156.02",
@@ -1386,7 +1491,8 @@
       "kepmag": 15.998,
       "ra": 294.11795,
       "dec": 48.349693,
-      "is_host": false
+      "is_host": false,
+      "disposition": "CONFIRMED"
     },
     {
       "koi": "K00156.03",
@@ -1398,7 +1504,8 @@
       "kepmag": 15.998,
       "ra": 294.11795,
       "dec": 48.349693,
-      "is_host": false
+      "is_host": false,
+      "disposition": "CONFIRMED"
     },
     {
       "koi": "K02557.01",
@@ -1410,7 +1517,8 @@
       "kepmag": 15.998,
       "ra": 294.11795,
       "dec": 48.349693,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K01464.01",
@@ -1422,7 +1530,8 @@
       "kepmag": 16.039,
       "ra": 296.91528,
       "dec": 43.51247,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K08180.01",
@@ -1434,7 +1543,8 @@
       "kepmag": 14.86,
       "ra": 285.32401,
       "dec": 45.75211,
-      "is_host": false
+      "is_host": false,
+      "disposition": "CANDIDATE"
     },
     {
       "koi": "K02817.01",
@@ -1446,7 +1556,8 @@
       "kepmag": 14.75,
       "ra": 291.00113,
       "dec": 43.249268,
-      "is_host": false
+      "is_host": false,
+      "disposition": "CONFIRMED"
     },
     {
       "koi": "K03820.01",
@@ -1458,7 +1569,8 @@
       "kepmag": 15.551,
       "ra": 298.93063,
       "dec": 40.398975,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K03431.01",
@@ -1470,7 +1582,8 @@
       "kepmag": 12.404,
       "ra": 285.22391,
       "dec": 45.709293,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K01060.02",
@@ -1482,7 +1595,8 @@
       "kepmag": 15.254,
       "ra": 293.08978,
       "dec": 41.137947,
-      "is_host": false
+      "is_host": false,
+      "disposition": "CONFIRMED"
     },
     {
       "koi": "K01060.03",
@@ -1494,7 +1608,8 @@
       "kepmag": 15.254,
       "ra": 293.08978,
       "dec": 41.137947,
-      "is_host": false
+      "is_host": false,
+      "disposition": "CONFIRMED"
     },
     {
       "koi": "K01060.04",
@@ -1506,7 +1621,8 @@
       "kepmag": 15.254,
       "ra": 293.08978,
       "dec": 41.137947,
-      "is_host": false
+      "is_host": false,
+      "disposition": "CONFIRMED"
     },
     {
       "koi": "K01060.01",
@@ -1518,7 +1634,8 @@
       "kepmag": 15.254,
       "ra": 293.08978,
       "dec": 41.137947,
-      "is_host": false
+      "is_host": false,
+      "disposition": "CONFIRMED"
     },
     {
       "koi": "K03847.01",
@@ -1530,7 +1647,8 @@
       "kepmag": 15.58,
       "ra": 293.96829,
       "dec": 42.832092,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K00399.01",
@@ -1542,7 +1660,8 @@
       "kepmag": 15.58,
       "ra": 293.96829,
       "dec": 42.832092,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K01887.01",
@@ -1554,7 +1673,8 @@
       "kepmag": 14.234,
       "ra": 286.47025,
       "dec": 48.500763,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K07748.01",
@@ -1566,7 +1686,8 @@
       "kepmag": 15.8,
       "ra": 295.06027,
       "dec": 41.123112,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K03469.01",
@@ -1578,7 +1699,8 @@
       "kepmag": 16.2,
       "ra": 294.25125,
       "dec": 39.945328,
-      "is_host": false
+      "is_host": false,
+      "disposition": "CANDIDATE"
     },
     {
       "koi": "K03846.01",
@@ -1590,7 +1712,8 @@
       "kepmag": 15.384,
       "ra": 298.83765,
       "dec": 43.724319,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K06047.01",
@@ -1602,7 +1725,8 @@
       "kepmag": 16.304,
       "ra": 298.81952,
       "dec": 43.673035,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K00042.01",
@@ -1614,7 +1738,8 @@
       "kepmag": 15.691,
       "ra": 283.15189,
       "dec": 45.133488,
-      "is_host": false
+      "is_host": false,
+      "disposition": "CONFIRMED"
     },
     {
       "koi": "K04280.01",
@@ -1626,7 +1751,8 @@
       "kepmag": 15.93,
       "ra": 295.66409,
       "dec": 40.177757,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K05700.01",
@@ -1638,7 +1764,8 @@
       "kepmag": 15.46,
       "ra": 297.14645,
       "dec": 46.226082,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K04676.02",
@@ -1650,7 +1777,8 @@
       "kepmag": 15.296,
       "ra": 298.73639,
       "dec": 40.073967,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K01930.01",
@@ -1662,7 +1790,8 @@
       "kepmag": 13.953,
       "ra": 282.97971,
       "dec": 40.789967,
-      "is_host": false
+      "is_host": false,
+      "disposition": "CONFIRMED"
     },
     {
       "koi": "K01930.02",
@@ -1674,7 +1803,8 @@
       "kepmag": 13.953,
       "ra": 282.97971,
       "dec": 40.789967,
-      "is_host": false
+      "is_host": false,
+      "disposition": "CONFIRMED"
     },
     {
       "koi": "K01930.03",
@@ -1686,7 +1816,8 @@
       "kepmag": 13.953,
       "ra": 282.97971,
       "dec": 40.789967,
-      "is_host": false
+      "is_host": false,
+      "disposition": "CONFIRMED"
     },
     {
       "koi": "K01930.04",
@@ -1698,7 +1829,8 @@
       "kepmag": 13.953,
       "ra": 282.97971,
       "dec": 40.789967,
-      "is_host": false
+      "is_host": false,
+      "disposition": "CONFIRMED"
     },
     {
       "koi": "K01966.01",
@@ -1710,7 +1842,8 @@
       "kepmag": 15.487,
       "ra": 299.77805,
       "dec": 46.892075,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K04221.01",
@@ -1722,7 +1855,8 @@
       "kepmag": 14.923,
       "ra": 291.83237,
       "dec": 41.710304,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     },
     {
       "koi": "K03560.01",
@@ -1734,7 +1868,8 @@
       "kepmag": 16.27,
       "ra": 295.21512,
       "dec": 39.911606,
-      "is_host": false
+      "is_host": false,
+      "disposition": "FALSE POSITIVE"
     }
   ]
 }

@@ -59,6 +59,8 @@ def main() -> bool:
     affected = sorted({r["koi"] for r in neighbours})
 
     disposition = {k.kepoi_name: k.koi_disposition for k in kois}
+    for record in neighbours:
+        record["disposition"] = disposition.get(record["koi"])
     counts: dict[str, int] = {}
     for koi in affected:
         counts[disposition.get(koi, "?")] = counts.get(disposition.get(koi, "?"), 0) + 1
