@@ -2,6 +2,7 @@
   "target": {
     "kepid": 4951877,
     "kepoi_name": "K00501.01",
+    "pp_koi_depth": 575.0,
     "pp_host_rel_prob": 0.0003,
     "pp_host_prob_score": 1.0,
     "pp_host_prob_prov": "PROB",
@@ -40,6 +41,51 @@
       "exceeds_rejection_threshold": true
     }
   ],
+  "earlier_release": {
+    "source": "https://archive.stsci.edu/pub/kepler/catalogs/kepler_koiapp.txt.gz",
+    "record": {
+      "kepid": 4951877,
+      "kepoi_name": null,
+      "pp_koi_depth": 655.0,
+      "pp_host_rel_prob": 0.00029,
+      "pp_host_prob_score": 1.0,
+      "pp_host_prob_prov": "PROB",
+      "pp_1hi_starid": "KIC 4951867",
+      "pp_1hi_kepmag": 14.83,
+      "pp_1hi_rel_prob": 0.96,
+      "pp_1hi_mod_depth": 58190.0,
+      "pp_1hi_prob_prov": "KIC",
+      "pp_2hi_starid": "KIC 4951861",
+      "pp_2hi_kepmag": 15.48,
+      "pp_2hi_rel_prob": 0.037,
+      "pp_2hi_mod_depth": 347543.0,
+      "pp_2hi_prob_prov": "KIC"
+    },
+    "corrected_depths": [
+      {
+        "kic": 4951867,
+        "catalogue_kepmag": 14.83,
+        "gaia_G": 17.786575,
+        "magnitude_error": 2.956574999999999,
+        "flux_factor": 15.227548801155653,
+        "tabulated_depth_ppm": 58190.0,
+        "corrected_depth_ppm": 886091.0647392474,
+        "corrected_depth_percent": 88.60910647392474,
+        "exceeds_rejection_threshold": false
+      },
+      {
+        "kic": 4951861,
+        "catalogue_kepmag": 15.48,
+        "gaia_G": 17.513193,
+        "magnitude_error": 2.0331930000000007,
+        "flux_factor": 6.505447853620804,
+        "tabulated_depth_ppm": 347543.0,
+        "corrected_depth_ppm": 2260922.863390935,
+        "corrected_depth_percent": 226.0922863390935,
+        "exceeds_rejection_threshold": false
+      }
+    ]
+  },
   "candidate_audit": {
     "favours_the_bad_star": [
       "K00501.01"
@@ -67,6 +113,7 @@
     {
       "kepid": 4951877,
       "kepoi_name": "K00501.01",
+      "pp_koi_depth": 575.0,
       "pp_host_rel_prob": 0.0003,
       "pp_host_prob_score": 1.0,
       "pp_host_prob_prov": "PROB",
@@ -84,6 +131,7 @@
     {
       "kepid": 8869680,
       "kepoi_name": "K00696.01",
+      "pp_koi_depth": null,
       "pp_host_rel_prob": 0.0,
       "pp_host_prob_score": 1.0,
       "pp_host_prob_prov": "FPWG",
@@ -101,6 +149,7 @@
     {
       "kepid": 7984047,
       "kepoi_name": "K01552.01",
+      "pp_koi_depth": null,
       "pp_host_rel_prob": null,
       "pp_host_prob_score": 0.0,
       "pp_host_prob_prov": "FAILED",
@@ -118,6 +167,7 @@
     {
       "kepid": 4150611,
       "kepoi_name": "K03156.01",
+      "pp_koi_depth": null,
       "pp_host_rel_prob": null,
       "pp_host_prob_score": 0.0,
       "pp_host_prob_prov": "FAILED",
@@ -135,6 +185,7 @@
     {
       "kepid": 4844470,
       "kepoi_name": "K03469.01",
+      "pp_koi_depth": 502.0,
       "pp_host_rel_prob": 1.0,
       "pp_host_prob_score": 0.33,
       "pp_host_prob_prov": "PROB",
@@ -152,6 +203,7 @@
     {
       "kepid": 4566848,
       "kepoi_name": "K05071.01",
+      "pp_koi_depth": 4291.0,
       "pp_host_rel_prob": 1.0,
       "pp_host_prob_score": 1.0,
       "pp_host_prob_prov": "PROB",
@@ -169,6 +221,7 @@
     {
       "kepid": 5131276,
       "kepoi_name": "K05129.01",
+      "pp_koi_depth": 62.0,
       "pp_host_rel_prob": 1.0,
       "pp_host_prob_score": 1.0,
       "pp_host_prob_prov": "PROB",
@@ -186,6 +239,7 @@
     {
       "kepid": 5391911,
       "kepoi_name": "K05157.01",
+      "pp_koi_depth": 108.0,
       "pp_host_rel_prob": 2.3e-53,
       "pp_host_prob_score": 0.82,
       "pp_host_prob_prov": "PROB",
@@ -203,6 +257,7 @@
     {
       "kepid": 5563057,
       "kepoi_name": "K05179.01",
+      "pp_koi_depth": 14.0,
       "pp_host_rel_prob": 1.0,
       "pp_host_prob_score": 1.0,
       "pp_host_prob_prov": "PROB",
@@ -220,6 +275,7 @@
     {
       "kepid": 7888863,
       "kepoi_name": "K05440.01",
+      "pp_koi_depth": 346.0,
       "pp_host_rel_prob": 0.72,
       "pp_host_prob_score": 0.09,
       "pp_host_prob_prov": "PROB",
@@ -237,6 +293,7 @@
     {
       "kepid": 5295206,
       "kepoi_name": "K06557.01",
+      "pp_koi_depth": 70.0,
       "pp_host_rel_prob": 0.99,
       "pp_host_prob_score": 0.44,
       "pp_host_prob_prov": "PROB",
@@ -254,6 +311,7 @@
     {
       "kepid": 8112013,
       "kepoi_name": "K06969.01",
+      "pp_koi_depth": 60512.0,
       "pp_host_rel_prob": 1.0,
       "pp_host_prob_score": 1.0,
       "pp_host_prob_prov": "PROB",
@@ -271,6 +329,7 @@
     {
       "kepid": 9268159,
       "kepoi_name": "K08180.01",
+      "pp_koi_depth": 287.0,
       "pp_host_rel_prob": 0.9,
       "pp_host_prob_score": 0.18,
       "pp_host_prob_prov": "PROB",

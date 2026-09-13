@@ -45,6 +45,7 @@ only; it does not compare them with the manuscript.
 | §4 | Host RUWE 0.970, astrometric excess noise 0, multi-peak fraction 0, no non-single-star entry | 01 | Gaia DR3 |
 | §2.3 | The archive's positional-probability record lists Kp = 14.830 and 15.480 with provenance `KIC`, and required depths of 69,203 and 580,986 ppm | 04 | `data/koiapp/` |
 | §2.4 | With Gaia magnitudes the required eclipses become 105% and 378%; the second exceeds the 3 × 10⁶ ppm rejection limit | 04 | `data/koiapp/`, Gaia DR3 |
+| §2.3, §2.4 | An earlier release of the table gives the host 2.9 × 10⁻⁴ and KIC 4951867 0.96 from the same KIC magnitudes; corrected eclipses 89% and 226% | 04 | MAST bulk file, Gaia DR3 |
 | §2.6 | Of 29,673 KIC neighbours within 25 arcsec of the 8,054 DR25 objects of interest, 135 beside 124 objects have r − J < −0.5; 35 hosts have the same defect | 02 | DR25 KOI table, KIC |
 | §2.6 | Dispositions of the 124: 80 FALSE POSITIVE, 31 CONFIRMED, 13 CANDIDATE | 02 | DR25 KOI table |
 | §2.6 | The 135 are 106 stars; 92 have a Gaia counterpart and all 92 have G more than 1 mag fainter than KIC r (median G − r = +3.15) | 03 | KIC, Gaia DR3 |
@@ -71,6 +72,7 @@ curves (§5.2), the vetting diagnostics (§6) and the false-positive probability
 |---|---|---|---|
 | NASA Exoplanet Archive | `q1_q17_dr25_koi` (DR25 objects of interest) | TAP | 02, 04, 05 |
 | NASA Exoplanet Archive | `koiapp` (DR25 positional probabilities) | manual export, committed | 04 |
+| MAST | `kepler_koiapp.txt.gz` (earlier positional-probability release) | bulk file | 04 |
 | Kepler DV report | per-quarter difference-image centroids, KIC 4951877 | manual extraction, committed | 06 |
 | ESA Gaia archive | Gaia DR3 `gaia_source` | TAP | 01 |
 | CDS VizieR | KIC `V/133/kic`, 2MASS `II/246`, Pan-STARRS DR1 `II/349`, APOGEE DR17 `III/286/allvis` | cone search | 01, 06, 07 |
@@ -78,12 +80,16 @@ curves (§5.2), the vetting diagnostics (§6) and the false-positive probability
 
 ### Committed data
 
-Two datasets have no programmatic interface and are committed in `data/`.
+Two datasets are not served by any query interface and are committed in `data/`.
 
-**`data/koiapp/` — DR25 positional probabilities (13 CSV files).** The `koiapp`
-table is not exposed by the archive's TAP service or its `nph-nstedAPI`
-endpoint (both return `"koiapp" is not a valid table`); it is available only
-through the interactive viewer. To reproduce an export:
+**`data/koiapp/` — DR25 positional probabilities (13 CSV files).** The DR25
+`koiapp` table is not exposed by the archive's TAP service or its
+`nph-nstedAPI` endpoint (both return `"koiapp" is not a valid table`); it is
+available through the interactive viewer. MAST's bulk file
+`https://archive.stsci.edu/pub/kepler/catalogs/kepler_koiapp.txt.gz` is an
+earlier release with different values (for KOI-501.01 a 655 ppm depth rather
+than 575 ppm); step 04 downloads it and reports it separately, but it is not
+the DR25 table. To reproduce an export:
 
 1. Open <https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=koiapp>.
 2. Choose **Select Columns → All Columns**. The default column set omits
@@ -135,7 +141,7 @@ subsampling is used anywhere: step 02 covers all 8,054 objects of interest.
 run_all.py    runs the steps in order
 koi501/       config.py    thresholds and constants
               models.py    pydantic record models
-              archives.py  TAP, VizieR and X-Match clients with an on-disk cache
+              archives.py  TAP, VizieR, X-Match and MAST clients with an on-disk cache
               report.py    shared functions and printed tables
 steps/        01_target_photometry.py
               02_colour_pathology.py

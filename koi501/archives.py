@@ -1,4 +1,4 @@
-"""Query layer for the four services the analysis touches.
+"""Query layer for the services the analysis touches.
 
 Responses are cached under ``results/.cache`` so a rerun is fast and gives the
 same answer. Delete that directory to force a fresh fetch.
@@ -7,6 +7,7 @@ same answer. Delete that directory to force a fresh fetch.
 from __future__ import annotations
 
 import csv
+import gzip
 import hashlib
 import io
 import urllib.parse
@@ -118,6 +119,16 @@ def xmatch(rows: Iterable[dict], catalogue: str, radius_as: float,
     key = f"xmatch:{catalogue}:{radius_as}:{selection}:{hashlib.sha256(payload.encode()).hexdigest()[:16]}"
     headers = {"Content-Type": f"multipart/form-data; boundary={boundary}"}
     return _rows(_cached(key, lambda: _post(XMATCH, body.getvalue(), headers)))
+
+
+def mast_table(url: str) -> list[dict]:
+    """A gzipped tab-separated bulk catalogue file from MAST."""
+    fetch = lambda: gzip.decompress(urllib.request.urlopen(
+        urllib.request.Request(url, headers=HEADERS), timeout=600).read()
+    ).decode("utf8", "replace")
+    return list(csv.DictReader(io.StringIO(_cached(f"mast:{url}", fetch)),
+                               delimiter="\t"))
+
 
 def validate(model, rows: Iterable[dict], rename: dict[str, str] | None = None
              ) -> Iterator:

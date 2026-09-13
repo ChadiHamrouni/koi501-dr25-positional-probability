@@ -145,14 +145,15 @@ class GaiaMatch(Strict):
 
 
 class PositionalProbability(Strict):
-    """A row of the archive's DR25 positional-probability table (`koiapp`).
+    """A row of a positional-probability table (`koiapp`).
 
-    This table has no API. Rows come from CSVs exported by hand from the
-    archive's interactive table view; see data/README.md.
+    The DR25 rows are CSVs exported from the NASA Exoplanet Archive's table
+    viewer. MAST's bulk file is an earlier release and has no KOI name column.
     """
 
     kepid: int
-    kepoi_name: str
+    kepoi_name: Optional[str] = None
+    pp_koi_depth: Optional[float] = None
     pp_host_rel_prob: Optional[Prob] = None
     pp_host_prob_score: Optional[Prob] = None
     pp_host_prob_prov: Optional[str] = None

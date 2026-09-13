@@ -1,9 +1,10 @@
 """Step 4 - the archive's positional probability, its inputs, and its consequence.
 
-The `koiapp` table has no API, so its rows come from CSVs exported by hand from
-the archive's interactive table view (see data/README.md). This step validates
-them, reproduces the correction of Section 2.4, and audits the twelve other
-candidates that have an impossible-colour neighbour.
+The DR25 `koiapp` rows are not served by the archive's TAP service, so they come
+from CSVs exported from its table viewer (see README). This step validates them,
+reproduces the correction of Section 2.4, repeats it on the earlier release that
+MAST distributes as a bulk file, and audits the twelve other candidates that have
+an impossible-colour neighbour.
 """
 
 import csv
@@ -17,6 +18,7 @@ from koi501.models import KOIRow, PositionalProbability
 from koi501.report import Table, read, write
 
 KOIAPP = config.DATA / "koiapp"
+MAST_KOIAPP = "https://archive.stsci.edu/pub/kepler/catalogs/kepler_koiapp.txt.gz"
 
 
 def load_koiapp() -> list[PositionalProbability]:
@@ -28,20 +30,15 @@ def load_koiapp() -> list[PositionalProbability]:
     return records
 
 
-def main() -> bool:
-    records = load_koiapp()
-    by_koi = {r.kepoi_name: r for r in records}
-    target = by_koi[config.KOI]
-    print(f"  {len(records)} positional-probability records from data/koiapp/")
-
-    photometry = {s["kic"]: s for s in read("01_target_photometry")["stars"]}
-    corrected = []
+def correct_depths(record: PositionalProbability, photometry: dict) -> list[dict]:
+    """Rescale each tabulated depth by the neighbour's KIC-to-Gaia flux error."""
+    out = []
     for tag, kic in (("pp_1hi", 4951867), ("pp_2hi", 4951861)):
-        kic_mag = getattr(target, f"{tag}_kepmag")
-        depth = getattr(target, f"{tag}_mod_depth")
+        kic_mag = getattr(record, f"{tag}_kepmag")
+        depth = getattr(record, f"{tag}_mod_depth")
         gaia_g = photometry[kic]["gaia_G"]
         factor = 10.0 ** (0.4 * (gaia_g - kic_mag))
-        corrected.append({
+        out.append({
             "kic": kic, "catalogue_kepmag": kic_mag, "gaia_G": gaia_g,
             "magnitude_error": gaia_g - kic_mag, "flux_factor": factor,
             "tabulated_depth_ppm": depth,
@@ -49,6 +46,22 @@ def main() -> bool:
             "corrected_depth_percent": depth * factor / 1e4,
             "exceeds_rejection_threshold": depth * factor > config.REJECTION_DEPTH_PPM,
         })
+    return out
+
+
+def main() -> bool:
+    records = load_koiapp()
+    by_koi = {r.kepoi_name: r for r in records}
+    target = by_koi[config.KOI]
+    print(f"  {len(records)} positional-probability records from data/koiapp/")
+
+    photometry = {s["kic"]: s for s in read("01_target_photometry")["stars"]}
+    corrected = correct_depths(target, photometry)
+
+    earlier = next(archives.validate(PositionalProbability, (
+        r for r in archives.mast_table(MAST_KOIAPP)
+        if r["kepid"] == str(config.KEPID))))
+    corrected_earlier = correct_depths(earlier, photometry)
 
     kois = {k.kepoi_name: k for k in archives.validate(KOIRow, archives.nasa_tap(
         "select kepoi_name,kepid,koi_disposition from q1_q17_dr25_koi"))}
@@ -73,6 +86,8 @@ def main() -> bool:
     payload = {
         "target": target.model_dump(),
         "corrected_depths": corrected,
+        "earlier_release": {"source": MAST_KOIAPP, "record": earlier.model_dump(),
+                            "corrected_depths": corrected_earlier},
         "candidate_audit": audit,
         "records": [r.model_dump() for r in records],
     }
@@ -93,6 +108,14 @@ def main() -> bool:
     table('eclipse needed on KIC 4951867, corrected (% of its light)', round(first["corrected_depth_percent"]))
     table('eclipse needed on KIC 4951861, corrected (% of its light)', round(second["corrected_depth_percent"]))
     table("KIC 4951861 above the archive's own rejection limit", second["exceeds_rejection_threshold"])
+    first_e, second_e = corrected_earlier
+    table('earlier release (MAST): transit depth used (ppm)', earlier.pp_koi_depth)
+    table("  probability given to KOI-501.01's own star", earlier.pp_host_rel_prob)
+    table('  probability given to KIC 4951867', earlier.pp_1hi_rel_prob)
+    table('  Kepler magnitudes used', f"{earlier.pp_1hi_kepmag} / {earlier.pp_2hi_kepmag}")
+    table('  eclipse needed on KIC 4951867, corrected (% of its light)', round(first_e["corrected_depth_percent"]))
+    table('  eclipse needed on KIC 4951861, corrected (% of its light)', round(second_e["corrected_depth_percent"]))
+    table("  KIC 4951861 above the rejection limit", second_e["exceeds_rejection_threshold"])
     table('candidates with a bad neighbour, records checked', len(records))
     table('  archive favours the bad neighbour', ", ".join(audit["favours_the_bad_star"]))
     table('  archive favours the host star', len(audit["host_favoured"]))

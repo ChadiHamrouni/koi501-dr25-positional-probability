@@ -1,5 +1,6 @@
 """Step 2 - how far the colour defect extends across the Kepler field.
 
+
 The r - J test of Section 2.2 uses two KIC columns and nothing else, so it runs
 on the whole catalogue. Every DR25 object of interest is cross-matched against
 the KIC inside the blend radius and the same test applied.
