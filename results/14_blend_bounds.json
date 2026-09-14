@@ -1,0 +1,320 @@
+{
+  "light_curve": {
+    "file": "data/lightcurve/kic4951877_pdcsap.npz",
+    "n_points": 6996,
+    "period_d": 24.7962801,
+    "epoch_bkjd": 145.529,
+    "exposure_min": 29.4244
+  },
+  "best_fit": {
+    "epoch_offset_min": 0.6672813745786694,
+    "depth_ppm": 518.708206025681,
+    "duration_h": 8.389529310240988,
+    "ingress_min": 34.55200209070099
+  },
+  "bootstrap": {
+    "requested": 600,
+    "converged": 600,
+    "seed": 20260904,
+    "depth_ppm_p16_p50_p84": [
+      504.86476472137144,
+      521.7172847495003,
+      535.8523491602256
+    ],
+    "duration_h_p16_p50_p84": [
+      8.135719275363016,
+      8.372891440745153,
+      8.657783311330967
+    ],
+    "ingress_min_p16_p50_p84": [
+      18.03745493715637,
+      32.83014157562489,
+      54.99680654742484
+    ],
+    "T_over_tau_p16_p50_p84": [
+      9.322790073240293,
+      15.360332162278286,
+      26.863390623595492
+    ],
+    "duration_d_median": 0.34887047669771476,
+    "ingress_d_p16_p50_p84": [
+      0.012526010373025255,
+      0.022798709427517286,
+      0.038192226769045025
+    ]
+  },
+  "max_true_depth_p95_ppm": 33413.14726127602,
+  "dmag_shape_bound": 4.41062331350428,
+  "dmag_shape_bound_median": 2.315008041498311,
+  "dmag_brightness_bound": 8.100830388275924,
+  "centroid_error_as": 0.27026465478047534,
+  "target": {
+    "source_id": 2073562489151839872,
+    "G": 14.590293,
+    "sep_as": 0.08960963508683553
+  },
+  "n_neighbours_within_25as": 26,
+  "n_survivors": 0,
+  "neighbours": [
+    {
+      "source_id": 2073562489139827328,
+      "G": 20.828262,
+      "sep_as": 6.914260479463245,
+      "dmag": 6.237968999999998,
+      "bright_enough": true,
+      "shape_allows": false,
+      "centroid_sigma": 25.583295326129157,
+      "survives": false
+    },
+    {
+      "source_id": 2073562489151838080,
+      "G": 17.786575,
+      "sep_as": 6.959264629262609,
+      "dmag": 3.1962819999999983,
+      "bright_enough": true,
+      "shape_allows": true,
+      "centroid_sigma": 25.749814140200197,
+      "survives": false
+    },
+    {
+      "source_id": 2073562695310268032,
+      "G": 17.513193,
+      "sep_as": 8.927680772843805,
+      "dmag": 2.9229000000000003,
+      "bright_enough": true,
+      "shape_allows": true,
+      "centroid_sigma": 33.03310519866309,
+      "survives": false
+    },
+    {
+      "source_id": 2073562489139836032,
+      "G": 20.13963,
+      "sep_as": 10.529627152171075,
+      "dmag": 5.5493369999999995,
+      "bright_enough": true,
+      "shape_allows": false,
+      "centroid_sigma": 38.96042995605123,
+      "survives": false
+    },
+    {
+      "source_id": 2073562691000222080,
+      "G": 18.170513,
+      "sep_as": 10.760534176085851,
+      "dmag": 3.580219999999999,
+      "bright_enough": true,
+      "shape_allows": true,
+      "centroid_sigma": 39.81480369612587,
+      "survives": false
+    },
+    {
+      "source_id": 2073562484835192576,
+      "G": 17.903767,
+      "sep_as": 11.359830919726935,
+      "dmag": 3.3134739999999976,
+      "bright_enough": true,
+      "shape_allows": true,
+      "centroid_sigma": 42.032247720124744,
+      "survives": false
+    },
+    {
+      "source_id": 2073562690993616768,
+      "G": 18.280115,
+      "sep_as": 12.646388421157024,
+      "dmag": 3.6898219999999977,
+      "bright_enough": true,
+      "shape_allows": true,
+      "centroid_sigma": 46.79260938293672,
+      "survives": false
+    },
+    {
+      "source_id": 2073562489139809152,
+      "G": 20.61172,
+      "sep_as": 13.326906326905576,
+      "dmag": 6.021426999999997,
+      "bright_enough": true,
+      "shape_allows": false,
+      "centroid_sigma": 49.31057795082551,
+      "survives": false
+    },
+    {
+      "source_id": 2073562489139816960,
+      "G": 20.425549,
+      "sep_as": 13.673306955010826,
+      "dmag": 5.835255999999999,
+      "bright_enough": true,
+      "shape_allows": false,
+      "centroid_sigma": 50.59228690528209,
+      "survives": false
+    },
+    {
+      "source_id": 2073562690993638272,
+      "G": 18.116688,
+      "sep_as": 13.927621275004125,
+      "dmag": 3.526394999999999,
+      "bright_enough": true,
+      "shape_allows": true,
+      "centroid_sigma": 51.53326944034524,
+      "survives": false
+    },
+    {
+      "source_id": 2073562695298263040,
+      "G": 20.812704,
+      "sep_as": 14.031912544299137,
+      "dmag": 6.222410999999999,
+      "bright_enough": true,
+      "shape_allows": false,
+      "centroid_sigma": 51.919155154404756,
+      "survives": false
+    },
+    {
+      "source_id": 2073562489139825152,
+      "G": 19.436777,
+      "sep_as": 16.53154497593518,
+      "dmag": 4.8464839999999985,
+      "bright_enough": true,
+      "shape_allows": false,
+      "centroid_sigma": 61.16798731733183,
+      "survives": false
+    },
+    {
+      "source_id": 2073562484835152384,
+      "G": 19.591656,
+      "sep_as": 17.470838612972216,
+      "dmag": 5.001363,
+      "bright_enough": true,
+      "shape_allows": false,
+      "centroid_sigma": 64.64344598505878,
+      "survives": false
+    },
+    {
+      "source_id": 2073562484835133568,
+      "G": 17.920164,
+      "sep_as": 17.770698667653228,
+      "dmag": 3.329870999999999,
+      "bright_enough": true,
+      "shape_allows": true,
+      "centroid_sigma": 65.75295123991563,
+      "survives": false
+    },
+    {
+      "source_id": 2073562489151840128,
+      "G": 19.251024,
+      "sep_as": 18.31537385358916,
+      "dmag": 4.660731,
+      "bright_enough": true,
+      "shape_allows": false,
+      "centroid_sigma": 67.76829130122832,
+      "survives": false
+    },
+    {
+      "source_id": 2073562489139791104,
+      "G": 19.399927,
+      "sep_as": 18.434160102037136,
+      "dmag": 4.809634000000001,
+      "bright_enough": true,
+      "shape_allows": false,
+      "centroid_sigma": 68.20780955249377,
+      "survives": false
+    },
+    {
+      "source_id": 2073562489139793024,
+      "G": 17.199772,
+      "sep_as": 18.66757760658538,
+      "dmag": 2.6094789999999985,
+      "bright_enough": true,
+      "shape_allows": true,
+      "centroid_sigma": 69.07147226391209,
+      "survives": false
+    },
+    {
+      "source_id": 2073562489139791232,
+      "G": 18.813477,
+      "sep_as": 18.779485405116787,
+      "dmag": 4.223183999999998,
+      "bright_enough": true,
+      "shape_allows": true,
+      "centroid_sigma": 69.48553972168716,
+      "survives": false
+    },
+    {
+      "source_id": 2073562489139806208,
+      "G": 19.20639,
+      "sep_as": 18.799338647378605,
+      "dmag": 4.616096999999998,
+      "bright_enough": true,
+      "shape_allows": false,
+      "centroid_sigma": 69.55899824432655,
+      "survives": false
+    },
+    {
+      "source_id": 2073562489151834496,
+      "G": 16.229666,
+      "sep_as": 19.191583183300057,
+      "dmag": 1.6393730000000009,
+      "bright_enough": true,
+      "shape_allows": true,
+      "centroid_sigma": 71.01033318207509,
+      "survives": false
+    },
+    {
+      "source_id": 2073562489151847168,
+      "G": 17.555885,
+      "sep_as": 19.221686823571392,
+      "dmag": 2.965591999999999,
+      "bright_enough": true,
+      "shape_allows": true,
+      "centroid_sigma": 71.12171896537623,
+      "survives": false
+    },
+    {
+      "source_id": 2073562489139856000,
+      "G": 20.531212,
+      "sep_as": 22.375779526789646,
+      "dmag": 5.940918999999999,
+      "bright_enough": true,
+      "shape_allows": false,
+      "centroid_sigma": 82.79210444652688,
+      "survives": false
+    },
+    {
+      "source_id": 2073562695298238848,
+      "G": 20.263721,
+      "sep_as": 22.735505731339664,
+      "dmag": 5.6734279999999995,
+      "bright_enough": true,
+      "shape_allows": false,
+      "centroid_sigma": 84.12311905826813,
+      "survives": false
+    },
+    {
+      "source_id": 2073562690993584512,
+      "G": 18.855442,
+      "sep_as": 23.024290612201128,
+      "dmag": 4.265148999999999,
+      "bright_enough": true,
+      "shape_allows": true,
+      "centroid_sigma": 85.1916453185593,
+      "survives": false
+    },
+    {
+      "source_id": 2073562592219078912,
+      "G": 19.717731,
+      "sep_as": 23.518194126896898,
+      "dmag": 5.127438,
+      "bright_enough": true,
+      "shape_allows": false,
+      "centroid_sigma": 87.01912629307647,
+      "survives": false
+    },
+    {
+      "source_id": 2073562695298287232,
+      "G": 20.778324,
+      "sep_as": 24.756838169611886,
+      "dmag": 6.1880310000000005,
+      "bright_enough": true,
+      "shape_allows": false,
+      "centroid_sigma": 91.60220447516834,
+      "survives": false
+    }
+  ]
+}

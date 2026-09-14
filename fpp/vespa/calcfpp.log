@@ -1,0 +1,62 @@
+2026-09-14 12:42:30,162: Loading transit signal from /mnt/c/Users/shadyy/transit_hunt/data/vespa/K00501.01_adopted/trsig.pkl...
+2026-09-14 12:42:30,257: Generating ['beb', 'heb', 'eb', 'beb_Px2', 'heb_Px2', 'eb_Px2', 'pl'] models for PopulationSet...
+2026-09-14 12:42:57,113: 19852 eclipsing HEB systems generated (target 20000)
+2026-09-14 12:42:57,168: 20029 eclipsing HEB systems generated (target 20000)
+2026-09-14 12:42:57,517: Fitting trapezoid models for HEBs...
+2026-09-14 12:43:21,999: Done.
+2026-09-14 12:43:28,452: 19851 eclipsing HEB systems generated (target 20000)
+2026-09-14 12:43:28,509: 20030 eclipsing HEB systems generated (target 20000)
+2026-09-14 12:43:28,871: Fitting trapezoid models for HEBs (Double Period)...
+2026-09-14 12:43:52,589: Done.
+2026-09-14 12:43:58,425: 19761 Eclipsing EB systems generated (target 20000)
+2026-09-14 12:43:58,472: 20048 Eclipsing EB systems generated (target 20000)
+2026-09-14 12:43:58,747: Fitting trapezoid models for EBs...
+2026-09-14 12:44:22,166: Done.
+2026-09-14 12:44:28,043: 19821 Eclipsing EB systems generated (target 20000)
+2026-09-14 12:44:28,090: 20034 Eclipsing EB systems generated (target 20000)
+2026-09-14 12:44:28,399: Fitting trapezoid models for EBs (Double Period)...
+2026-09-14 12:44:52,296: Done.
+2026-09-14 12:44:52,844: Loading TRILEGAL simulation from /mnt/c/Users/shadyy/transit_hunt/data/vespa/K00501.01_adopted/starfield.h5
+2026-09-14 12:45:33,008: 0 M1s are nan
+2026-09-14 12:45:33,011: 0 M2s are nan
+2026-09-14 12:45:33,012: 586 R1s are nan
+2026-09-14 12:45:33,012: 105 R2s are nan
+2026-09-14 12:45:33,167: 3088 BEB systems generated (target 20000)
+2026-09-14 12:45:33,290: 0 M1s are nan
+2026-09-14 12:45:33,291: 0 M2s are nan
+2026-09-14 12:45:33,292: 3706 R1s are nan
+2026-09-14 12:45:33,293: 674 R2s are nan
+2026-09-14 12:45:33,737: 21176 BEB systems generated (target 20000)
+2026-09-14 12:45:33,769: Fitting trapezoid models for BEBs...
+2026-09-14 12:45:57,721: Done.
+2026-09-14 12:45:58,061: Loading TRILEGAL simulation from /mnt/c/Users/shadyy/transit_hunt/data/vespa/K00501.01_adopted/starfield.h5
+2026-09-14 12:46:38,555: 0 M1s are nan
+2026-09-14 12:46:38,558: 0 M2s are nan
+2026-09-14 12:46:38,558: 606 R1s are nan
+2026-09-14 12:46:38,559: 117 R2s are nan
+2026-09-14 12:46:38,737: 5150 BEB systems generated (target 20000)
+2026-09-14 12:46:38,810: 0 M1s are nan
+2026-09-14 12:46:38,811: 0 M2s are nan
+2026-09-14 12:46:38,812: 1998 R1s are nan
+2026-09-14 12:46:38,812: 355 R2s are nan
+2026-09-14 12:46:39,224: 20564 BEB systems generated (target 20000)
+2026-09-14 12:46:39,271: Fitting trapezoid models for BEBs (Double Period)...
+2026-09-14 12:47:04,400: Done.
+2026-09-14 12:47:06,353: 17897 Transiting planet systems generated (target 20000)
+2026-09-14 12:47:06,583: 20168 Transiting planet systems generated (target 20000)
+2026-09-14 12:47:06,618: Fitting trapezoid models for Planets...
+2026-09-14 12:47:30,166: Done.
+2026-09-14 12:47:34,706: UKIRT J-band cc not applied to Planets model
+2026-09-14 12:47:34,816: VCC constraint not applied to BEBs model
+2026-09-14 12:47:34,817: VCC constraint not applied to BEBs (Double Period) model
+2026-09-14 12:47:34,818: VCC constraint not applied to Planets model
+2026-09-14 12:48:00,840: FPP calculation successful. Results/plots written to /mnt/c/Users/shadyy/transit_hunt/data/vespa/K00501.01_adopted.
+2026-09-14 12:49:05,271: Loading transit signal from /mnt/c/Users/shadyy/transit_hunt/data/vespa/K00501.01_adopted/trsig.pkl...
+2026-09-14 12:49:09,125: Populations (['beb', 'heb', 'eb', 'beb_Px2', 'heb_Px2', 'eb_Px2', 'pl']) already generated.
+2026-09-14 12:49:27,189: UKIRT J-band cc not applied to Planets model
+2026-09-14 12:49:27,300: VCC constraint not applied to BEBs model
+2026-09-14 12:49:27,301: VCC constraint not applied to BEBs (Double Period) model
+2026-09-14 12:49:27,302: VCC constraint not applied to Planets model
+2026-09-14 12:49:51,855: Re-fitting trapezoid MCMC model...
+2026-09-14 13:05:22,390: Bootstrap results (100) written to /mnt/c/Users/shadyy/transit_hunt/data/vespa/K00501.01_adopted/results_bootstrap.txt.
+2026-09-14 13:05:22,390: FPP calculation successful. Results/plots written to /mnt/c/Users/shadyy/transit_hunt/data/vespa/K00501.01_adopted.

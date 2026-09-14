@@ -1,0 +1,43 @@
+{
+  "inputs": {
+    "star": {
+      "radius_rsun": 1.746,
+      "teff_k": 5764.0,
+      "logg": 4.054,
+      "mass_msun": 1.2591819185770403,
+      "parallax_mas": 0.6522
+    },
+    "transit": {
+      "depth_ppm": 575.3,
+      "period_d": 24.7963,
+      "epoch_bkjd": 145.529,
+      "duration_h": 8.483,
+      "exposure_min": 29.4
+    },
+    "light_curve": {
+      "bins": 100,
+      "flux_err": 4.8770436045084096e-05
+    },
+    "search_radius_px": 10,
+    "draws_per_run": 100000,
+    "contrast_curve": {
+      "band": "J",
+      "file": "ukirt_J_triceratops.txt"
+    },
+    "trilegal": "fpp/data/4951877_TRILEGAL.csv",
+    "quarter": 1
+  },
+  "bars": {
+    "fpp": 0.015,
+    "nfpp": 0.001
+  },
+  "n_runs": 20,
+  "fpp_mean": 0.00088528490069254,
+  "fpp_sem": 0.0006223905896323249,
+  "fpp_median": 4.717956136879309e-09,
+  "fpp_max": 0.011318730491282847,
+  "n_fpp_exactly_zero": 0,
+  "nfpp_mean": 2.418175852543199e-06,
+  "nfpp_max": 4.72879318176545e-05,
+  "n_pass_both_bars": 20
+}

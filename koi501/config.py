@@ -41,3 +41,27 @@ STELLAR_MASS = 1.26
 #: Orbital period, days, and transit epoch, BKJD.
 PERIOD_D = 24.7963
 EPOCH_BKJD = 145.529
+
+#: Positional probability (step 13): radius of the Gaia DR3 search, arcsec.
+POSPROB_RADIUS_AS = 20.0
+
+#: Per-axis systematic added to difference-image centroids, arcsec. Measured by
+#: the analysis pipeline on 73 control objects that DR25 places on their target
+#: at better than one sigma: their fitted offsets imply a per-axis total error of
+#: 0.364 arcsec against a median formal error of 0.171, and the quadrature
+#: difference is this floor.
+CENTROID_SYSTEMATIC_AS = 0.321
+
+#: Transit shape (step 14): the DR25 period to more digits than PERIOD_D, the
+#: DR25 duration and depth, the Kepler long-cadence integration time, and the
+#: bootstrap that sets the shape bound.
+SHAPE_PERIOD_D = 24.7962801
+SHAPE_DURATION_H = 8.483
+SHAPE_DEPTH_PPM = 575.0
+LONG_CADENCE_MIN = 29.4244
+SHAPE_BOOTSTRAPS = 600
+SHAPE_SEED = 20260904
+
+#: A catalogued star further than this many standard errors of the combined
+#: difference-image offset from the target cannot host the signal (step 14).
+CENTROID_EXCLUSION_SIGMA = 3.0

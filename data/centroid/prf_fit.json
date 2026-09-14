@@ -1,0 +1,15 @@
+{
+  "_description": "This work's point-response-function fit to the sixteen DR25 difference images of KOI-501.01: the median east and north offsets of the fitted source from the target's catalogue position over the 16 quarterly panels, and the robust per-panel scatter of the offset. Produced by the analysis pipeline behind the paper (not reproduced in this repository); committed here as an input to step 13.",
+  "_units": {
+    "east_as": "arcsec",
+    "north_as": "arcsec",
+    "sigma_as": "arcsec",
+    "n_panels": "-"
+  },
+  "east_as": 0.15954031140965771,
+  "north_as": 0.16856312065840484,
+  "sigma_as": 0.2572380827284627,
+  "n_panels": 16,
+  "median_panel_snr": 21.040275141124162,
+  "median_panel_quality": 0.946957725548482
+}
