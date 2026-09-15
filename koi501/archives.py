@@ -12,6 +12,7 @@ import hashlib
 import http.client
 import io
 import json
+import tarfile
 import time
 import urllib.error
 import urllib.parse
@@ -51,6 +52,27 @@ def _open(req: urllib.request.Request, timeout: int, attempts: int = 4) -> bytes
             print(f"  {req.full_url.split('?')[0]}: {error}; retrying in {wait} s")
             time.sleep(wait)
     raise AssertionError
+
+
+def _download(url: str, attempts: int = 8, chunk: int = 1 << 20) -> bytes:
+    """A large file read in chunks, resuming with a Range request when the
+    connection drops part way (a single read() of a long response can stop short)."""
+    data = bytearray()
+    for attempt in range(attempts):
+        headers = dict(HEADERS, **({"Range": f"bytes={len(data)}-"} if data else {}))
+        try:
+            with urllib.request.urlopen(urllib.request.Request(url, headers=headers),
+                                        timeout=900) as response:
+                total = response.headers.get("Content-Length")
+                expected = len(data) + int(total) if total else None
+                while block := response.read(chunk):
+                    data.extend(block)
+            if expected is None or len(data) >= expected:
+                return bytes(data)
+        except (OSError, http.client.HTTPException) as error:
+            print(f"  {url}: {error}; {len(data)} bytes so far, resuming")
+        time.sleep(5 * (attempt + 1))
+    raise OSError(f"{url}: incomplete after {attempts} attempts")
 
 
 def _get(url: str, timeout: int = 600) -> str:
@@ -177,6 +199,22 @@ def exofop_file(file_id: int, sha256: str) -> bytes:
         path.unlink()
         raise ValueError(f"ExoFOP file {file_id}: checksum {digest} != expected {sha256}")
     return data
+
+
+def arxiv_member(eprint: str, member: str, sha256: str) -> str:
+    """One file from a pinned arXiv source tarball, cached, checked against its checksum."""
+    CACHE.mkdir(parents=True, exist_ok=True)
+    path = CACHE / f"arxiv_{eprint}_{member.replace('/', '_')}"
+    if not path.exists():
+        tarball = _download(f"https://arxiv.org/e-print/{eprint}")
+        with tarfile.open(fileobj=io.BytesIO(tarball), mode="r:*") as tar:
+            path.write_bytes(tar.extractfile(member).read())
+    data = path.read_bytes()
+    digest = hashlib.sha256(data).hexdigest()
+    if digest != sha256:
+        path.unlink()
+        raise ValueError(f"arXiv {eprint} {member}: checksum {digest} != expected {sha256}")
+    return data.decode("utf8")
 
 
 def kepler_fov(kic: int) -> list[dict]:

@@ -10,63 +10,66 @@
     ]
   },
   "prf_fit": {
-    "east_as": 0.15954031140965771,
-    "north_as": 0.16856312065840484,
-    "sigma_as": 0.2572380827284627,
+    "east_as": 0.15954030381522755,
+    "north_as": 0.16856314232427394,
+    "sigma_as": 0.25723807032167767,
     "n_panels": 16
   },
-  "systematic_per_axis_as": 0.321,
+  "measured_inputs_files": {
+    "prf_fit": "results/prf_centroids.json"
+  },
+  "systematic_per_axis_as": 0.32126205633083144,
   "section_3_1": {
     "east_as": [
-      0.23898804325704143,
-      0.2695939014034456
+      0.23899469461281064,
+      0.26975064792206377
     ],
     "north_as": [
-      -0.1793881582835729,
-      0.2714510686635672
+      -0.17942363919346196,
+      0.27160708705211173
     ],
-    "offset_as": 0.29882335275577393,
-    "offset_err_as": 0.27026465478047534,
-    "offset_sigma": 1.1056693780342666
+    "offset_as": 0.29884997298727706,
+    "offset_err_as": 0.2704212824785032,
+    "offset_sigma": 1.1051274154467992
   },
   "equation_1": {
     "centroid_east_as": [
-      0.22513005197197924,
-      0.1426707509619896
+      0.2251300434073292,
+      0.14267074672859925
     ],
     "centroid_north_as": [
-      -0.10819053905637199,
-      0.14496463476622987
+      -0.10819050833876843,
+      0.1449646303253434
     ],
     "combined_error_as": [
-      0.3512775870733259,
-      0.35221548139300524
+      0.35151707043899083,
+      0.3524543273720409
     ],
     "p_on_target": 1.0,
-    "p_all_others": 4.661195112616318e-79,
+    "p_all_others": 5.954328556815498e-79,
     "nearest_alternative": {
       "source_id": 2073562489139827328,
       "G": 20.828262,
       "sep_as": 6.914231180184965,
-      "sigma_from_centroid": 19.015440109910543
+      "sigma_from_centroid": 19.002528842514053
     }
   },
   "total_error_weighting": {
     "centroid_east_as": [
-      0.23898804325704143,
-      0.2695939014034456
+      0.23899469461281064,
+      0.26975064792206377
     ],
     "centroid_north_as": [
-      -0.1793881582835729,
-      0.2714510686635672
+      -0.17942363919346196,
+      0.27160708705211173
     ],
     "p_on_target": 1.0,
-    "p_all_others": 2.2435469478981816e-130,
+    "p_all_others": 3.1753137075596097e-130,
     "nearest_alternative": {
       "source_id": 2073562489139827328,
       "G": 20.828262,
       "sep_as": 6.914231180184965,
-      "sigma_from_centroid": 24.471895812936193
+      "sigma_from_centroid": 24.457659230266177
     }
   },
   "depth_ppm": 574.4,
@@ -84,11 +87,11 @@
       "flux_fraction": 0.5547091862891572,
       "capable": true,
       "equation_1": {
-        "sigma_from_centroid": 0.9257762334628362,
+        "sigma_from_centroid": 0.9251457205452921,
         "probability": 1.0
       },
       "total_error_weighting": {
-        "sigma_from_centroid": 1.348212388889039,
+        "sigma_from_centroid": 1.3475101897058328,
         "probability": 1.0
       }
     },
@@ -101,12 +104,12 @@
       "flux_fraction": 0.001773690165810082,
       "capable": true,
       "equation_1": {
-        "sigma_from_centroid": 19.015440109910543,
-        "probability": 4.661195111511315e-79
+        "sigma_from_centroid": 19.002528842514053,
+        "probability": 5.954328555360127e-79
       },
       "total_error_weighting": {
-        "sigma_from_centroid": 24.471895812936193,
-        "probability": 2.2435469478981816e-130
+        "sigma_from_centroid": 24.457659230266177,
+        "probability": 3.1753137075596097e-130
       }
     },
     {
@@ -118,12 +121,12 @@
       "flux_fraction": 0.02921141253822273,
       "capable": true,
       "equation_1": {
-        "sigma_from_centroid": 20.147266369263466,
-        "probability": 1.1050028605186245e-88
+        "sigma_from_centroid": 20.133562760196913,
+        "probability": 1.4553708912327673e-88
       },
       "total_error_weighting": {
-        "sigma_from_centroid": 26.11700871044585,
-        "probability": 1.9009620405212917e-148
+        "sigma_from_centroid": 26.101833725929257,
+        "probability": 2.8225019015996785e-148
       }
     },
     {
@@ -135,12 +138,12 @@
       "flux_fraction": 0.03757555103330873,
       "capable": true,
       "equation_1": {
-        "sigma_from_centroid": 26.01658805068973,
-        "probability": 1.611414859336185e-147
+        "sigma_from_centroid": 25.998864340295206,
+        "probability": 2.553544718825788e-147
       },
       "total_error_weighting": {
-        "sigma_from_centroid": 33.922748596188505,
-        "probability": 3.25006634891408e-250
+        "sigma_from_centroid": 33.90305088600223,
+        "probability": 6.332755280062748e-250
       }
     },
     {
@@ -152,12 +155,12 @@
       "flux_fraction": 0.0033444950544639757,
       "capable": true,
       "equation_1": {
-        "sigma_from_centroid": 29.25025522230009,
-        "probability": 2.510903953808299e-186
+        "sigma_from_centroid": 29.23034616300525,
+        "probability": 4.491587462793952e-186
       },
       "total_error_weighting": {
-        "sigma_from_centroid": 37.92889696921735,
-        "probability": 1.01488437137e-312
+        "sigma_from_centroid": 37.90682390212576,
+        "probability": 2.34149987542e-312
       }
     },
     {
@@ -169,11 +172,11 @@
       "flux_fraction": 0.020510552444459536,
       "capable": true,
       "equation_1": {
-        "sigma_from_centroid": 31.15011805006221,
-        "probability": 3.031501897812046e-211
+        "sigma_from_centroid": 31.128904861828065,
+        "probability": 5.865237498531252e-211
       },
       "total_error_weighting": {
-        "sigma_from_centroid": 40.55151252721491,
+        "sigma_from_centroid": 40.52795705524879,
         "probability": 0.0
       }
     },
@@ -186,11 +189,11 @@
       "flux_fraction": 0.026222600472363366,
       "capable": true,
       "equation_1": {
-        "sigma_from_centroid": 31.985131220666588,
-        "probability": 1.0812436001069566e-222
+        "sigma_from_centroid": 31.96338397682678,
+        "probability": 2.1659960431277593e-222
       },
       "total_error_weighting": {
-        "sigma_from_centroid": 41.73124293367496,
+        "sigma_from_centroid": 41.707161069037696,
         "probability": 0.0
       }
     },
@@ -203,11 +206,11 @@
       "flux_fraction": 0.018541145332935584,
       "capable": true,
       "equation_1": {
-        "sigma_from_centroid": 36.69721787263502,
-        "probability": 5.714822674355364e-293
+        "sigma_from_centroid": 36.67223540848501,
+        "probability": 1.4281351877255524e-292
       },
       "total_error_weighting": {
-        "sigma_from_centroid": 47.93427517350478,
+        "sigma_from_centroid": 47.90653996897371,
         "probability": 0.0
       }
     },
@@ -220,11 +223,11 @@
       "flux_fraction": 0.0021651827484193767,
       "capable": true,
       "equation_1": {
-        "sigma_from_centroid": 37.58012656303015,
-        "probability": 3.284446418292705e-307
+        "sigma_from_centroid": 37.55465893583225,
+        "probability": 8.545176382443135e-307
       },
       "total_error_weighting": {
-        "sigma_from_centroid": 48.505839795207855,
+        "sigma_from_centroid": 48.47784631672194,
         "probability": 0.0
       }
     },
@@ -237,11 +240,11 @@
       "flux_fraction": 0.0025701765575586286,
       "capable": true,
       "equation_1": {
-        "sigma_from_centroid": 38.3707669198197,
-        "probability": 2.998e-320
+        "sigma_from_centroid": 38.344756377712436,
+        "probability": 8.1254e-320
       },
       "total_error_weighting": {
-        "sigma_from_centroid": 49.532488782409914,
+        "sigma_from_centroid": 49.503883860277064,
         "probability": 0.0
       }
     },
@@ -254,11 +257,11 @@
       "flux_fraction": 0.02155298159691502,
       "capable": true,
       "equation_1": {
-        "sigma_from_centroid": 39.83291657264777,
+        "sigma_from_centroid": 39.80592306051065,
         "probability": 0.0
       },
       "total_error_weighting": {
-        "sigma_from_centroid": 51.94572553025199,
+        "sigma_from_centroid": 51.91601658432606,
         "probability": 0.0
       }
     },
@@ -271,11 +274,11 @@
       "flux_fraction": 0.0017992891375489422,
       "capable": true,
       "equation_1": {
-        "sigma_from_centroid": 40.31969582336886,
+        "sigma_from_centroid": 40.29236074269469,
         "probability": 0.0
       },
       "total_error_weighting": {
-        "sigma_from_centroid": 52.59976461777789,
+        "sigma_from_centroid": 52.56965388261862,
         "probability": 0.0
       }
     },
@@ -288,11 +291,11 @@
       "flux_fraction": 0.00638957184999877,
       "capable": true,
       "equation_1": {
-        "sigma_from_centroid": 46.34183367631909,
+        "sigma_from_centroid": 46.31036231028557,
         "probability": 0.0
       },
       "total_error_weighting": {
-        "sigma_from_centroid": 59.99612757034224,
+        "sigma_from_centroid": 59.96138618321656,
         "probability": 0.0
       }
     },
@@ -305,11 +308,11 @@
       "flux_fraction": 0.005540132582696031,
       "capable": true,
       "equation_1": {
-        "sigma_from_centroid": 48.99512550969949,
+        "sigma_from_centroid": 48.961785121571346,
         "probability": 0.0
       },
       "total_error_weighting": {
-        "sigma_from_centroid": 63.61305657436405,
+        "sigma_from_centroid": 63.57610146757031,
         "probability": 0.0
       }
     },
@@ -322,11 +325,11 @@
       "flux_fraction": 0.02582955702351377,
       "capable": true,
       "equation_1": {
-        "sigma_from_centroid": 50.25674271916048,
+        "sigma_from_centroid": 50.22268048739128,
         "probability": 0.0
       },
       "total_error_weighting": {
-        "sigma_from_centroid": 64.96734246097613,
+        "sigma_from_centroid": 64.92988653314752,
         "probability": 0.0
       }
     },
@@ -339,11 +342,11 @@
       "flux_fraction": 0.00758181106977119,
       "capable": true,
       "equation_1": {
-        "sigma_from_centroid": 51.4351233278756,
+        "sigma_from_centroid": 51.40021319927488,
         "probability": 0.0
       },
       "total_error_weighting": {
-        "sigma_from_centroid": 66.57256820143178,
+        "sigma_from_centroid": 66.53407324846833,
         "probability": 0.0
       }
     },
@@ -356,11 +359,11 @@
       "flux_fraction": 0.006610156747575843,
       "capable": true,
       "equation_1": {
-        "sigma_from_centroid": 52.614442779555155,
+        "sigma_from_centroid": 52.57869781074407,
         "probability": 0.0
       },
       "total_error_weighting": {
-        "sigma_from_centroid": 68.25038318964545,
+        "sigma_from_centroid": 68.21088396249132,
         "probability": 0.0
       }
     },
@@ -373,11 +376,11 @@
       "flux_fraction": 0.05015032572469921,
       "capable": true,
       "equation_1": {
-        "sigma_from_centroid": 53.16360593966782,
+        "sigma_from_centroid": 53.12751389423261,
         "probability": 0.0
       },
       "total_error_weighting": {
-        "sigma_from_centroid": 68.89650031392495,
+        "sigma_from_centroid": 68.85667594528758,
         "probability": 0.0
       }
     },
@@ -390,11 +393,11 @@
       "flux_fraction": 0.011344667144489184,
       "capable": true,
       "equation_1": {
-        "sigma_from_centroid": 53.636400996265024,
+        "sigma_from_centroid": 53.59995215923061,
         "probability": 0.0
       },
       "total_error_weighting": {
-        "sigma_from_centroid": 69.60442492361692,
+        "sigma_from_centroid": 69.56412617886177,
         "probability": 0.0
       }
     },
@@ -407,11 +410,11 @@
       "flux_fraction": 0.007899990300934396,
       "capable": true,
       "equation_1": {
-        "sigma_from_centroid": 53.06913848042076,
+        "sigma_from_centroid": 53.03317545215696,
         "probability": 0.0
       },
       "total_error_weighting": {
-        "sigma_from_centroid": 68.59693900911213,
+        "sigma_from_centroid": 68.55740465704018,
         "probability": 0.0
       }
     },
@@ -424,11 +427,11 @@
       "flux_fraction": 0.12255080210601693,
       "capable": true,
       "equation_1": {
-        "sigma_from_centroid": 54.64426604573721,
+        "sigma_from_centroid": 54.60717069606818,
         "probability": 0.0
       },
       "total_error_weighting": {
-        "sigma_from_centroid": 70.8155845328169,
+        "sigma_from_centroid": 70.77465701840775,
         "probability": 0.0
       }
     },
@@ -441,11 +444,11 @@
       "flux_fraction": 0.036126722079141464,
       "capable": true,
       "equation_1": {
-        "sigma_from_centroid": 54.249159527158746,
+        "sigma_from_centroid": 54.21223816605802,
         "probability": 0.0
       },
       "total_error_weighting": {
-        "sigma_from_centroid": 70.69801180739978,
+        "sigma_from_centroid": 70.65705734439074,
         "probability": 0.0
       }
     }

@@ -2,8 +2,9 @@
 
 Two measurements of where the light changed are combined here, one axis at a
 time: DR25's difference-image offset from the catalogue position, and this
-work's PRF fit to the sixteen difference images (data/centroid/prf_fit.json; the
-fit itself is not reproduced, see README). They are combined two ways.
+work's PRF fit to the sixteen difference images (results/prf_centroids.json,
+written by fit/prf_centroids.py, which also measures the per-axis systematic on
+243 control objects). They are combined two ways.
 
 Section 3.1 adds the per-axis systematic to each input first, combines by
 inverse variance, and quotes the length of the resulting offset.
@@ -36,9 +37,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from koi501 import archives, config
 from koi501.models import GaiaSource
-from koi501.report import Table, flux, write
+from koi501.report import Table, flux, read, write
 
-PRF_FIT = config.DATA / "centroid" / "prf_fit.json"
+PRF_FIT = config.RESULTS / "prf_centroids.json"
 GAIA_RENAME = {"Source": "source_id", "RA_ICRS": "ra", "DE_ICRS": "dec",
                "Gmag": "phot_g_mean_mag"}
 
@@ -77,14 +78,14 @@ def summary(sources: list[dict], rows: list[dict]) -> dict:
 
 
 def main() -> bool:
-    row = archives.nasa_tap(
-        "select koi_dikco_mra,koi_dikco_mra_err,koi_dikco_mdec,koi_dikco_mdec_err,"
-        f"koi_depth from q1_q17_dr25_koi where kepoi_name='{config.KOI}'")[0]
-    dr25 = {k: float(v) for k, v in row.items()}
-    depth = dr25["koi_depth"] * 1e-6
-    sys_as = config.CENTROID_SYSTEMATIC_AS
+    target = read("00_dr25_target")["koi"]
+    dr25 = {k: float(target[k]) for k in ("koi_dikco_mra", "koi_dikco_mra_err",
+                                          "koi_dikco_mdec", "koi_dikco_mdec_err", "koi_depth")}
+    depth = dr25["koi_depth"] / config.PPM
 
-    prf = json.loads(PRF_FIT.read_text(encoding="utf8"))
+    fit = json.loads(PRF_FIT.read_text(encoding="utf8"))
+    sys_as = fit["systematic_per_axis_as"]
+    prf = fit["target"]
     # the fit's own scatter, split equally between the two axes
     prf_err = prf["sigma_as"] / math.sqrt(2.0)
     inputs = {"x": (dr25["koi_dikco_mra"], dr25["koi_dikco_mra_err"], prf["east_as"]),
@@ -105,7 +106,7 @@ def main() -> bool:
     gaia = archives.validate(
         GaiaSource,
         archives.vizier_cone("I/355/gaiadr3", "Source,RA_ICRS,DE_ICRS,Gmag",
-                             config.RA, config.DEC, 30.0),
+                             config.RA, config.DEC, config.CONE_RADIUS_AS),
         GAIA_RENAME)
     cos_dec = math.cos(math.radians(config.DEC))
     sources = []
@@ -133,6 +134,7 @@ def main() -> bool:
         "dr25_offset_as": {"ra": [dr25["koi_dikco_mra"], dr25["koi_dikco_mra_err"]],
                            "dec": [dr25["koi_dikco_mdec"], dr25["koi_dikco_mdec_err"]]},
         "prf_fit": {k: prf[k] for k in ("east_as", "north_as", "sigma_as", "n_panels")},
+        "measured_inputs_files": {"prf_fit": "results/prf_centroids.json"},
         "systematic_per_axis_as": sys_as,
         "section_3_1": {"east_as": [xv, exv], "north_as": [yv, eyv],
                         "offset_as": offset, "offset_err_as": offset_err,
@@ -158,18 +160,19 @@ def main() -> bool:
     table("combined offset, systematic on each input (arcsec)",
           f"{offset:.3f} +/- {offset_err:.3f}")
     table("  in standard errors", round(offset / offset_err, 2))
-    table("Gaia DR3 sources within 20 arcsec", len(sources))
+    table(f"Gaia DR3 sources within {config.POSPROB_RADIUS_AS:g} arcsec", len(sources))
     table("  bright enough for the depth if totally eclipsed", payload["n_capable"])
     table("Equation 1 centroid, east (arcsec)", f"{xc:+.3f} +/- {exc:.3f}")
     table("Equation 1 centroid, north (arcsec)", f"{yc:+.3f} +/- {eyc:.3f}")
     table("  systematic then added per axis (arcsec)", sys_as)
+    level = config.POSPROB_REPORT_LEVEL
     table("probability on KOI-501.01",
-          "> 0.999" if main_result["p_on_target"] > 0.999 else main_result["p_on_target"])
+          f"> {level}" if main_result["p_on_target"] > level else main_result["p_on_target"])
     table("nearest alternative, standard errors from centroid",
           f"{near['sigma_from_centroid']:.1f}")
     table("  its separation (arcsec) / G (mag)", f"{near['sep_as']:.2f} / {near['G']:.2f}")
     table("same with the Section 3.1 centroid: probability on target",
-          "> 0.999" if other["p_on_target"] > 0.999 else other["p_on_target"])
+          f"> {level}" if other["p_on_target"] > level else other["p_on_target"])
     table("  nearest alternative, standard errors",
           f"{near_alt['sigma_from_centroid']:.1f}")
     table.show("13_gaia_positional_probability")

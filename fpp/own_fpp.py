@@ -15,18 +15,25 @@ Kepler candidate rate per period window, and the TRILEGAL star density.
 Run A uses the measured inputs and the constraint set of the calibrated
 calculation. Run B multiplies the scenario weights by three factors from the
 follow-up data: the APOGEE velocities against a binary on the target (a floor
-of 1e-30 on a likelihood that underflows), the same velocities against a bound
-pair inside 11.3 AU (which removes part of the triple prior), and the J-band
-contrast curve against a background pair (which removes part of its sky area).
+on a likelihood that underflows), the same velocities against a bound pair
+inside the separation step 09 excludes (which removes part of the triple prior),
+and the J-band contrast curve against a background pair (which removes part of
+its sky area).
 
-Each run adds a flat 0.06% for uncatalogued contaminating stars (Morton et al.
-2016) and 0.14% for an instrumental origin. Twenty repeats of 2,000,000 draws.
+Each run adds flat allowances for uncatalogued contaminating stars (Morton et
+al. 2016) and for an instrumental origin. Every fixed value (seeds, repeats,
+draws, occurrence rates, allowances) is in koi501/config.py; every measured
+value is read from a step output through koi501/inputs.py.
 
 Inputs
   fpp/data/trilegal_starfield.npz  Kepler_mag, Mact, logg of the TRILEGAL field
                                    simulated for vespa (one square degree)
   fpp/data/cumulative_koi.csv      the cumulative KOI table, 2026-08-22 snapshot
+  results/00_dr25_target.json      transit and vetting measurements (step 00)
+  results/07_host_star.json        radius, log g, temperature, mass (step 07)
+  results/09_radial_velocities.json  the bound-pair separation limit (step 09)
   results/12_contrast_curves.json  the UKIRT J contrast curve (step 12)
+  results/13_...json, 14_...json   the centroid offset and the transit shape
 
     pip install -r fpp/requirements.txt
     python fpp/own_fpp.py               # about N minutes
@@ -49,46 +56,47 @@ from scipy.special import ndtr
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
 RESULTS = ROOT / "results"
+sys.path.insert(0, str(ROOT))
 
-SEED = 20260830
-RUN_SEED_OFFSET = 50100
-REPEATS = 20
-N = 2_000_000
+from koi501 import config, inputs  # noqa: E402
 
-G_CGS, R_SUN, M_SUN, R_EARTH, DAY = 6.674e-8, 6.957e10, 1.989e33, 6.371e8, 86400.0
-RSUN_RE = R_SUN / R_EARTH
-TEFF_SUN = 5772.0
+SEED, RUN_SEED_OFFSET = config.OWN_SEED, config.OWN_RUN_SEED_OFFSET
+REPEATS, N = config.OWN_REPEATS, config.OWN_DRAWS
 
-# Raghavan et al. (2010): binary fraction, log-normal period distribution in
-# log10(P/d), triple fraction
-F_BINARY, LOGP_MU, LOGP_SIG, F_TRIPLE = 0.44, 5.03, 2.28, 0.11
-N_TARGETS = 190_000                  # Kepler stars searched
-BLEND_RADIUS_AS = 4.0 * 3.98         # four Kepler pixels
-SEC_NSIGMA = 7.0                     # depth at which a secondary counts as detected
-ECC_PLANET = (0.867, 3.03)           # Kipping (2013) Beta distribution
-ECC_BINARY = (1.0, 2.0)
-T_INT = 0.0204340                    # long-cadence integration, d
-OE_SCALE = 2.43                      # spread of the odd-even statistic on confirmed planets
-P_CONTAM_RESIDUAL = 0.0006           # Morton et al. (2016)
-P_INSTRUMENT = 0.0014                # Thompson et al. (2018) curated inverted/scrambled sets
-R_STELLAR_MIN = 0.086                # smallest hydrogen-burning star, R_sun
-Q_MIN = 0.06                         # smallest companion mass ratio
-F_RUWE = 0.33                        # credit for Gaia astrometry showing no companion
-CEN_FLOOR = np.exp(-0.5 * 5.0 ** 2)  # never more than 5 sigma from the centroid
+# cgs units
+G_CGS = config.G_SI * 1000
+R_SUN, M_SUN, R_EARTH = config.R_SUN_M * 100, config.M_SUN_KG * 1000, config.R_EARTH_M * 100
+DAY = config.DAY_S
+RSUN_RE = config.R_EARTH_PER_R_SUN
+TEFF_SUN = config.TEFF_SUN_K
 
-# KOI-501.01: DR25 transit and vetting measurements, and the host's temperature
-TARGET = dict(P=24.79630, dur=8.4830, dur_err=0.4484, depth=575.3e-6,
-              depth_err=15.47e-6, kepmag=14.612, wst=44.89, wst_rob=2.60,
-              oe=0.1114, teff=5764.0)
+F_BINARY, LOGP_MU = config.RAGHAVAN["binary"], config.RAGHAVAN["logp_mu"]
+LOGP_SIG, F_TRIPLE = config.RAGHAVAN["logp_sigma"], config.RAGHAVAN["triple"]
+N_TARGETS = config.KEPLER_TARGETS
+BLEND_RADIUS_AS = config.OWN_BLEND_RADIUS_PIXELS * config.KEPLER_PIXEL_AS
+SEC_NSIGMA = config.SECONDARY_DETECTION_SIGMA
+ECC_PLANET, ECC_BINARY = config.ECC_PLANET, config.ECC_BINARY
+T_INT = config.LONG_CADENCE_D
+OE_SCALE = config.ODD_EVEN_SCALE
+P_CONTAM_RESIDUAL, P_INSTRUMENT = config.P_CONTAM_RESIDUAL, config.P_INSTRUMENT
+R_STELLAR_MIN = config.R_STELLAR_MIN
+Q_MIN, Q_MIN_TRIPLE = config.Q_MIN, config.Q_MIN_TRIPLE
+F_RUWE = config.RUWE_CREDIT
+CEN_FLOOR = np.exp(-0.5 * config.CENTROID_FLOOR_SIGMA ** 2)
+A_MS, B_MS, C_MS = (config.MS_RADIUS_EXPONENT, config.MS_LUMINOSITY_EXPONENT,
+                    config.MS_SECONDARY_EXPONENT)
+WINDOW = config.PERIOD_WINDOW_FACTOR
+FLOORS = config.OWN_FLOORS
+EB_FLOOR = config.EB_FLOOR
 
-# the spectroscopic stellar solution (Section 4)
-R_MED, R_SD = 1.746, 0.060
-LOGG_MED, LOGG_SD = 4.054, 0.035
-
-# follow-up constraints of run B
-EB_FLOOR = 1e-30                     # velocity likelihood floor for an EB on the target
-A_MIN_BOUND_AU = 11.3                # bound stellar pairs excluded inside this
-M_TRIPLE_MIN = 1.26 + 0.16           # host plus the lightest bound pair, M_sun
+USED = ["transit.period_tce_d", "transit.duration_h", "transit.duration_err_h",
+        "transit.depth_ppm", "transit.depth_err_ppm", "transit.kepmag",
+        "transit.weak_secondary_ppm", "transit.weak_secondary_robstat", "transit.odd_even_stat",
+        "star.teff_k", "star.radius_rsun", "star.radius_err_rsun", "star.logg", "star.logg_err",
+        "star.mass_msun", "velocities.bound_pair_min_au",
+        "centroid.offset_as", "centroid.offset_err_as",
+        "shape.duration_d_median", "shape.ingress_d_p16", "shape.ingress_d_p50", "shape.ingress_d_p84",
+        "instrumental.upper_bound"]
 
 
 def cdfn(x, mu, s):
@@ -97,24 +105,24 @@ def cdfn(x, mu, s):
 
 def mass_radius(m):
     """Main-sequence radius in solar units, floored at the smallest real star."""
-    return np.maximum(m ** 0.92, R_STELLAR_MIN)
+    return np.maximum(m ** A_MS, R_STELLAR_MIN)
 
 
 def flux_ratio(m2, m1):
     """Kepler-band flux ratio of a main-sequence companion, L ~ M^4.5."""
-    return (m2 / m1) ** 4.5
+    return (m2 / m1) ** B_MS
 
 
 def ms_teff(m):
     """Main-sequence temperature from L = M^4.5 and R = M^0.92."""
-    return TEFF_SUN * ((m ** 4.5) / mass_radius(m) ** 2) ** 0.25
+    return TEFF_SUN * ((m ** B_MS) / mass_radius(m) ** 2) ** 0.25
 
 
 def blocked(b, k):
     """Fraction of a uniform disc hidden by a disc of radius ratio k at
     separation b (in primary radii)."""
     b = np.asarray(b, float)
-    k = np.clip(np.asarray(k, float), 1e-9, 1.0)
+    k = np.clip(np.asarray(k, float), FLOORS["k"], 1.0)
     shape = np.broadcast(b, k).shape
     bb, kk = np.broadcast_to(b, shape), np.broadcast_to(k, shape)
     full = bb <= 1.0 - kk
@@ -135,9 +143,9 @@ def centroid_terms(off, err, ap_area):
     blend anywhere inside the search area (uniform in area)."""
     on = max(np.exp(-0.5 * (off / err) ** 2) / (err * np.sqrt(2 * np.pi)), CEN_FLOOR)
     smax = np.sqrt(ap_area / np.pi)
-    s = np.linspace(0, smax, 4000)
+    s = np.linspace(0, smax, config.OWN_CENTROID_GRID)
     kern = np.exp(-0.5 * ((off - s) / err) ** 2) / (err * np.sqrt(2 * np.pi))
-    blend = max(float(np.trapezoid(kern * 2 * s / smax ** 2, s)), 1e-300)
+    blend = max(float(np.trapezoid(kern * 2 * s / smax ** 2, s)), FLOORS["blend"])
     return on, blend
 
 
@@ -150,15 +158,15 @@ def score(k, aR, dil, P, t, rng, qsec=None, sec=None, ecc=ECC_PLANET,
         aR = aR * 2.0 ** (2.0 / 3.0)
         P = 2.0 * P
     cosi = rng.random(n)
-    sini = np.sqrt(np.clip(1.0 - cosi ** 2, 1e-12, 1.0))
-    e = np.clip(rng.beta(ecc[0], ecc[1], n), 0.0, 0.95)
+    sini = np.sqrt(np.clip(1.0 - cosi ** 2, FLOORS["sini"], 1.0))
+    e = np.clip(rng.beta(ecc[0], ecc[1], n), 0.0, config.ECC_MAX)
     esw = e * np.sin(rng.uniform(0, 2 * np.pi, n))
     rfac = (1.0 - e ** 2) / (1.0 + esw)      # separation at transit / semi-major axis
     b = aR * cosi * rfac
     dep = blocked(b, k) * dil
     if double:
-        q_ = np.clip(qsec, 1e-6, 1.0)
-        dep_sec_ = dep * q_ ** 2.66
+        q_ = np.clip(qsec, FLOORS["q"], 1.0)
+        dep_sec_ = dep * q_ ** C_MS
         oe_delta = np.abs(dep - dep_sec_)
         dep = 0.5 * (dep + dep_sec_)
     else:
@@ -196,7 +204,7 @@ def score(k, aR, dil, P, t, rng, qsec=None, sec=None, ecc=ECC_PLANET,
         elif teff1 is not None and teff2 is not None:
             dep_sec = dep * np.clip(teff2 / teff1, 0.0, None) ** 4
         else:
-            dep_sec = dep * np.clip(qsec, 1e-6, 1.0) ** 2.66
+            dep_sec = dep * np.clip(qsec, FLOORS["q"], 1.0) ** C_MS
         if detected:
             v = v * np.exp(-0.5 * ((sec_obs - dep_sec) / sec_sigma) ** 2)
         else:
@@ -204,11 +212,11 @@ def score(k, aR, dil, P, t, rng, qsec=None, sec=None, ecc=ECC_PLANET,
     return float(v.mean())
 
 
-def stellar_samples(n, rng):
+def stellar_samples(t, n, rng):
     """Radius from its measurement; mass from log g and that radius."""
-    R = rng.normal(R_MED, R_SD, n)
-    g = 10 ** rng.normal(LOGG_MED, LOGG_SD, n) / 100.0
-    M = g * (R * 6.957e8) ** 2 / 6.67430e-11 / 1.98892e30
+    R = rng.normal(t["r_star"], t["r_star_err"], n)
+    g = 10 ** rng.normal(t["logg"], t["logg_err"], n) / 100.0
+    M = g * (R * config.R_SUN_M) ** 2 / config.G_SI / config.M_SUN_KG
     return M, R
 
 
@@ -225,19 +233,19 @@ def evaluate(t, M1, R1, field, koi, rng, n=N):
     ap_area = np.pi * BLEND_RADIUS_AS ** 2
     n_bg = possible.sum() * ap_area / 3600.0 ** 2
 
-    f_per = cdfn(np.log10(P * 1.5), LOGP_MU, LOGP_SIG) - cdfn(np.log10(P / 1.5), LOGP_MU, LOGP_SIG)
-    f_per2 = (cdfn(np.log10(2 * P * 1.5), LOGP_MU, LOGP_SIG)
-              - cdfn(np.log10(2 * P / 1.5), LOGP_MU, LOGP_SIG))
+    f_per = cdfn(np.log10(P * WINDOW), LOGP_MU, LOGP_SIG) - cdfn(np.log10(P / WINDOW), LOGP_MU, LOGP_SIG)
+    f_per2 = (cdfn(np.log10(2 * P * WINDOW), LOGP_MU, LOGP_SIG)
+              - cdfn(np.log10(2 * P / WINDOW), LOGP_MU, LOGP_SIG))
     a_cm = (G_CGS * M_SUN * (P * DAY) ** 2 / (4 * np.pi ** 2)) ** (1 / 3)
     candidates = koi.koi_disposition.isin(["CONFIRMED", "CANDIDATE"])
-    n_win = int((candidates & koi.koi_period.between(P / 1.5, P * 1.5)).sum())
+    n_win = int((candidates & koi.koi_period.between(P / WINDOW, P * WINDOW)).sum())
     prior = dict(P=n_win / (N_TARGETS * (R_SUN / a_cm)),
                  EB=F_BINARY * f_per, BEB=n_bg * F_BINARY * f_per, HEB=F_TRIPLE * f_per,
                  EB2=F_BINARY * f_per2, BEB2=n_bg * F_BINARY * f_per2, HEB2=F_TRIPLE * f_per2)
 
-    sec = (t["wst"] * 1e-6, t["wst"] * 1e-6 / t["wst_rob"], t["wst_rob"] >= SEC_NSIGMA)
+    sec = (t["wst"] / config.PPM, t["wst"] / config.PPM / t["wst_rob"], t["wst_rob"] >= SEC_NSIGMA)
     oe, shape, teff = t["oe"], t["shape"], t["teff"]
-    radii = koi.koi_prad[candidates & koi.koi_prad.between(0.3, 25.0)].to_numpy()
+    radii = koi.koi_prad[candidates & koi.koi_prad.between(*config.PLANET_RADIUS_RANGE)].to_numpy()
 
     # planet on the target
     Rp = rng.choice(radii, n) / RSUN_RE
@@ -252,7 +260,7 @@ def evaluate(t, M1, R1, field, koi, rng, n=N):
     L_EB2 = score(R2 / R1, aR1, 1.0 / (1.0 + f2), P, t, rng, double=True, **kw)
 
     # hierarchical triple, diluted by the target's light
-    qb = rng.uniform(0.10, 1.0, n)
+    qb = rng.uniform(Q_MIN_TRIPLE, 1.0, n)
     Mb = qb * M1
     Rb, fb = mass_radius(Mb), flux_ratio(Mb, M1)
     aRb = (G_CGS * (Mb * M_SUN / (4 / 3 * np.pi * (Rb * R_SUN) ** 3))
@@ -292,10 +300,13 @@ def with_allowances(w):
     return fpp, 1 - (1 - fpp) * (1 - P_INSTRUMENT)
 
 
-def triple_outer_fraction():
-    """Share of the Raghavan period distribution beyond the velocity-drift limit."""
-    p_yr = np.sqrt(A_MIN_BOUND_AU ** 3 / M_TRIPLE_MIN)
-    return float(1.0 - cdfn(np.log10(p_yr * 365.25), LOGP_MU, LOGP_SIG))
+def triple_outer_fraction(t):
+    """Share of the Raghavan period distribution beyond the velocity-drift limit:
+    a bound pair (the lightest that can eclipse) around the host, inside the
+    separation step 09 excludes."""
+    m_total = t["m_star"] + config.LIGHTEST_ECLIPSING_PAIR_MSUN
+    p_yr = np.sqrt(t["bound_pair_min_au"] ** 3 / m_total)
+    return float(1.0 - cdfn(np.log10(p_yr * config.YEAR_D), LOGP_MU, LOGP_SIG))
 
 
 def contrast_area_factor(field, possible, kepmag, ap_area):
@@ -314,34 +325,43 @@ def contrast_area_factor(field, possible, kepmag, ap_area):
 
 
 def measured_inputs() -> dict:
-    """The centroid offset of step 13 (Section 3.1) and the transit shape of
-    step 14, the latter as duration over integration-broadened ingress,
+    """Every measured value the calculation uses, read from the step outputs.
+
+    The transit shape is duration over integration-broadened ingress,
     T / (tau + T_int), at the median duration and the median, 16th and 84th
-    percentile ingress, with half the 16-84 spread as its error."""
-    offset = json.loads((RESULTS / "13_gaia_positional_probability.json").read_text(
-        encoding="utf8"))["section_3_1"]
-    boot = json.loads((RESULTS / "14_blend_bounds.json").read_text(encoding="utf8"))["bootstrap"]
-    T = boot["duration_d_median"]
-    tau16, tau50, tau84 = boot["ingress_d_p16_p50_p84"]
+    percentile ingress of step 14, with half the 16-84 spread as its error."""
+    g = inputs.get
+    T = g("shape.duration_d_median")
+    tau16, tau50, tau84 = g("shape.ingress_d_p16"), g("shape.ingress_d_p50"), g("shape.ingress_d_p84")
     shape = (T / (tau50 + T_INT), 0.5 * (T / (tau16 + T_INT) - T / (tau84 + T_INT)))
-    return dict(cen=offset["offset_as"], cen_err=offset["offset_err_as"], shape=shape)
+    return dict(P=g("transit.period_tce_d"), dur=g("transit.duration_h"),
+                dur_err=g("transit.duration_err_h"),
+                depth=g("transit.depth_ppm") / config.PPM,
+                depth_err=g("transit.depth_err_ppm") / config.PPM,
+                kepmag=g("transit.kepmag"), wst=g("transit.weak_secondary_ppm"),
+                wst_rob=g("transit.weak_secondary_robstat"), oe=g("transit.odd_even_stat"),
+                teff=g("star.teff_k"), r_star=g("star.radius_rsun"),
+                r_star_err=g("star.radius_err_rsun"), logg=g("star.logg"),
+                logg_err=g("star.logg_err"), m_star=g("star.mass_msun"),
+                bound_pair_min_au=g("velocities.bound_pair_min_au"),
+                cen=g("centroid.offset_as"), cen_err=g("centroid.offset_err_as"), shape=shape)
 
 
 def main() -> int:
     out = Path(sys.argv[1]) if len(sys.argv) > 1 else RESULTS
     field = dict(np.load(HERE / "data" / "trilegal_starfield.npz"))
     koi = pd.read_csv(HERE / "data" / "cumulative_koi.csv", comment="#")
-    t = dict(TARGET, **measured_inputs())
+    t = measured_inputs()
 
     run_a, run_b, first = [], [], None
     for k in range(REPEATS):
         rng = np.random.default_rng(SEED + RUN_SEED_OFFSET + k)
-        M1, R1 = stellar_samples(N, rng)
+        M1, R1 = stellar_samples(t, N, rng)
         r = evaluate(t, M1, R1, field, koi, rng)
         if first is None:
             first = r
             factors = dict(P=1.0, EB=EB_FLOOR, EB2=EB_FLOOR,
-                           HEB=triple_outer_fraction(), HEB2=triple_outer_fraction(),
+                           HEB=triple_outer_fraction(t), HEB2=triple_outer_fraction(t),
                            BEB=contrast_area_factor(field, r["possible"], t["kepmag"],
                                                     r["ap_area"]))
             factors["BEB2"] = factors["BEB"]
@@ -359,8 +379,8 @@ def main() -> int:
                 "astrophysical_part": 1 - (1 - mean) / (1 - flat)}
 
     payload = {
-        "inputs": {"target": t, "stellar_radius_rsun": [R_MED, R_SD],
-                   "stellar_logg": [LOGG_MED, LOGG_SD], "draws": N, "repeats": REPEATS,
+        "measured_inputs": inputs.record(USED),
+        "inputs": {"target": t, "draws": N, "repeats": REPEATS,
                    "seeds": [SEED + RUN_SEED_OFFSET, SEED + RUN_SEED_OFFSET + REPEATS - 1],
                    "blend_radius_as": BLEND_RADIUS_AS, "raghavan": [F_BINARY, LOGP_MU,
                                                                     LOGP_SIG, F_TRIPLE],
@@ -368,6 +388,13 @@ def main() -> int:
                    "n_koi_rows": int(len(koi))},
         "flat_allowances": {"residual_contamination": P_CONTAM_RESIDUAL,
                             "instrumental": P_INSTRUMENT, "combined": flat},
+        # the same totals with the instrumental allowance raised to the 95% upper
+        # bound of step 16 on the instrumental share
+        "with_instrumental_upper_bound": {
+            "instrumental": inputs.get("instrumental.upper_bound"),
+            **{run: 1 - (1 - summary(values)["astrophysical_part"]) * (1 - P_CONTAM_RESIDUAL)
+                   * (1 - inputs.get("instrumental.upper_bound"))
+               for run, values in (("run_a", run_a), ("run_b", run_b))}},
         "priors": first["prior"], "expected_background_stars": first["n_bg"],
         "p_on_target": float(first["p_on_target"]),
         "run_b_factors": factors,

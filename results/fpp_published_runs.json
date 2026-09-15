@@ -1,0 +1,24 @@
+{
+  "vespa": {
+    "fpp": 0.000169,
+    "bootstrap_n": 100,
+    "bootstrap_mean": 0.000173606,
+    "bootstrap_sd": 8.568703309371868e-05,
+    "population_generated": 20168,
+    "population_target": 20000,
+    "isochrone_radius_rsun": [
+      1.7644065627453476,
+      0.05949149823935495
+    ]
+  },
+  "triceratops_published": {
+    "n_runs": 20,
+    "fpp_mean": 0.0007166816278159571,
+    "fpp_median": 2.04025685235365e-12,
+    "fpp_max": 0.014317789970436756,
+    "n_fpp_exactly_zero": 5,
+    "nfpp_mean": 7.878876197377489e-07,
+    "nfpp_max": 1.500984962173444e-05,
+    "n_pass_both_bars": 20
+  }
+}

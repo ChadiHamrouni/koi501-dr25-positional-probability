@@ -7,14 +7,15 @@ Validation report.
 Reproduces the DR25 rows of Table 4, Section 6.
 """
 
+import math
 import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from koi501 import archives, config
+from koi501 import archives, config, inputs
 from koi501.models import KOIRow, TCERow
-from koi501.report import Table, write
+from koi501.report import Table, read, write
 
 TCE_COLUMNS = ("kepid,tce_plnt_num,tce_max_mult_ev,tce_num_transits,tce_depth,"
                "tce_depth_err,boot_fap,tce_bin_oedp_stat,wst_depth,wst_depth_err,"
@@ -28,16 +29,38 @@ KOI_COLUMNS = ("kepoi_name,kepid,koi_disposition,koi_score,koi_max_mult_ev,"
 def main() -> bool:
     tce = next(archives.validate(TCERow, archives.nasa_tap(
         f"select {TCE_COLUMNS} from q1_q17_dr25_tce "
-        f"where kepid={config.KEPID} and tce_plnt_num=1")))
+        f"where kepid={config.KEPID} and tce_plnt_num={config.TCE_PLANET_NUMBER}")))
     koi = next(archives.validate(KOIRow, archives.nasa_tap(
         f"select {KOI_COLUMNS} from q1_q17_dr25_koi "
         f"where kepoi_name='{config.KOI}'")))
 
     rolling = [tce.tce_rb_tcount0, tce.tce_rb_tcount1, tce.tce_rb_tcount2,
                tce.tce_rb_tcount3, tce.tce_rb_tcount4]
+
+    # The flux-weighted centroid: DR25's third centroid statistic. Its error on
+    # the offset distance is propagated along the offset direction, first with
+    # the table's errors and then with the per-axis systematic of the difference-
+    # image centroids (fit/prf_centroids.py) added to each axis.
+    t = read("00_dr25_target")["tce"]
+    ra, era = t["tce_fwm_srao"], t["tce_fwm_srao_err"]
+    de, ede = t["tce_fwm_sdeco"], t["tce_fwm_sdeco_err"]
+    dist = math.hypot(ra, de)
+    sys_as = inputs.get("centroid.systematic_per_axis_as")
+    edist = math.hypot(ra * era, de * ede) / dist
+    edist_sys = math.hypot(ra * math.hypot(era, sys_as), de * math.hypot(ede, sys_as)) / dist
+    flux_weighted = {
+        "ra_offset_as": [ra, era], "dec_offset_as": [de, ede],
+        "offset_as": dist, "offset_err_as": edist, "offset_sigma": dist / edist,
+        "offset_err_with_systematic_as": edist_sys,
+        "offset_sigma_with_systematic": dist / edist_sys,
+        "motion_detection_significance": read("00_dr25_target")["koi"]["koi_fwm_stat_sig"],
+    }
+
     payload = {
+        "flux_weighted_centroid": flux_weighted,
+        "measured_inputs": inputs.record(["centroid.systematic_per_axis_as"]),
         "tce": tce.model_dump(), "koi": koi.model_dump(),
-        "secondary_3sigma_limit_ppm": tce.wst_depth + 3 * tce.wst_depth_err,
+        "secondary_3sigma_limit_ppm": tce.wst_depth + config.LIMIT_SIGMA * tce.wst_depth_err,
         "rolling_band_severity_ge1": sum(rolling[1:]),
         "rolling_band_transits": sum(rolling),
         "core_over_halo": tce.tce_cap_stat / tce.tce_hap_stat,
@@ -57,6 +80,11 @@ def main() -> bool:
     table("secondary 3 sigma upper limit (ppm)", round(payload["secondary_3sigma_limit_ppm"], 1))
     table("odd-even depth statistic", tce.tce_bin_oedp_stat)
     table("optical ghost, core / halo statistic", f"{tce.tce_cap_stat} / {tce.tce_hap_stat}")
+    table("flux-weighted centroid offset (arcsec)",
+          f"{flux_weighted['offset_as']:.3f} +- {flux_weighted['offset_err_as']:.3f}")
+    table("  in standard errors", round(flux_weighted["offset_sigma"], 2))
+    table("  with the difference-image systematic added", round(flux_weighted["offset_sigma_with_systematic"], 2))
+    table("  motion-detection significance", flux_weighted["motion_detection_significance"])
     table("Robovetter disposition score", koi.koi_score)
     table("Robovetter false-positive flags", koi.flags)
     table.show("11_dr25_vetting")

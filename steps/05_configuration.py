@@ -91,7 +91,8 @@ def main() -> bool:
 
     target = next(r for r in rows if r["koi"] == config.KOI)
     others = [r for r in rows if r["koi"] != config.KOI]
-    displaced = [r for r in others if r["offset_sigma"] and r["offset_sigma"] > 2]
+    displaced = [r for r in others
+                 if r["offset_sigma"] and r["offset_sigma"] > config.DISPLACED_SIGMA]
 
     table = Table('When the catalogue error can change a verdict',
                   'Section 2.6, Table 2')
@@ -105,7 +106,8 @@ def main() -> bool:
     table('KOI-501.01, Robovetter score', target["score"])
     table('KOI-501.01, Robovetter flags', target["flags"])
     table('the other 8: displaced in the difference image', len(displaced))
-    table('the other 8: Robovetter score above 0.001', sum(1 for r in others if r["score"] > 0.001))
+    table('the other 8: Robovetter score above the fail score',
+          sum(1 for r in others if r["score"] > config.ROBOVETTER_FAIL_SCORE))
     table('threshold grid (15 settings): KOI-501.01 only candidate', len(only_target))
     table('threshold grid: no candidate at all', len(empty))
     table('threshold grid: some other candidate', payload["n_other_candidate"])

@@ -1,0 +1,76 @@
+section,claim,file,path,format,text
+§2.2,Kepler's pixels: KIC 4951867 flux share,results/pixel_scene.json,summary.uniform.flux_ratio_4951867.median,pct1,5.2\%
+§2.2,Kepler's pixels: KIC 4951867 flux share from the KIC,results/pixel_scene.json,catalogue_flux_ratio.kic.4951867,pct0,82\%
+§2.2,Kepler's pixels: flux ratios fitted,results/pixel_scene.json,summary.uniform.flux_ratio_4951867.median,.3f,0.052
+§2.2,Kepler's pixels: flux ratio KIC 4951861,results/pixel_scene.json,summary.uniform.flux_ratio_4951861.median,.3f,0.088
+§2.2,Kepler's pixels: photon weights KIC 4951867,results/pixel_scene.json,summary.photon.flux_ratio_4951867.median,.3f,0.050
+§2.2,Kepler's pixels: photon weights KIC 4951861,results/pixel_scene.json,summary.photon.flux_ratio_4951861.median,.3f,0.091
+§2.2,Kepler's pixels: Gaia sources modelled,results/pixel_scene.json,n_gaia_sources,d,60
+§2.2,Kepler's pixels: worst pixel,results/pixel_scene.json,summary.uniform.scene_worst_pixel_over_peak.max,pct1,2.7\%
+§2.2,Kepler's pixels: light centre with Gaia magnitudes,results/pixel_scene.json,summary.uniform.predicted_gaia.median_distance_as,.2f,0.15
+§2.2,Kepler's pixels: light centre with KIC magnitudes,results/pixel_scene.json,summary.uniform.predicted_kic.median_distance_as,.1f,2.0
+§2.2,Kepler's pixels: largest observed offset,results/pixel_scene.json,summary.observed.max_distance_as,.3f,0.260
+§2.2,Kepler's pixels: reproduces the report,results/pixel_scene.json,summary.uniform.real_fit_minus_report.rms_as,.2f,0.19
+§3,difference images: robust-mean errors,results/06_difference_images.json,neighbours.4951867.sigma_report_robust_error,.1f,30.5
+§3,difference images: weakest quarter,results/06_difference_images.json,weakest_quarter.sigma_from_neighbour,.1f,12.5
+§3.1,combined centroid offset,results/13_gaia_positional_probability.json,section_3_1.offset_as,.3f,0.299
+§3.1,combined centroid error,results/13_gaia_positional_probability.json,section_3_1.offset_err_as,.3f,0.270
+§3.1,combined centroid significance,results/13_gaia_positional_probability.json,section_3_1.offset_sigma,.2f,1.11
+§3.1,flux-weighted centroid offset,results/11_dr25_vetting.json,flux_weighted_centroid.offset_as,.3f,1.037
+§3.1,flux-weighted centroid error,results/11_dr25_vetting.json,flux_weighted_centroid.offset_err_as,.3f,0.340
+§3.1,flux-weighted centroid significance,results/11_dr25_vetting.json,flux_weighted_centroid.offset_sigma,.2f,3.05
+§3.1,flux-weighted centroid with systematic,results/11_dr25_vetting.json,flux_weighted_centroid.offset_sigma_with_systematic,.2f,2.22
+§3.1,centroid systematic per axis,results/prf_centroids.json,systematic_per_axis_as,.3f,0.321
+§4,population: planets with a Berger class,results/15_literature.json,population.n_with_berger_class,d,2080
+§4,population: subgiant hosts,results/15_literature.json,population.n_subgiant_host,d,252
+§1,prior implied by ExoMiner,results/15_literature.json,valizadegan2022.implied_prior,tex1,2.6\times10^{-4}
+§5.1,companion mass limit,results/09_radial_velocities.json,companion_mass_limit_mjup,.1f,3.3
+§6,Bayes factor,results/bayes_factor.json,wide.B,.1f,392.0
+§6,Bayes factor with narrow priors,results/bayes_factor.json,narrow.B,.1f,397.3
+§6,Bayes factor at the control epoch,results/bayes_factor.json,control.B,.1f,-0.9
+§6,blend shape bound,results/14_blend_bounds.json,dmag_shape_bound,.2f,4.41
+§6,blend brightness bound,results/14_blend_bounds.json,dmag_brightness_bound,.2f,8.10
+§6,Gaia sources within 25 arcsec,results/14_blend_bounds.json,n_neighbours_within_25as,d,26
+§6,survivors of all bounds,results/14_blend_bounds.json,n_survivors,d,0
+§6,M0V host minimum eccentricity,results/lightcurve_checks.json,m0v_host.e_min,.2f,0.76
+Table 4,deepest false dip,results/lightcurve_checks.json,wrong_epochs.deepest_ppm,.0f,73 ppm
+Table 4,transit depth here,results/lightcurve_checks.json,depth_ppm.0,.0f,516 ppm
+Table 4,transits deeper than zero,results/lightcurve_checks.json,single_transits.n_deeper_than_zero_1sigma,d,50 of 50
+Table 4,transit time scatter,results/lightcurve_checks.json,transit_times.scatter_min,.0f,31 vs
+Table 4,transit time precision,results/lightcurve_checks.json,transit_times.true_precision_min,.0f,40 min
+Table 4,transit time chi2,results/lightcurve_checks.json,transit_times.chi2_red_true_precision,.2f,0.62
+Table 4,odd and even transit times,results/lightcurve_checks.json,transit_times.odd_even_sigma,.2f,1.07\sigma
+Table 4,phase 0.5,results/lightcurve_checks.json,secondary_at_phase_half_ppm.0,+.1f,-0.1
+Table 4,phase 0.5 error,results/lightcurve_checks.json,secondary_at_phase_half_ppm.1,.1f,15.0
+Table 4,odd depth,results/lightcurve_checks.json,odd_even.first_ppm.0,.0f,520\pm22
+Table 4,even depth,results/lightcurve_checks.json,odd_even.second_ppm.0,.0f,512\pm21
+Table 4,odd-even significance,results/lightcurve_checks.json,odd_even.sigma,.2f,0.26\sigma
+Table 4,first half depth,results/lightcurve_checks.json,halves.first_ppm.0,.0f,512\pm22
+Table 4,second half depth,results/lightcurve_checks.json,halves.second_ppm.0,.0f,520\pm20
+Table 4,RV semi-amplitude,results/09_radial_velocities.json,semi_amplitude_ms,.0f,12 \pm 63
+Table 4,ephemeris objects compared,results/10_ephemeris_match.json,n_compared,d,"10{,}929"
+Table 4,ephemeris matches,results/10_ephemeris_match.json,n_full_matches,d,0
+§2.6,CROWDSAP lowest,results/lightcurve_checks.json,crowdsap.range.0,.3f,0.922
+§2.6,CROWDSAP highest,results/lightcurve_checks.json,crowdsap.range.1,.3f,0.993
+§7,vespa FPP,results/fpp_published_runs.json,vespa.fpp,tex1,1.7\times10^{-4}
+§7,vespa bootstrap sd,results/fpp_published_runs.json,vespa.bootstrap_sd,tex1@-4,0.9\times10^{-4}
+§7,vespa isochrone radius,results/fpp_published_runs.json,vespa.isochrone_radius_rsun.0,.2f,1.76
+§7,TRICERATOPS mean,results/fpp_published_runs.json,triceratops_published.fpp_mean,tex1,7.2\times10^{-4}
+§7,TRICERATOPS zeros,results/fpp_published_runs.json,triceratops_published.n_fpp_exactly_zero,words,five runs
+§7,TRICERATOPS max,results/fpp_published_runs.json,triceratops_published.fpp_max,.4f,0.0143
+§7,own FPP run B,results/fpp_own.json,run_b.mean,tex1,2.1\times10^{-3}
+§7,own FPP run A,results/fpp_own.json,run_a.mean,tex1,2.2\times10^{-3}
+§7,positional probability nearest alternative,results/13_gaia_positional_probability.json,equation_1.nearest_alternative.sigma_from_centroid,.1f,19.0
+§7,positional probability with Section 3.1 centroid,results/13_gaia_positional_probability.json,total_error_weighting.nearest_alternative.sigma_from_centroid,.1f,24.5
+§4,stellar radius,results/07_host_star.json,radius_rsun.0,.3f,1.746
+§4,stellar radius error,results/07_host_star.json,radius_rsun.1,.3f,0.061
+§4,planet radius,results/07_host_star.json,planet_radius_earth.adopted_star.0,.2f,4.16
+§6,instrumental share: synthetic detections in the cell,results/16_instrumental_share.json,n_noise_in_cell,d,22 detections
+§6,instrumental share: passed,results/16_instrumental_share.json,n_noise_passed,d,(0 of 22 pass)
+§6,instrumental share: DR25 candidates in the cell,results/16_instrumental_share.json,n_dr25_candidates_in_cell,d,436 DR25 candidates
+§6,instrumental share: 95% upper bound,results/16_instrumental_share.json,share_upper_bounds.unaveraged_over_candidates,pct1,below $0.7\%$
+Table 4,instrumental share row,results/16_instrumental_share.json,share_upper_bounds.unaveraged_over_candidates,pct1,$<0.7\%$ (0 of 22 pass)
+App. A,own FPP with the instrumental bound (run B),results/fpp_own.json,with_instrumental_upper_bound.run_b,tex1,$7.6\times10^{-3}$ with
+App. A,own FPP with the instrumental bound (run A),results/fpp_own.json,with_instrumental_upper_bound.run_a,tex1,$7.7\times10^{-3}$ without
+§5.1,eclipsing binary on the target over the K limit (low),results/09_radial_velocities.json,eclipsing_binary_k_over_limit.0,.0f,between 24 and
+§5.1,eclipsing binary on the target over the K limit (high),results/09_radial_velocities.json,eclipsing_binary_k_over_limit.1,.0f,and 213 times

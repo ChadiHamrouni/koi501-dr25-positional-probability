@@ -1,0 +1,3 @@
+reference,ra_as,ra_err_as,dec_as,dec_err_as,distance_as,distance_err_as,radius_3sigma_as
+kic_position,0.3309,0.225,-0.5879,0.235,0.6746,0.255,0.7645
+out_of_transit_centroid,0.4213,0.234,-0.4640,0.227,0.6267,0.247,0.7420

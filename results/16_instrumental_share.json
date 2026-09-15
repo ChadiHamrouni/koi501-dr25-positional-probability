@@ -1,0 +1,34 @@
+{
+  "cell": {
+    "period_range_d": [
+      10.0,
+      40.0
+    ],
+    "mes_above": 30.0
+  },
+  "synthetic": {
+    "inverted": {
+      "n_rows": 14953,
+      "n_in_cell": 16,
+      "n_passed_in_cell": 0
+    },
+    "scrambled": {
+      "n_rows": 13782,
+      "n_in_cell": 6,
+      "n_passed_in_cell": 0
+    }
+  },
+  "n_noise_in_cell": 22,
+  "n_noise_passed": 0,
+  "n_dr25_tces_in_cell": 1229,
+  "n_dr25_candidates_in_cell": 436,
+  "confidence": 0.95,
+  "poisson_upper_limit_events": 2.99573227355399,
+  "share_upper_bounds": {
+    "per_run_over_tces": 0.001218768215441005,
+    "per_run_over_candidates": 0.0034354727907729243,
+    "unaveraged_over_tces": 0.00243753643088201,
+    "unaveraged_over_candidates": 0.006870945581545849
+  },
+  "point_estimate": 0.0
+}

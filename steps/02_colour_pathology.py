@@ -67,12 +67,14 @@ def main() -> bool:
 
     # Histogram of every tested colour, so the cut can be shown to sit in a
     # tail rather than through the bulk of the distribution.
-    edges = [round(-6.0 + 0.25 * i, 2) for i in range(int(12 / 0.25) + 1)]
+    low, high = config.COLOUR_HIST_RANGE
+    width = config.COLOUR_HIST_BIN
+    edges = [round(low + width * i, 2) for i in range(int((high - low) / width) + 1)]
     histogram = [0] * (len(edges) - 1)
     for record in tested:
         colour = record["r_minus_J"]
         if edges[0] <= colour < edges[-1]:
-            histogram[int((colour - edges[0]) / 0.25)] += 1
+            histogram[int((colour - edges[0]) / width)] += 1
 
     payload = {
         "n_kois": len(kois),

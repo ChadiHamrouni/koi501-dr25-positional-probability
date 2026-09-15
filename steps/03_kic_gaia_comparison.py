@@ -14,7 +14,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from koi501 import archives
+from koi501 import archives, config
 from koi501.models import GaiaMatch
 from koi501.report import Table, read, write, write_table
 
@@ -25,7 +25,7 @@ def _convict(stars: dict[int, dict]) -> dict:
     """Match a set of KIC stars to Gaia and ask which column G agrees with."""
     matches = archives.xmatch(
         [{"kic": k, "ra": r["ra"], "dec": r["dec"]} for k, r in stars.items()],
-        GAIA_CAT, 2.0, selection="best")
+        GAIA_CAT, config.GAIA_XMATCH_AS, selection="best")
 
     records = []
     for match in archives.validate(GaiaMatch, matches,
@@ -39,7 +39,7 @@ def _convict(stars: dict[int, dict]) -> dict:
             "G_minus_r": match.gmag - star["rmag"],
             "G_minus_J": match.gmag - star["jmag"],
         })
-    convicted = [r for r in records if r["G_minus_r"] > 1.0]
+    convicted = [r for r in records if r["G_minus_r"] > config.OPTICAL_COLUMN_WRONG_MAG]
     return {
         "n_stars": len(stars),
         "n_with_gaia": len(records),
@@ -70,8 +70,8 @@ def main() -> bool:
             for r in neighbours]
     write_table(
         "impossible_colour_neighbours",
-        "KIC neighbours within 25 arcsec of a DR25 object of interest with "
-        "r - J < -0.5 (Section 2.6)",
+        f"KIC neighbours within {config.BLEND_RADIUS:g} arcsec of a DR25 object of interest with "
+        f"r - J < {config.COLOUR_IMPOSSIBLE} (Section 2.6)",
         [("koi", "-", "DR25 object of interest"),
          ("disposition", "-", "DR25 disposition of that object"),
          ("kic", "-", "KIC identifier of the neighbour"),
@@ -82,7 +82,7 @@ def main() -> bool:
          ("rmag", "mag", "KIC r magnitude"),
          ("jmag", "mag", "KIC J magnitude"),
          ("r_minus_J", "mag", "KIC r minus KIC J"),
-         ("gaia_G", "mag", "Gaia DR3 G of the best match within 2 arcsec; blank if none"),
+         ("gaia_G", "mag", f"Gaia DR3 G of the best match within {config.GAIA_XMATCH_AS:g} arcsec; blank if none"),
          ("G_minus_r", "mag", "Gaia G minus KIC r; blank if no match")],
         rows)
 
@@ -90,7 +90,7 @@ def main() -> bool:
                   'Section 2.6')
     table('distinct neighbouring stars', by_neighbour["n_stars"])
     table('  with a Gaia match', by_neighbour["n_with_gaia"])
-    table('  Gaia more than 1 mag fainter than KIC r', by_neighbour["n_optical_column_wrong"])
+    table(f'  Gaia more than {config.OPTICAL_COLUMN_WRONG_MAG:g} mag fainter than KIC r', by_neighbour["n_optical_column_wrong"])
     table('median Gaia G minus KIC r (mag)', round(by_neighbour["median_G_minus_r"], 2))
     table.show("03_kic_gaia_comparison")
     return True

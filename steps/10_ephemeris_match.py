@@ -20,11 +20,11 @@ from koi501 import archives, config
 from koi501.models import EclipsingBinary, KeplerFieldPosition, KOIRow
 from koi501.report import Table, angsep, write
 
-SIGMA_P_MIN, SIGMA_T_MIN = 3.5, 2.0
+SIGMA_P_MIN, SIGMA_T_MIN = config.EPHEMERIS_SIGMA_P, config.EPHEMERIS_SIGMA_T
 DP_MAX = math.erfc(SIGMA_P_MIN / math.sqrt(2.0))
 DT_MAX = math.erfc(SIGMA_T_MIN / math.sqrt(2.0))
-FOV_CENTRE = (290.66667, 44.5)      # 19h22m40s, +44d30m00s
-BKJD_FROM_KIRK = 54833.0            # Kirk et al. tabulate BJD - 2400000
+FOV_CENTRE = config.KEPLER_FOV_CENTRE
+BKJD_FROM_KIRK = config.KIRK_BJD_OFFSET
 
 
 def fractional_mismatch(a: float, b: float) -> float:
@@ -48,14 +48,15 @@ def field_position(kic: int) -> KeplerFieldPosition:
 def physical_path(a: KeplerFieldPosition, b: KeplerFieldPosition) -> dict:
     """Coughlin et al. (2014) criterion 2: at least one route for the light."""
     sep = angsep(a.ra, a.dec, b.ra, b.dec)
-    brighter = min(m for m in (a.kepmag, b.kepmag, 20.0) if m is not None)
-    d_max = 50.0 * math.sqrt(1e6 * 10 ** (-0.4 * brighter) + 1.0)
+    brighter = min(m for m in (a.kepmag, b.kepmag, config.DEFAULT_KEPMAG) if m is not None)
+    d_max = config.PRF_REACH_AS * math.sqrt(
+        config.PRF_REACH_FLUX_SCALE * 10 ** (-0.4 * brighter) + 1.0)
     anti = angsep(2 * FOV_CENTRE[0] - a.ra, 2 * FOV_CENTRE[1] - a.dec, b.ra, b.dec)
     shared = sorted(a.modules & b.modules)
     return {"separation_as": sep, "prf_reach_as": d_max, "prf_wings": sep < d_max,
-            "antipodal_offset_as": anti, "antipodal_reflection": anti < 50.0,
+            "antipodal_offset_as": anti, "antipodal_reflection": anti < config.ANTIPODAL_AS,
             "shared_modules": shared, "same_module": bool(shared),
-            "satisfied": sep < d_max or anti < 50.0 or bool(shared)}
+            "satisfied": sep < d_max or anti < config.ANTIPODAL_AS or bool(shared)}
 
 
 def main() -> bool:
@@ -98,7 +99,7 @@ def main() -> bool:
         "n_period_only": len(period_only),
         "statistical_matches": statistical,
         "n_full_matches": len(full),
-        "period_coincident": period_only[:12],
+        "period_coincident": period_only[:12],  # literal: display
     }
     write("10_ephemeris_match", payload)
 
@@ -107,8 +108,8 @@ def main() -> bool:
     table("other DR25 objects of interest compared", payload["n_kois"])
     table("Kirk et al. 2016 eclipsing binaries compared", len(ebs))
     table("total compared", len(compared))
-    table("period agrees (sigma_P > 3.5)", len(period_only))
-    table("period and epoch agree (also sigma_T > 2.0)", len(statistical))
+    table(f"period agrees (sigma_P > {SIGMA_P_MIN})", len(period_only))
+    table(f"period and epoch agree (also sigma_T > {SIGMA_T_MIN})", len(statistical))
     for m in statistical:
         path = m["physical_path"]
         table(f"  {m['name']}: separation (deg)", round(path["separation_as"] / 3600, 1))

@@ -112,8 +112,10 @@ class TwoMassSource(Strict):
 
 
 class TwoMassPhotometry(Strict):
-    """2MASS H and Ks photometry of one source (VizieR II/246)."""
+    """2MASS J, H and Ks photometry of one source (VizieR II/246)."""
 
+    jmag: Mag
+    e_jmag: float = Field(gt=0)
     hmag: Mag
     e_hmag: float = Field(gt=0)
     kmag: Mag
@@ -139,10 +141,12 @@ class GaiaDistance(Strict):
 class ApogeeStar(Strict):
     """APOGEE DR17 ASPCAP parameters of one star (VizieR III/286/catalog)."""
 
-    teff: float = Field(gt=2000, lt=10000)
+    teff: float = Field(gt=2000, lt=10000)  # literal: schema sanity range
     e_teff: float = Field(gt=0)
     logg: float
     e_logg: float = Field(gt=0)
+    feh: float
+    e_feh: float = Field(gt=0)
     snr: float = Field(gt=0)
 
 
@@ -293,11 +297,15 @@ class PositionalProbability(Strict):
     pp_1hi_rel_prob: Optional[Prob] = None
     pp_1hi_mod_depth: Optional[float] = None
     pp_1hi_prob_prov: Optional[str] = None
+    pp_1hi_ra: Optional[float] = None
+    pp_1hi_dec: Optional[float] = None
     pp_2hi_starid: Optional[str] = None
     pp_2hi_kepmag: Optional[Mag] = None
     pp_2hi_rel_prob: Optional[Prob] = None
     pp_2hi_mod_depth: Optional[float] = None
     pp_2hi_prob_prov: Optional[str] = None
+    pp_2hi_ra: Optional[float] = None
+    pp_2hi_dec: Optional[float] = None
 
     @property
     def favours_host(self) -> bool:

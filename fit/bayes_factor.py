@@ -20,8 +20,9 @@ exp(-100/rho), zero to machine precision, so one Gaussian-process call is exact.
 
 Model: batman quadratic limb darkening held at u1 = 0.42, u2 = 0.24, 29.4-minute
 exposures supersampled 7 times, circular orbit, period fixed at the DR25 value.
-UltraNest, 400 live points, frac_remain 0.3. The sampler is not seeded, so a
-rerun agrees with the published values within the quoted evidence errors.
+UltraNest, 400 live points, frac_remain 0.3, seeded through numpy's global
+generator (config.BAYES_SEED). Every fixed setting is in koi501/config.py; the
+ephemeris and duration are read from step 00's output.
 
     pip install -r fit/requirements.txt
     python fit/bayes_factor.py                      # about 40 minutes
@@ -49,27 +50,24 @@ import ultranest
 from celerite2 import terms
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT))
+
+from koi501 import config, inputs  # noqa: E402
+
 LIGHT_CURVE = ROOT / "data" / "lightcurve" / "kic4951877_pdcsap.npz"
 RUNDIR = ROOT / "results" / ".cache" / "ultranest"
 OUT = ROOT / "results" / "bayes_factor.json"
 
-P = 24.7962801              # d, DR25
-T0 = 145.529                # BKJD, DR25
-DUR_D = 8.483 / 24.0        # DR25 duration
-CADENCE_D = 29.4244 / 60 / 24
-WINDOW = 2.5                # window half-width, in durations
-LD_U1, LD_U2 = 0.42, 0.24   # quadratic, Kepler band, Teff 5764 K, log g 4.05
-CONTROL_PHASE = 0.371       # control epoch offset, in periods
-
-PRIORS_WIDE = {
-    "t0": (-0.05, 0.05),          # d
-    "log_rp": (-3.0, -1.0),       # log10 Rp/R*
-    "aor": (5.0, 60.0),           # a/R*
-    "b": (0.0, 0.99),
-    "log_sigma": (-6.0, -2.0),    # log10 GP amplitude, relative flux
-    "log_rho": (-1.5, 1.5),       # log10 GP timescale, d
-    "log_jit": (-5.0, -3.0),      # log10 white-noise jitter, relative flux
-}
+USED = ["transit.period_koi_d", "transit.epoch_bkjd", "transit.duration_h"]
+P = inputs.get("transit.period_koi_d")
+T0 = inputs.get("transit.epoch_bkjd")
+DUR_D = inputs.get("transit.duration_h") / 24.0
+CADENCE_D = config.LONG_CADENCE_D
+WINDOW = config.BAYES_WINDOW_DURATIONS
+LD_U1, LD_U2 = config.BAYES_LD
+CONTROL_PHASE = config.BAYES_CONTROL_PHASE
+BAD = config.BAYES_BAD_LOGL
+PRIORS_WIDE = dict(config.BAYES_PRIORS)
 TGP_NAMES = ["t0", "log_rp", "aor", "b", "log_sigma", "log_rho", "log_jit"]
 GP_NAMES = ["log_sigma", "log_rho", "log_jit"]
 
@@ -83,13 +81,13 @@ def load_light_curve():
 
 def detrend_and_clip(x, y, ye):
     """Divide by a line through the out-of-transit points; clip 5 robust sigma."""
-    oot = np.abs(x) > 0.75 * DUR_D
-    if oot.sum() < 20:
+    oot = np.abs(x) > config.OOT_DURATIONS * DUR_D
+    if oot.sum() < config.BAYES_MIN_OOT:
         return None
     y = y / np.polyval(np.polyfit(x[oot], y[oot], 1), x)
     r = y - 1.0
-    sd = 1.4826 * np.median(np.abs(r[oot] - np.median(r[oot])))
-    keep = np.abs(r - np.median(r[oot])) < 5 * sd
+    sd = config.MAD_TO_SIGMA * np.median(np.abs(r[oot] - np.median(r[oot])))
+    keep = np.abs(r - np.median(r[oot])) < config.BAYES_CLIP_SIGMA * sd
     return x[keep], y[keep], ye[keep], keep
 
 
@@ -100,13 +98,13 @@ def transit_windows():
     blocks = []
     for k in np.unique(ep[inwin]):
         s = inwin & (ep == k)
-        if s.sum() < 40:
+        if s.sum() < config.BAYES_MIN_POINTS:
             continue
         done = detrend_and_clip(t[s] - (T0 + k * P), f[s], e[s])
         if done is None:
             continue
         x, y, ye, keep = done
-        if keep.sum() < 40 or (np.abs(x) < 0.5 * DUR_D).sum() < 3:
+        if keep.sum() < config.BAYES_MIN_POINTS or (np.abs(x) < 0.5 * DUR_D).sum() < config.BAYES_MIN_IN:
             continue
         blocks.append((x, y, ye))
     return blocks
@@ -115,7 +113,7 @@ def transit_windows():
 def control_windows(t0_alt):
     """The same extraction at an epoch with no transit, real transits removed."""
     t, f, e = load_light_curve()
-    away = np.abs(((t - T0) / P + 0.5) % 1.0 - 0.5) * P > 1.5 * DUR_D
+    away = np.abs(((t - T0) / P + 0.5) % 1.0 - 0.5) * P > config.BAYES_CONTROL_EXCLUSION_DURATIONS * DUR_D
     t, f, e = t[away], f[away], e[away]
     ep = np.round((t - t0_alt) / P).astype(int)
     x_all = t - (t0_alt + ep * P)
@@ -123,20 +121,20 @@ def control_windows(t0_alt):
     blocks = []
     for k in np.unique(ep[inwin]):
         s = inwin & (ep == k)
-        if s.sum() < 40:
+        if s.sum() < config.BAYES_MIN_POINTS:
             continue
         done = detrend_and_clip(x_all[s], f[s], e[s])
         if done is None:
             continue
         x, y, ye, keep = done
-        if keep.sum() >= 40:
+        if keep.sum() >= config.BAYES_MIN_POINTS:
             blocks.append((x, y, ye))
     return blocks
 
 
 def one_axis(blocks):
-    """All windows on one time axis, 100 d apart, sorted."""
-    x = np.concatenate([b[0] + i * 100.0 for i, b in enumerate(blocks)])
+    """All windows on one time axis, config.BAYES_AXIS_GAP_D apart, sorted."""
+    x = np.concatenate([b[0] + i * config.BAYES_AXIS_GAP_D for i, b in enumerate(blocks)])
     y = np.concatenate([b[1] for b in blocks])
     e = np.concatenate([b[2] for b in blocks])
     order = np.argsort(x)
@@ -150,28 +148,29 @@ def gp_loglike(resid, log_sigma, log_rho, log_jit, x, e):
         gp.compute(x, diag=e ** 2 + (10 ** log_jit) ** 2, check_sorted=False)
         v = gp.log_likelihood(resid)
     except Exception:
-        return -1e30
-    return v if np.isfinite(v) else -1e30
+        return BAD
+    return v if np.isfinite(v) else BAD
 
 
 def tgp_likelihood(blocks):
     """Transit plus GP. The batman model is built once; only parameters change."""
     x, y, e, order = one_axis(blocks)
     pars = batman.TransitParams()
-    pars.t0, pars.per, pars.rp, pars.a = 0.0, P, 0.02, 20.0
-    pars.inc, pars.ecc, pars.w = 89.0, 0.0, 90.0
+    start = config.BATMAN_BAYES_START
+    pars.t0, pars.per, pars.rp, pars.a = 0.0, P, start["rp"], start["a"]
+    pars.inc, pars.ecc, pars.w = start["inc"], 0.0, 90.0  # literal: circular orbit
     pars.u, pars.limb_dark = [LD_U1, LD_U2], "quadratic"
     model = batman.TransitModel(pars, np.concatenate([b[0] for b in blocks]),
-                                supersample_factor=7, exp_time=CADENCE_D)
+                                supersample_factor=config.BAYES_SUPERSAMPLE, exp_time=CADENCE_D)
 
     def loglike(p):
         t0, log_rp, aor, b, ls, lr, lj = p
         pars.t0, pars.rp, pars.a = t0, 10 ** log_rp, aor
-        pars.inc = np.degrees(np.arccos(np.clip(b / aor, 0, 0.999)))
+        pars.inc = np.degrees(np.arccos(np.clip(b / aor, 0, 0.999)))  # literal: technical, keeps the orbit inclined
         try:
             flux = model.light_curve(pars)
         except Exception:
-            return -1e30
+            return BAD
         return gp_loglike(y - flux[order], ls, lr, lj, x, e)
     return loglike
 
@@ -192,7 +191,7 @@ def sample(name, names, loglike, bounds):
         names, loglike, lambda cube: lo + cube * (hi - lo), log_dir=str(folder),
         resume="overwrite", vectorized=False)
     tic = time.time()
-    res = sampler.run(min_num_live_points=400, frac_remain=0.3,
+    res = sampler.run(min_num_live_points=config.BAYES_LIVE_POINTS, frac_remain=config.BAYES_FRAC_REMAIN,
                       show_status=False, viz_callback=None)
     print(f"  {name:12s} ln Z = {res['logz']:.2f} +/- {res['logzerr']:.2f}"
           f"   ({time.time() - tic:.0f} s)", flush=True)
@@ -201,6 +200,7 @@ def sample(name, names, loglike, bounds):
 
 def main():
     out = Path(sys.argv[1]) if len(sys.argv) > 1 else OUT
+    np.random.seed(config.BAYES_SEED)
     blocks = transit_windows()
     print(f"{len(blocks)} transit windows, {sum(len(b[0]) for b in blocks)} points")
 
@@ -211,12 +211,12 @@ def main():
 
     narrow = dict(PRIORS_WIDE)
     for i, n in enumerate(TGP_NAMES[:4]):
-        w = max(5 * sd[i], 1e-4)
+        w = max(config.BAYES_NARROW_SIGMA * sd[i], config.BAYES_NARROW_MIN_WIDTH)
         lo, hi = mean[i] - w, mean[i] + w
         if n == "b":
-            lo, hi = max(0.0, lo), min(0.99, hi)
+            lo, hi = max(PRIORS_WIDE["b"][0], lo), min(PRIORS_WIDE["b"][1], hi)
         if n == "aor":
-            lo = max(3.0, lo)
+            lo = max(config.BAYES_NARROW_MIN_AOR, lo)
         narrow[n] = (float(lo), float(hi))
     r_narrow = sample("tgp_narrow", TGP_NAMES, tgp_likelihood(blocks), narrow)
 
@@ -228,8 +228,10 @@ def main():
     results = {
         "data": {"n_windows": len(blocks), "n_points": int(sum(len(b[0]) for b in blocks)),
                  "window_durations": WINDOW, "period_d": P, "t0_bkjd": T0,
-                 "limb_darkening": [LD_U1, LD_U2], "supersample": 7,
-                 "live_points": 400, "frac_remain": 0.3},
+                 "limb_darkening": [LD_U1, LD_U2], "supersample": config.BAYES_SUPERSAMPLE,
+                 "live_points": config.BAYES_LIVE_POINTS, "frac_remain": config.BAYES_FRAC_REMAIN,
+                 "seed": config.BAYES_SEED},
+        "measured_inputs": inputs.record(USED),
         "wide": {"priors": PRIORS_WIDE,
                  "logz_tgp": float(r_tgp["logz"]), "logzerr_tgp": float(r_tgp["logzerr"]),
                  "logz_gp": float(r_gp["logz"]), "logzerr_gp": float(r_gp["logzerr"]),
@@ -237,7 +239,7 @@ def main():
                  "B_err": float(np.hypot(r_tgp["logzerr"], r_gp["logzerr"])),
                  "tgp_mean": {n: float(mean[i]) for i, n in enumerate(TGP_NAMES)},
                  "tgp_sd": {n: float(sd[i]) for i, n in enumerate(TGP_NAMES)},
-                 "depth_ppm": float(10 ** (2 * mean[1]) * 1e6)},
+                 "depth_ppm": float(10 ** (2 * mean[1]) * config.PPM)},
         "narrow": {"priors": narrow, "logz_tgp": float(r_narrow["logz"]),
                    "B": float(r_narrow["logz"] - r_gp["logz"])},
         "control": {"epoch_offset_periods": CONTROL_PHASE,

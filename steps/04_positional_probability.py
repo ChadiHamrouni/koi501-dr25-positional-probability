@@ -15,7 +15,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from koi501 import archives, config
 from koi501.models import KOIRow, PositionalProbability
-from koi501.report import Table, read, write
+from koi501.report import Table, angsep, read, write
 
 KOIAPP = config.DATA / "koiapp"
 MAST_KOIAPP = "https://archive.stsci.edu/pub/kepler/catalogs/kepler_koiapp.txt.gz"
@@ -33,7 +33,7 @@ def load_koiapp() -> list[PositionalProbability]:
 def correct_depths(record: PositionalProbability, photometry: dict) -> list[dict]:
     """Rescale each tabulated depth by the neighbour's KIC-to-Gaia flux error."""
     out = []
-    for tag, kic in (("pp_1hi", 4951867), ("pp_2hi", 4951861)):
+    for tag, kic in zip(("pp_1hi", "pp_2hi"), config.NEIGHBOURS):
         kic_mag = getattr(record, f"{tag}_kepmag")
         depth = getattr(record, f"{tag}_mod_depth")
         gaia_g = photometry[kic]["gaia_G"]
@@ -43,7 +43,7 @@ def correct_depths(record: PositionalProbability, photometry: dict) -> list[dict
             "magnitude_error": gaia_g - kic_mag, "flux_factor": factor,
             "tabulated_depth_ppm": depth,
             "corrected_depth_ppm": depth * factor,
-            "corrected_depth_percent": depth * factor / 1e4,
+            "corrected_depth_percent": depth * factor / config.PPM * 100,
             "exceeds_rejection_threshold": depth * factor > config.REJECTION_DEPTH_PPM,
         })
     return out
@@ -58,10 +58,22 @@ def main() -> bool:
     photometry = {s["kic"]: s for s in read("01_target_photometry")["stars"]}
     corrected = correct_depths(target, photometry)
 
+    mast_rows = archives.mast_table(MAST_KOIAPP)
     earlier = next(archives.validate(PositionalProbability, (
-        r for r in archives.mast_table(MAST_KOIAPP)
-        if r["kepid"] == str(config.KEPID))))
+        r for r in mast_rows if r["kepid"] == str(config.KEPID))))
     corrected_earlier = correct_depths(earlier, photometry)
+    n_dr24_kois = int(archives.nasa_tap("select count(*) as n from q1_q17_dr24_koi")[0]["n"])
+
+    # where the scene model placed the two stars, against the KIC and Gaia
+    positions = {}
+    for tag, kic in zip(("pp_1hi", "pp_2hi"), config.NEIGHBOURS):
+        ra, dec = getattr(target, f"{tag}_ra"), getattr(target, f"{tag}_dec")
+        star = photometry[kic]
+        positions[str(kic)] = {
+            "archive_ra": ra, "archive_dec": dec,
+            "sep_from_kic_position_as": angsep(ra, dec, star["kic_ra"], star["kic_dec"]),
+            "sep_from_gaia_as": angsep(ra, dec, star["gaia_ra"], star["gaia_dec"]),
+        }
 
     kois = {k.kepoi_name: k for k in archives.validate(KOIRow, archives.nasa_tap(
         "select kepoi_name,kepid,koi_disposition from q1_q17_dr25_koi"))}
@@ -87,8 +99,13 @@ def main() -> bool:
         "target": target.model_dump(),
         "corrected_depths": corrected,
         "earlier_release": {"source": MAST_KOIAPP, "record": earlier.model_dump(),
-                            "corrected_depths": corrected_earlier},
+                            "corrected_depths": corrected_earlier,
+                            "n_rows": len(mast_rows), "n_dr24_kois": n_dr24_kois},
+        "archive_positions": positions,
         "candidate_audit": audit,
+        "host_favoured_probability_range": [
+            min(by_koi[k].pp_host_rel_prob for k in audit["host_favoured"]),
+            max(by_koi[k].pp_host_rel_prob for k in audit["host_favoured"])],
         "records": [r.model_dump() for r in records],
     }
     write("04_positional_probability", payload)
@@ -116,9 +133,15 @@ def main() -> bool:
     table('  eclipse needed on KIC 4951867, corrected (% of its light)', round(first_e["corrected_depth_percent"]))
     table('  eclipse needed on KIC 4951861, corrected (% of its light)', round(second_e["corrected_depth_percent"]))
     table("  KIC 4951861 above the rejection limit", second_e["exceeds_rejection_threshold"])
+    table('  rows in that file / objects in the DR24 KOI table',
+          f"{len(mast_rows)} / {n_dr24_kois}")
+    for kic, p in positions.items():
+        table(f"archive position of KIC {kic}: from its KIC entry / from Gaia (arcsec)",
+              f"{p['sep_from_kic_position_as']:.2f} / {p['sep_from_gaia_as']:.2f}")
     table('candidates with a bad neighbour, records checked', len(records))
     table('  archive favours the bad neighbour', ", ".join(audit["favours_the_bad_star"]))
     table('  archive favours the host star', len(audit["host_favoured"]))
+    table('    at relative probabilities', "%.2f to %.2f" % tuple(payload["host_favoured_probability_range"]))
     table('  no usable value', len(audit["no_usable_value"]))
     table('  host disfavoured for another reason', len(audit["disfavoured_for_another_reason"]))
     table.show("04_positional_probability")

@@ -21,6 +21,7 @@ from koi501.models import KICStar, QuarterCentroid
 from koi501.report import Table, write
 
 DV = config.DATA / "dv" / "dvr_quarterly_centroids.csv"
+DV_MEAN = config.DATA / "dv" / "dvr_multiquarter_mean.csv"
 KIC_COLUMNS = "KIC,RAJ2000,DEJ2000,kepmag,rmag,Jmag"
 KIC_RENAME = {"KIC": "kic", "RAJ2000": "ra", "DEJ2000": "dec", "Jmag": "jmag"}
 
@@ -36,13 +37,18 @@ def main() -> bool:
     scatter = (statistics.stdev(ra), statistics.stdev(dec))
     err_scatter = (scatter[0] / math.sqrt(n), scatter[1] / math.sqrt(n))
 
+    # the report's own robust weighted mean over the quarters, and its errors
+    robust = next(r for r in csv.DictReader(DV_MEAN.open(encoding="utf8"))
+                  if r["reference"] == "kic_position")
+    robust_err = (float(robust["ra_err_as"]), float(robust["dec_err_as"]))
+
     formal = [(q.e_ra, q.e_dec) for q in quarters]
     err_formal = (1 / math.sqrt(sum(1 / e[0] ** 2 for e in formal)),
                   1 / math.sqrt(sum(1 / e[1] ** 2 for e in formal)))
 
     kic = {s.kic: s for s in archives.validate(
         KICStar, archives.vizier_cone("V/133/kic", KIC_COLUMNS,
-                                      config.RA, config.DEC, 30.0), KIC_RENAME)}
+                                      config.RA, config.DEC, config.CONE_RADIUS_AS), KIC_RENAME)}
     host = kic[config.KEPID]
     cos_dec = math.cos(math.radians(config.DEC))
 
@@ -62,8 +68,10 @@ def main() -> bool:
             "separation_as": math.hypot(*pos),
             "sigma_scatter_error": sigma(pos, err_scatter),
             "sigma_formal_error": sigma(pos, err_formal),
-            "sigma_four_independent": sigma(pos, tuple(e * 2 for e in err_scatter)),
+            "sigma_four_independent": sigma(pos, tuple(
+                s / math.sqrt(config.WORST_CASE_INDEPENDENT_QUARTERS) for s in scatter)),
             "sigma_single_systematic": sigma(pos, scatter),
+            "sigma_report_robust_error": sigma(pos, robust_err),
         }
 
     primary = offset_of(kic[config.NEIGHBOURS[0]])
@@ -79,18 +87,23 @@ def main() -> bool:
             "closer_to_target": to_target < to_star,
         })
 
+    weakest = min(per_quarter, key=lambda q: q["sigma_from_neighbour"])
+    leaning = min(per_quarter, key=lambda q: q["d_neighbour_as"])
     payload = {
         "n_quarters": n, "mean_offset_as": mean, "scatter_as": scatter,
+        "scatter_over_formal": [s / statistics.median(e) for s, e in
+                                zip(scatter, ([q.e_ra for q in quarters], [q.e_dec for q in quarters]))],
         "error_on_mean_as": err_scatter, "error_formal_as": err_formal,
+        "report_robust_error_as": robust_err,
         "neighbours": neighbours, "per_quarter": per_quarter,
         "n_closer_to_target": sum(q["closer_to_target"] for q in per_quarter),
+        "weakest_quarter": weakest, "most_negative_ra_quarter": min(
+            ({"quarter": q.quarter, "d_ra_as": q.d_ra} for q in quarters), key=lambda r: r["d_ra_as"]),
     }
     write("06_difference_images", payload)
 
     first = neighbours[config.NEIGHBOURS[0]]
     second = neighbours[config.NEIGHBOURS[1]]
-    weakest = min(per_quarter, key=lambda q: q["sigma_from_neighbour"])
-    leaning = min(per_quarter, key=lambda q: q["d_neighbour_as"])
 
     table = Table('Where the light changed, from the 16 difference images',
                   'Section 3')
@@ -104,6 +117,7 @@ def main() -> bool:
     table('KIC 4951867, distance from measured source (sigma)', round(first["sigma_scatter_error"], 1))
     table('KIC 4951861, distance from measured source (sigma)', round(second["sigma_scatter_error"], 1))
     table("  KIC 4951867, using the mission's own error bars", round(first["sigma_formal_error"], 1))
+    table("  KIC 4951867, using the report's robust-mean errors", round(first["sigma_report_robust_error"], 1))
     table('  KIC 4951867, if only 4 images were independent', round(first["sigma_four_independent"], 1))
     table('  KIC 4951867, if all 16 shared one error', round(first["sigma_single_systematic"], 1))
     table('images placing the source nearer KOI-501.01', payload["n_closer_to_target"])

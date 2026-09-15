@@ -51,6 +51,10 @@ from scipy.optimize import least_squares
 warnings.filterwarnings("ignore")
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT))
+
+from koi501 import config  # noqa: E402
+
 STAMPS = ROOT / "data" / "figure_diffimage" / "diffimage_stamps.fits"
 GAIA = ROOT / "data" / "figure_diffimage" / "gaia_neighbours.csv"
 DV = ROOT / "data" / "dv" / "dvr_quarterly_oot_centroids.csv"
@@ -59,12 +63,13 @@ PRF_DIR = ROOT / "results" / ".cache" / "kepler_prf"
 PRF_URL = "https://archive.stsci.edu/missions/kepler/fpc/prf/"
 OUT = ROOT / "results" / "pixel_scene.json"
 
-KIC_RA_H, KIC_DEC = 19.89821400, 40.07587000      # the report's KIC reference
-GAIA_RADIUS_AS = 40.0
-NAMED = {2073562489151839872: 4951877,              # Gaia DR3 source -> KIC
-         2073562489151838080: 4951867,
-         2073562695310268032: 4951861}
-WEIGHTINGS = ("uniform", "photon")
+# the report's KIC reference position, as the report itself gives it
+_REFERENCE = next(csv.DictReader(DV.open(encoding="utf8")))
+KIC_RA_H, KIC_DEC = float(_REFERENCE["kic_ra_h"]), float(_REFERENCE["kic_dec"])
+GAIA_RADIUS_AS = config.PIXEL_GAIA_RADIUS_AS
+TARGET = config.KEPID
+FIRST, SECOND = config.NEIGHBOURS
+WEIGHTINGS = config.PIXEL_WEIGHTINGS
 
 
 def local_prf_files():
@@ -76,7 +81,7 @@ def local_prf_files():
         local = PRF_DIR / Path(path).name
         if not local.exists():
             PRF_DIR.mkdir(parents=True, exist_ok=True)
-            local.write_bytes(urllib.request.urlopen(PRF_URL + local.name, timeout=600).read())
+            local.write_bytes(urllib.request.urlopen(PRF_URL + local.name, timeout=600).read())  # literal: technical
         return original(self, str(local), ext)
     KeplerPRF._read_prf_calibration_file = read
 
@@ -151,7 +156,8 @@ class Stamp:
 
         def resid(p):
             return (self.prf.evaluate(p[0], p[1], p[2]) + p[3] - image)[good] * w
-        return least_squares(resid, p0, x_scale=[0.1, 0.1, p0[2] * 0.1, 10.0]).x
+        sp, sf, sb = config.PIXEL_XSCALE
+        return least_squares(resid, p0, x_scale=[sp, sp, p0[2] * sf, sb]).x
 
 
 def main() -> int:
@@ -161,8 +167,9 @@ def main() -> int:
     hdus = [h for h in fits.open(STAMPS)[1:] if h.name.startswith("DIRECT")]
     gaia = load_gaia()
     phot = {s["kic"]: s for s in json.loads(PHOT.read_text(encoding="utf8"))["stars"]}
-    g_target = next(g["G"] for g in gaia if NAMED.get(g["source_id"]) == 4951877)
-    idx = {NAMED[g["source_id"]]: i for i, g in enumerate(gaia) if g["source_id"] in NAMED}
+    named = {s["gaia_source_id"]: kic for kic, s in phot.items()}   # Gaia DR3 source -> KIC
+    g_target = next(g["G"] for g in gaia if named.get(g["source_id"]) == TARGET)
+    idx = {named[g["source_id"]]: i for i, g in enumerate(gaia) if g["source_id"] in named}
     if len(dv) != len(hdus):
         raise SystemExit("the report's quarters and the stored stamps do not pair up")
 
@@ -173,16 +180,17 @@ def main() -> int:
         # stamps are stored in quarter order; check the pairing on the KIC reference pixel
         ref_row = st.row0 + hdu.header["CRPIX2"] - 1
         ref_col = st.col0 + hdu.header["CRPIX1"] - 1
-        if abs(d["kic"]["row"] - ref_row) > 0.1 or abs(d["kic"]["col"] - ref_col) > 0.1:
+        tol = config.PIXEL_PAIRING_TOLERANCE_PX
+        if abs(d["kic"]["row"] - ref_row) > tol or abs(d["kic"]["col"] - ref_col) > tol:
             raise SystemExit(f"stamp {hdu.name} does not match quarter {q}")
         target_col, target_row = ref_col + 0.5, ref_row + 0.5
 
         def scene(kic_mags):
             stars = []
             for g in gaia:
-                kic = NAMED.get(g["source_id"])
+                kic = named.get(g["source_id"])
                 mag = phot[kic]["kic_kepmag"] if (kic_mags and kic) else g["G"]
-                ref = phot[4951877]["kic_kepmag"] if kic_mags else g_target
+                ref = phot[TARGET]["kic_kepmag"] if kic_mags else g_target
                 col, row = st.pixel(g["ra"], g["dec"])
                 stars.append((col, row, 10 ** (-0.4 * (mag - ref))))
             return stars
@@ -197,7 +205,7 @@ def main() -> int:
             dx, dy, ft, f1, f2, bg = p
             img = np.full(st.shape, bg)
             for i, (col, row, ratio) in enumerate(base):
-                flux = {idx[4951867]: f1, idx[4951861]: f2, idx[4951877]: ft}.get(i, ft * ratio)
+                flux = {idx[FIRST]: f1, idx[SECOND]: f2, idx[TARGET]: ft}.get(i, ft * ratio)
                 img += st.prf.evaluate(col + dx, row + dy, flux)
             return img
 
@@ -217,21 +225,23 @@ def main() -> int:
             fitted["real_stamp_single_prf_px"] = [float(p[0] - target_col),
                                                   float(p[1] - target_row)]
             w = st.weights(st.image, weighting)
+            start, sp = config.PIXEL_SCENE_START_FRACTION, config.PIXEL_SCENE_XSCALE_PX
+            sf, sb = config.PIXEL_XSCALE[1:]
             sol = least_squares(lambda p: (scene_image(p) - st.image)[st.good] * w,
-                                [0.0, 0.0, tot, 0.05 * tot, 0.05 * tot, 0.0],
-                                x_scale=[0.05, 0.05, 0.1 * tot, 0.05 * tot, 0.05 * tot, 10.0])
+                                [0.0, 0.0, tot, start * tot, start * tot, 0.0],
+                                x_scale=[sp, sp, sf * tot, start * tot, start * tot, sb])
             dx, dy, ft, f1, f2, bg = sol.x
             resid = (scene_image(sol.x) - st.image)[st.good]
             peak = float(np.max(st.image[st.good]))
             fitted["scene_fit"] = dict(shift_px=[float(dx), float(dy)],
-                                       ratio_4951867=float(f1 / ft), ratio_4951861=float(f2 / ft),
+                                       **{f"ratio_{FIRST}": float(f1 / ft), f"ratio_{SECOND}": float(f2 / ft)},
                                        background=float(bg),
                                        max_abs_residual_over_peak=float(np.max(np.abs(resid)) / peak))
             rec[weighting] = fitted
         per_quarter.append(rec)
         print(f"  Q{q:02d} module {st.module:2d}.{st.output}  flux ratios "
-              f"{rec['uniform']['scene_fit']['ratio_4951867']:.3f} "
-              f"{rec['uniform']['scene_fit']['ratio_4951861']:.3f}", flush=True)
+              f"{rec['uniform']['scene_fit'][f'ratio_{FIRST}']:.3f} "
+              f"{rec['uniform']['scene_fit'][f'ratio_{SECOND}']:.3f}", flush=True)
 
     def vectors(key, weighting=None):
         v = np.array([(r[weighting] if weighting else r)[key] for r in per_quarter])
@@ -240,10 +250,10 @@ def main() -> int:
     obs, obs_d = vectors("observed_oot_minus_kic_as")
     obs_px, _ = vectors("observed_oot_minus_kic_px")
     catalogue = {
-        "kic": {k: 10 ** (-0.4 * (phot[k]["kic_kepmag"] - phot[4951877]["kic_kepmag"]))
-                for k in (4951867, 4951861)},
-        "gaia": {k: 10 ** (-0.4 * (phot[k]["gaia_G"] - phot[4951877]["gaia_G"]))
-                 for k in (4951867, 4951861)},
+        "kic": {k: 10 ** (-0.4 * (phot[k]["kic_kepmag"] - phot[TARGET]["kic_kepmag"]))
+                for k in (FIRST, SECOND)},
+        "gaia": {k: 10 ** (-0.4 * (phot[k]["gaia_G"] - phot[TARGET]["gaia_G"]))
+                 for k in (FIRST, SECOND)},
     }
     summary = dict(observed=dict(mean_as=obs.mean(axis=0).tolist(),
                                  median_distance_as=float(np.median(obs_d)),
@@ -253,8 +263,8 @@ def main() -> int:
         real_px, _ = vectors("real_stamp_single_prf_px", weighting)
         gaia_v, gaia_d = vectors("predicted_gaia_scene_as", weighting)
         kic_v, kic_d = vectors("predicted_kic_scene_as", weighting)
-        r1 = np.array([r[weighting]["scene_fit"]["ratio_4951867"] for r in per_quarter])
-        r2 = np.array([r[weighting]["scene_fit"]["ratio_4951861"] for r in per_quarter])
+        r1 = np.array([r[weighting]["scene_fit"][f"ratio_{FIRST}"] for r in per_quarter])
+        r2 = np.array([r[weighting]["scene_fit"][f"ratio_{SECOND}"] for r in per_quarter])
         worst = np.array([r[weighting]["scene_fit"]["max_abs_residual_over_peak"]
                           for r in per_quarter])
         summary[weighting] = dict(
@@ -267,8 +277,8 @@ def main() -> int:
                                median_distance_as=float(np.median(kic_d)),
                                min_distance_as=float(kic_d.min()),
                                quarters_above_largest_observed=int((kic_d > obs_d.max()).sum())),
-            flux_ratio_4951867=dict(median=float(np.median(r1)), range=[float(r1.min()), float(r1.max())]),
-            flux_ratio_4951861=dict(median=float(np.median(r2)), range=[float(r2.min()), float(r2.max())]),
+            **{f"flux_ratio_{FIRST}": dict(median=float(np.median(r1)), range=[float(r1.min()), float(r1.max())]),
+               f"flux_ratio_{SECOND}": dict(median=float(np.median(r2)), range=[float(r2.min()), float(r2.max())])},
             scene_worst_pixel_over_peak=dict(median=float(np.median(worst)), max=float(worst.max())))
 
     result = dict(n_quarters=len(per_quarter),
@@ -286,10 +296,9 @@ def main() -> int:
     out_path.write_text(json.dumps(result, indent=2), encoding="utf8")
 
     u = summary["uniform"]
-    print(f"\n  KIC 4951867 carries {u['flux_ratio_4951867']['median']:.3f} of the target's flux "
-          f"(KIC {catalogue['kic'][4951867]:.3f}, Gaia {catalogue['gaia'][4951867]:.3f})")
-    print(f"  KIC 4951861 carries {u['flux_ratio_4951861']['median']:.3f} "
-          f"(KIC {catalogue['kic'][4951861]:.3f}, Gaia {catalogue['gaia'][4951861]:.3f})")
+    for k in (FIRST, SECOND):
+        print(f"  KIC {k} carries {u[f'flux_ratio_{k}']['median']:.3f} of the target's flux "
+              f"(KIC {catalogue['kic'][k]:.3f}, Gaia {catalogue['gaia'][k]:.3f})")
     print(f"  light centre: report {summary['observed']['median_distance_as']:.3f} arcsec; "
           f"model with Gaia magnitudes {u['predicted_gaia']['median_distance_as']:.2f}, "
           f"with KIC magnitudes {u['predicted_kic']['median_distance_as']:.1f}")

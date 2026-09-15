@@ -1,0 +1,38 @@
+{
+  "measured_inputs": {
+    "transit.period_koi_d": 24.7962801,
+    "transit.epoch_bkjd": 145.529,
+    "star.mass_msun": 1.2585156638841195
+  },
+  "n_visits": 19,
+  "first_visit": "2018-09-25",
+  "last_visit": "2020-11-01",
+  "baseline_d": 767.9050000002608,
+  "baseline_periods": 30.968556448927224,
+  "largest_phase_gap": 0.20626806035676282,
+  "systemic_kms": -69.95761328374174,
+  "systemic_err_kms": 0.02382066167163931,
+  "scatter_ms": 189.06702298731673,
+  "error_range_ms": [
+    77.57,
+    164.53
+  ],
+  "semi_amplitude_ms": 11.701065371500764,
+  "semi_amplitude_err_ms": 62.52181704450317,
+  "chi2_reduced": 3.0531882096693037,
+  "limit_3sigma_ms": 199.2665165050103,
+  "companion_mass_limit_mjup": 3.339071931703673,
+  "single_component_every_visit": true,
+  "drift_ms_per_yr": 30.110810512533938,
+  "drift_limit_3sigma_ms_per_yr": 234.63569977563154,
+  "bound_pair_msun": 0.16,
+  "bound_pair_excluded_inside_au": 11.297983905817448,
+  "eclipsing_binary_companion_msun": [
+    0.08,
+    1.0
+  ],
+  "eclipsing_binary_k_over_limit": [
+    24.136496450402824,
+    212.8716420840427
+  ]
+}

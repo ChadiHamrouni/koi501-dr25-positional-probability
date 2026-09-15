@@ -1,4 +1,23 @@
 {
+  "flux_weighted_centroid": {
+    "ra_offset_as": [
+      0.904,
+      0.348
+    ],
+    "dec_offset_as": [
+      -0.5073,
+      0.313
+    ],
+    "offset_as": 1.0366143400513037,
+    "offset_err_as": 0.33994602198068796,
+    "offset_sigma": 3.049349817395989,
+    "offset_err_with_systematic_as": 0.467731340299545,
+    "offset_sigma_with_systematic": 2.216260170608696,
+    "motion_detection_significance": 0.001
+  },
+  "measured_inputs": {
+    "centroid.systematic_per_axis_as": 0.32126205633083144
+  },
   "tce": {
     "kepid": 4951877,
     "tce_plnt_num": 1,

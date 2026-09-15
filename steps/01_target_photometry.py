@@ -27,30 +27,30 @@ def main() -> bool:
     kic = {s.kic: s for s in archives.validate(
         KICStar,
         archives.vizier_cone("V/133/kic", KIC_COLUMNS,
-                             config.RA, config.DEC, 30.0),
+                             config.RA, config.DEC, config.CONE_RADIUS_AS),
         KIC_RENAME)}
 
     gaia = list(archives.validate(
         GaiaSource,
         archives.vizier_cone("I/355/gaiadr3",
                              "Source,RA_ICRS,DE_ICRS,Gmag,Plx,e_Plx,RUWE,epsi,IPDfmp,NSS",
-                             config.RA, config.DEC, 30.0),
+                             config.RA, config.DEC, config.CONE_RADIUS_AS),
         GAIA_RENAME))
 
     twomass = list(archives.validate(
         TwoMassSource,
         archives.vizier_cone("II/246/out", "_r,RAJ2000,DEJ2000,Jmag",
-                             config.RA, config.DEC, 30.0),
+                             config.RA, config.DEC, config.CONE_RADIUS_AS),
         SKY_RENAME))
     panstarrs = list(archives.validate(
         PanstarrsSource,
         archives.vizier_cone("II/349/ps1", "_r,RAJ2000,DEJ2000,rmag,e_rmag,Nr",
-                             config.RA, config.DEC, 12.0),
+                             config.RA, config.DEC, config.PANSTARRS_CONE_AS),
         {**SKY_RENAME, "e_rmag": "rmag_error", "Nr": "n_detections"}))
 
     def nearest(sources, ra, dec):
         """The source closest to a position, and how far away it is."""
-        best, best_sep = None, 1e9
+        best, best_sep = None, float("inf")
         for source in sources:
             sep = angsep(source.ra, source.dec, ra, dec)
             if sep < best_sep:
@@ -66,6 +66,9 @@ def main() -> bool:
         ps, ps_sep = nearest(panstarrs, star.ra, star.dec)
         stars.append({
             "kic": kid,
+            "kic_ra": star.ra, "kic_dec": star.dec,
+            "gaia_source_id": g.source_id if g else None,
+            "gaia_ra": g.ra if g else None, "gaia_dec": g.dec if g else None,
             "sep_from_host_as": angsep(star.ra, star.dec, host.ra, host.dec),
             "kic_kepmag": star.kepmag,
             "kic_r": star.rmag,
@@ -122,7 +125,7 @@ def main() -> bool:
     table("KOI-501.01, share of the three stars' light, KIC (%)", round(shares["kic"][0] * 100))
     table("KOI-501.01, share of the three stars' light, Gaia (%)", round(shares["gaia"][0] * 100))
     table('brightest other Gaia star within 25 arcsec (G)', round(payload["brightest_other_gaia_within_25as"]["G"], 2))
-    table('KOI-501.01, Gaia RUWE', round(host_gaia.ruwe, 3))
+    table('KOI-501.01, Gaia RUWE', host_gaia.ruwe)
     table('KOI-501.01, Gaia astrometric excess noise', host_gaia.astrometric_excess_noise)
     table('KOI-501.01, Gaia multi-peak fraction', host_gaia.ipd_frac_multi_peak)
     table('KOI-501.01, Gaia non-single-star flag', host_gaia.non_single_star)

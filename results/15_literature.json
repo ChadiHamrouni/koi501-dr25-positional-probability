@@ -1,0 +1,31 @@
+{
+  "armstrong2021": {
+    "source": "arXiv:2008.10516v1 TableA1.csv",
+    "gpc": 0.005313640952050008,
+    "rfc": 1.0,
+    "vespa_fpp": 0.00081,
+    "evolutionary_state_flag": 1,
+    "gaia_flag": 1,
+    "pp_host_rel_prob": 0.0003
+  },
+  "valizadegan2022": {
+    "source": "arXiv:2111.10009v2 Tables/table_13.csv",
+    "exominer": 0.9918639,
+    "exominer_with_prior": 0.030321279,
+    "implied_prior": 0.00025643214416811913
+  },
+  "valizadegan2023": {
+    "vizier": "J/AJ/166/28/table11",
+    "exominer_v12": 0.065792252,
+    "positional_probability_used": 0.002040621
+  },
+  "berger2018_host_evolutionary_state": 1,
+  "population": {
+    "query_date": "2026-09-15",
+    "n_validated": 2282,
+    "n_with_berger_class": 2080,
+    "n_subgiant_host": 252,
+    "n_giant_host": 4,
+    "n_without_berger_class": 202
+  }
+}

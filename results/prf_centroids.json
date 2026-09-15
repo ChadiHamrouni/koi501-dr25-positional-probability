@@ -1,0 +1,29 @@
+{
+  "target": {
+    "kepid": 4951877,
+    "offset_as": 0.23209188157212338,
+    "sigma_as": 0.25723807032167767,
+    "east_as": 0.15954030381522755,
+    "north_as": 0.16856314232427394,
+    "east_err_as": 0.30187126727222524,
+    "north_err_as": 0.20932426590502784,
+    "n_panels": 16,
+    "n_skipped": 0,
+    "median_panel_snr": 21.040275141124162,
+    "median_panel_quality": 0.9469577255484829,
+    "controls_with_smaller_offset_percent": 24.279835390946502
+  },
+  "controls": {
+    "n_listed": 243,
+    "n_measured": 243,
+    "n_on_target": 73,
+    "on_target_median_offset_as": 0.42862019190773715,
+    "total_per_axis_as": 0.36403647303087555,
+    "formal_per_axis_as": 0.17121111196077513,
+    "n_bright": 232,
+    "correlation_with_dr25": 0.8491307151788349,
+    "bias_minus_dr25_as": 0.0452072353721678,
+    "robust_scatter_minus_dr25_as": 0.31127143879474317
+  },
+  "systematic_per_axis_as": 0.32126205633083144
+}

@@ -38,18 +38,19 @@ def main() -> bool:
     edges, counts = hist["edges"], hist["counts"]
     centres = [(a + b) / 2 for a, b in zip(edges, edges[1:])]
     colours = [BAD if c < config.COLOUR_IMPOSSIBLE else MUTED for c in centres]
-    ax1.bar(centres, counts, width=0.24, color=colours, linewidth=0)
+    ax1.bar(centres, counts, width=0.96 * config.COLOUR_HIST_BIN,  # literal: display
+            color=colours, linewidth=0)
     ax1.set_yscale("log")
     ax1.axvline(config.COLOUR_IMPOSSIBLE, color=BAD, lw=1.2, ls="--")
     ax1.annotate(f"$r-J < {config.COLOUR_IMPOSSIBLE}$\nno star has this",
-                 xy=(config.COLOUR_IMPOSSIBLE, max(counts) * 0.3),
+                 xy=(config.COLOUR_IMPOSSIBLE, max(counts) * 0.3),  # literal: display
                  xytext=(-8, 0), textcoords="offset points",
                  ha="right", va="center", fontsize=9, color=BAD)
     ax1.set_xlabel("$r - J$ from the catalogue's own two columns")
     ax1.set_ylabel(f"neighbours ({step2['n_pairs_tested']:,} tested)")
     ax1.set_title("The cut sits in a tail, not through the bulk",
                   fontsize=10, color=INK)
-    ax1.set_xlim(-6, 6)
+    ax1.set_xlim(*config.COLOUR_HIST_RANGE)
 
     sep_max, share_min = config.CONFIG_SEP_MAX, config.CONFIG_SHARE_MIN * 100
     ax2.add_patch(plt.Rectangle((0, share_min), sep_max, 100 - share_min,
@@ -79,12 +80,13 @@ def main() -> bool:
                     s=300 if target else 60, zorder=4 if target else 3,
                     edgecolor=INK if target else "none",
                     linewidth=1.0 if target else 0, label=label)
-    ax2.annotate(config.KOI, xy=(6.74, 45), xytext=(-14, 14),
+    home = next(r for r in step5["table"] if r["koi"] == config.KOI)
+    ax2.annotate(config.KOI, xy=(home["sep_as"], home["share"] * 100), xytext=(-14, 14),
                  textcoords="offset points", fontsize=9, color=OK,
                  ha="right", fontweight="bold")
     ax2.annotate("close enough, and bright enough,\n"
                  "for the positional probability to prefer it",
-                 xy=(0.6, 95), fontsize=8, color=ACCENT, va="top")
+                 xy=(0.6, 95), fontsize=8, color=ACCENT, va="top")  # literal: display
     ax2.set_xlabel("separation from the host (arcsec)")
     ax2.set_ylabel("neighbour's share of the catalogued light (%)")
     ax2.set_title(f"Only {len(step5['table'])} of "

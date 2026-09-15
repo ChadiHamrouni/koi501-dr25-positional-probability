@@ -1,10 +1,10 @@
 {
   "inputs": {
     "star": {
-      "radius_rsun": 1.746,
+      "radius_rsun": 1.7460041564636897,
       "teff_k": 5764.0,
       "logg": 4.054,
-      "mass_msun": 1.2591819185770403,
+      "mass_msun": 1.2585156638841195,
       "parallax_mas": 0.6522
     },
     "transit": {
@@ -12,7 +12,7 @@
       "period_d": 24.7963,
       "epoch_bkjd": 145.529,
       "duration_h": 8.483,
-      "exposure_min": 29.4
+      "exposure_min": 29.424960000000002
     },
     "light_curve": {
       "bins": 100,
@@ -31,13 +31,24 @@
     "fpp": 0.015,
     "nfpp": 0.001
   },
+  "measured_inputs": {
+    "transit.period_tce_d": 24.7963,
+    "transit.epoch_bkjd": 145.529,
+    "transit.duration_h": 8.483,
+    "transit.depth_ppm": 575.3,
+    "star.radius_rsun": 1.7460041564636897,
+    "star.mass_msun": 1.2585156638841195,
+    "star.teff_k": 5764.0,
+    "star.logg": 4.054,
+    "star.parallax_mas": 0.6522
+  },
   "n_runs": 20,
-  "fpp_mean": 0.00088528490069254,
-  "fpp_sem": 0.0006223905896323249,
-  "fpp_median": 4.717956136879309e-09,
-  "fpp_max": 0.011318730491282847,
-  "n_fpp_exactly_zero": 0,
-  "nfpp_mean": 2.418175852543199e-06,
-  "nfpp_max": 4.72879318176545e-05,
+  "fpp_mean": 0.000955128498745006,
+  "fpp_sem": 0.0006833686910333493,
+  "fpp_median": 4.993111812900963e-09,
+  "fpp_max": 0.01270309431209704,
+  "n_fpp_exactly_zero": 1,
+  "nfpp_mean": 2.430487585893509e-06,
+  "nfpp_max": 4.753563065834008e-05,
   "n_pass_both_bars": 20
 }

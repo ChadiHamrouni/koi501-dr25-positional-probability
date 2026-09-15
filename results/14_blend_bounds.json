@@ -1,58 +1,65 @@
 {
+  "measured_inputs": {
+    "transit.period_koi_d": 24.7962801,
+    "transit.epoch_bkjd": 145.529,
+    "transit.duration_h": 8.483,
+    "transit.depth_ppm": 575.3
+  },
   "light_curve": {
     "file": "data/lightcurve/kic4951877_pdcsap.npz",
     "n_points": 6996,
     "period_d": 24.7962801,
     "epoch_bkjd": 145.529,
-    "exposure_min": 29.4244
+    "exposure_d": 0.020434
   },
   "best_fit": {
-    "epoch_offset_min": 0.6672813745786694,
-    "depth_ppm": 518.708206025681,
-    "duration_h": 8.389529310240988,
-    "ingress_min": 34.55200209070099
+    "epoch_offset_min": 0.6672386515805925,
+    "depth_ppm": 518.7082372442403,
+    "duration_h": 8.389519435730008,
+    "ingress_min": 34.55144824795434
   },
   "bootstrap": {
     "requested": 600,
     "converged": 600,
     "seed": 20260904,
     "depth_ppm_p16_p50_p84": [
-      504.86476472137144,
-      521.7172847495003,
-      535.8523491602256
+      504.86649506885556,
+      521.7173310290773,
+      535.8523640244798
     ],
     "duration_h_p16_p50_p84": [
-      8.135719275363016,
-      8.372891440745153,
-      8.657783311330967
+      8.13591353038469,
+      8.372883548221733,
+      8.657803892670167
     ],
     "ingress_min_p16_p50_p84": [
-      18.03745493715637,
-      32.83014157562489,
-      54.99680654742484
+      18.035741347914986,
+      32.82951234633376,
+      54.99652973416969
     ],
     "T_over_tau_p16_p50_p84": [
-      9.322790073240293,
-      15.360332162278286,
-      26.863390623595492
+      9.322860386979038,
+      15.36054212459035,
+      26.865975962493234
     ],
-    "duration_d_median": 0.34887047669771476,
+    "duration_d_median": 0.3488701478425722,
     "ingress_d_p16_p50_p84": [
-      0.012526010373025255,
-      0.022798709427517286,
-      0.038192226769045025
+      0.012524820380496519,
+      0.022798272462731778,
+      0.03819203453761784
     ]
   },
-  "max_true_depth_p95_ppm": 33413.14726127602,
-  "dmag_shape_bound": 4.41062331350428,
-  "dmag_shape_bound_median": 2.315008041498311,
-  "dmag_brightness_bound": 8.100830388275924,
-  "centroid_error_as": 0.27026465478047534,
+  "max_true_depth_p95_ppm": 33413.25652096098,
+  "dmag_shape_bound": 4.410060542550671,
+  "dmag_shape_bound_median": 2.314409970304947,
+  "dmag_brightness_bound": 8.100264064936253,
+  "centroid_error_as": 0.2704212824785032,
   "target": {
     "source_id": 2073562489151839872,
     "G": 14.590293,
     "sep_as": 0.08960963508683553
   },
+  "blend_radius_as": 25.0,
   "n_neighbours_within_25as": 26,
   "n_survivors": 0,
   "neighbours": [
@@ -63,7 +70,7 @@
       "dmag": 6.237968999999998,
       "bright_enough": true,
       "shape_allows": false,
-      "centroid_sigma": 25.583295326129157,
+      "centroid_sigma": 25.568477510688844,
       "survives": false
     },
     {
@@ -73,7 +80,7 @@
       "dmag": 3.1962819999999983,
       "bright_enough": true,
       "shape_allows": true,
-      "centroid_sigma": 25.749814140200197,
+      "centroid_sigma": 25.734899877252918,
       "survives": false
     },
     {
@@ -83,7 +90,7 @@
       "dmag": 2.9229000000000003,
       "bright_enough": true,
       "shape_allows": true,
-      "centroid_sigma": 33.03310519866309,
+      "centroid_sigma": 33.01397246185126,
       "survives": false
     },
     {
@@ -93,7 +100,7 @@
       "dmag": 5.5493369999999995,
       "bright_enough": true,
       "shape_allows": false,
-      "centroid_sigma": 38.96042995605123,
+      "centroid_sigma": 38.9378641195081,
       "survives": false
     },
     {
@@ -103,7 +110,7 @@
       "dmag": 3.580219999999999,
       "bright_enough": true,
       "shape_allows": true,
-      "centroid_sigma": 39.81480369612587,
+      "centroid_sigma": 39.79174300728807,
       "survives": false
     },
     {
@@ -113,7 +120,7 @@
       "dmag": 3.3134739999999976,
       "bright_enough": true,
       "shape_allows": true,
-      "centroid_sigma": 42.032247720124744,
+      "centroid_sigma": 42.00790269024026,
       "survives": false
     },
     {
@@ -123,7 +130,7 @@
       "dmag": 3.6898219999999977,
       "bright_enough": true,
       "shape_allows": true,
-      "centroid_sigma": 46.79260938293672,
+      "centroid_sigma": 46.765507157012806,
       "survives": false
     },
     {
@@ -133,7 +140,7 @@
       "dmag": 6.021426999999997,
       "bright_enough": true,
       "shape_allows": false,
-      "centroid_sigma": 49.31057795082551,
+      "centroid_sigma": 49.282017320382245,
       "survives": false
     },
     {
@@ -143,7 +150,7 @@
       "dmag": 5.835255999999999,
       "bright_enough": true,
       "shape_allows": false,
-      "centroid_sigma": 50.59228690528209,
+      "centroid_sigma": 50.562983910475936,
       "survives": false
     },
     {
@@ -153,7 +160,7 @@
       "dmag": 3.526394999999999,
       "bright_enough": true,
       "shape_allows": true,
-      "centroid_sigma": 51.53326944034524,
+      "centroid_sigma": 51.50342142952925,
       "survives": false
     },
     {
@@ -163,7 +170,7 @@
       "dmag": 6.222410999999999,
       "bright_enough": true,
       "shape_allows": false,
-      "centroid_sigma": 51.919155154404756,
+      "centroid_sigma": 51.88908363902381,
       "survives": false
     },
     {
@@ -173,7 +180,7 @@
       "dmag": 4.8464839999999985,
       "bright_enough": true,
       "shape_allows": false,
-      "centroid_sigma": 61.16798731733183,
+      "centroid_sigma": 61.132558888923,
       "survives": false
     },
     {
@@ -183,7 +190,7 @@
       "dmag": 5.001363,
       "bright_enough": true,
       "shape_allows": false,
-      "centroid_sigma": 64.64344598505878,
+      "centroid_sigma": 64.6060045749581,
       "survives": false
     },
     {
@@ -193,7 +200,7 @@
       "dmag": 3.329870999999999,
       "bright_enough": true,
       "shape_allows": true,
-      "centroid_sigma": 65.75295123991563,
+      "centroid_sigma": 65.71486720563824,
       "survives": false
     },
     {
@@ -203,7 +210,7 @@
       "dmag": 4.660731,
       "bright_enough": true,
       "shape_allows": false,
-      "centroid_sigma": 67.76829130122832,
+      "centroid_sigma": 67.72903998428865,
       "survives": false
     },
     {
@@ -213,7 +220,7 @@
       "dmag": 4.809634000000001,
       "bright_enough": true,
       "shape_allows": false,
-      "centroid_sigma": 68.20780955249377,
+      "centroid_sigma": 68.16830366708484,
       "survives": false
     },
     {
@@ -223,7 +230,7 @@
       "dmag": 2.6094789999999985,
       "bright_enough": true,
       "shape_allows": true,
-      "centroid_sigma": 69.07147226391209,
+      "centroid_sigma": 69.0314661460469,
       "survives": false
     },
     {
@@ -233,7 +240,7 @@
       "dmag": 4.223183999999998,
       "bright_enough": true,
       "shape_allows": true,
-      "centroid_sigma": 69.48553972168716,
+      "centroid_sigma": 69.44529377642323,
       "survives": false
     },
     {
@@ -243,7 +250,7 @@
       "dmag": 4.616096999999998,
       "bright_enough": true,
       "shape_allows": false,
-      "centroid_sigma": 69.55899824432655,
+      "centroid_sigma": 69.51870975197018,
       "survives": false
     },
     {
@@ -253,7 +260,7 @@
       "dmag": 1.6393730000000009,
       "bright_enough": true,
       "shape_allows": true,
-      "centroid_sigma": 71.01033318207509,
+      "centroid_sigma": 70.96920407818,
       "survives": false
     },
     {
@@ -263,7 +270,7 @@
       "dmag": 2.965591999999999,
       "bright_enough": true,
       "shape_allows": true,
-      "centroid_sigma": 71.12171896537623,
+      "centroid_sigma": 71.08052534696265,
       "survives": false
     },
     {
@@ -273,7 +280,7 @@
       "dmag": 5.940918999999999,
       "bright_enough": true,
       "shape_allows": false,
-      "centroid_sigma": 82.79210444652688,
+      "centroid_sigma": 82.74415135416858,
       "survives": false
     },
     {
@@ -283,7 +290,7 @@
       "dmag": 5.6734279999999995,
       "bright_enough": true,
       "shape_allows": false,
-      "centroid_sigma": 84.12311905826813,
+      "centroid_sigma": 84.07439504376654,
       "survives": false
     },
     {
@@ -293,7 +300,7 @@
       "dmag": 4.265148999999999,
       "bright_enough": true,
       "shape_allows": true,
-      "centroid_sigma": 85.1916453185593,
+      "centroid_sigma": 85.14230241486786,
       "survives": false
     },
     {
@@ -303,7 +310,7 @@
       "dmag": 5.127438,
       "bright_enough": true,
       "shape_allows": false,
-      "centroid_sigma": 87.01912629307647,
+      "centroid_sigma": 86.96872491449132,
       "survives": false
     },
     {
@@ -313,7 +320,7 @@
       "dmag": 6.1880310000000005,
       "bright_enough": true,
       "shape_allows": false,
-      "centroid_sigma": 91.60220447516834,
+      "centroid_sigma": 91.54914858293336,
       "survives": false
     }
   ]
